@@ -23,7 +23,7 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
 # 以這個專案來講就要改成這樣以下這樣，下面是走 ssh 模式
 # git push -f git@github.com:hsiangfeng/HexfootMusic.git master:gh-pages
-git push -f git@github.com:xuht0730/eco-coffee.git main:gh-pages
+git push -f git@github.com:xuht0730/Eco-Coffee.git main:gh-pages
 # 除此之外，也可以改走 HTTPS 模式
 # git push -f https://github.com/hsiangfeng/HexfootMusic.git master:gh-pages
 
