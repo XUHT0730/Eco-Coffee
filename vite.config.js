@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 // eslint-disable-next-line import/no-extraneous-dependencies
