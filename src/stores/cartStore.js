@@ -19,8 +19,8 @@ export default defineStore('cartStore', {
           this.final_total = res.data.data.final_total;
           this.total = res.data.data.total;
         })
-        .catch((err) => {
-          console.log(err.response.data.message);
+        .catch(() => {
+          // console.log(err.response.data.message);
         });
     },
     addToCart(id) {
@@ -30,13 +30,13 @@ export default defineStore('cartStore', {
       };
       const url = `${VITE_URL}/api/${VITE_PATH}/cart`;
       axios.post(url, { data: order })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          // alert(res);
           // this.$router.push('/cart');
           this.getCart();
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          // alert(err);
         });
     },
   },

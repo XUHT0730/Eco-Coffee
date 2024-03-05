@@ -260,7 +260,7 @@ export default {
       // 檢查購物車是否為空
       if (this.cart.carts && this.cart.carts.length === 0) {
         // 如果購物車為空，顯示通知訊息
-        alert('購物車為空');
+        // alert('購物車為空');
         // 不執行後續的 API 請求
         return;
       }

@@ -88,7 +88,7 @@ export default {
         })
         .catch((err) => {
         // axios 的錯誤狀態，可參考：https://github.com/axios/axios#handling-errors
-          console.log('err', err.response, err.request, err.message);
+          // console.log('err', err.response, err.request, err.message);
           this.isLoading = false;
           this.pushMessage({
             title: '取得文章資訊失敗',
@@ -108,7 +108,7 @@ export default {
         })
         .catch((err) => {
         // axios 的錯誤狀態，可參考：https://github.com/axios/axios#handling-errors
-          console.log('err', err.response, err.request, err.message);
+          // console.log('err', err.response, err.request, err.message);
           this.isLoading = false;
           this.pushMessage({
             title: '取得文章資訊失敗',

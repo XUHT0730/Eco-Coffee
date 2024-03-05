@@ -9,10 +9,10 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
   },
-  rules: {
-    // 允許 windows 開發環境
-    'linebreak-style': [0, 'error', 'windows'],
-  },
+  // rules: {
+  //   // 允許 windows 開發環境
+  //   'linebreak-style': [0, 'error', 'windows'],
+  // },
   settings: {
     'import/resolver': {
       alias: {

@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "deploy": "vite build && gh-pages -d dist"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^41.1.0",
@@ -16,7 +17,7 @@
     "@vee-validate/i18n": "^4.12.5",
     "@vee-validate/rules": "^4.12.5",
     "axios": "^1.6.7",
-    "bootstrap": "^5.2.3",
+    "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "import": "^0.0.6",
     "pinia": "^2.1.7",
