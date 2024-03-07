@@ -16,7 +16,8 @@
         <h2>{{ product.title }}</h2>
         <div>{{ product.content }}</div>
         <div>{{ product.description }}</div>
-        <img :src="product.imageUrl" class="img-fluid mb-3" :alt="product.title">
+        <img :src="product.imageUrl"
+         class="img-fluid mb-3 object-fit-cover" :alt="product.title">
       </article>
       <div class="col-4">
         <div class="h5" v-if="!product.price">{{ product.origin_price }} 元</div>
@@ -33,7 +34,7 @@
 import { mapActions } from 'pinia';
 
 import cartStore from '../../stores/cartStore';
-import toastMessage from '../../stores/toastMessage';
+// import toastMessage from '../../stores/toastMessage';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -45,7 +46,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(toastMessage, ['pushMessage']),
+    // ...mapActions(toastMessage, ['pushMessage']),
     ...mapActions(cartStore, ['addToCart']),
     getProduct() {
       const url = `${VITE_URL}/api/${VITE_PATH}/product/${this.id}`;

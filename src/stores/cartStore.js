@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
@@ -19,8 +20,8 @@ export default defineStore('cartStore', {
           this.final_total = res.data.data.final_total;
           this.total = res.data.data.total;
         })
-        .catch(() => {
-          // console.log(err.response.data.message);
+        .catch((err) => {
+          console.log(err.response.data.message);
         });
     },
     addToCart(id) {
@@ -30,13 +31,18 @@ export default defineStore('cartStore', {
       };
       const url = `${VITE_URL}/api/${VITE_PATH}/cart`;
       axios.post(url, { data: order })
-        .then(() => {
-          // alert(res);
+        .then((res) => {
+          Swal.fire({
+            icon: 'success',
+            title: res.data.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
           // this.$router.push('/cart');
           this.getCart();
         })
-        .catch(() => {
-          // alert(err);
+        .catch((err) => {
+          alert(err);
         });
     },
   },

@@ -3,7 +3,7 @@
   <div class="container">
     <div class="mt-4">
         <!-- 如購物車內有產品則顯示，沒有的話則顯示購物車目前無商品-->
-      <!-- <div v-if="cart.carts && cart.carts.length > 0"> -->
+      <div v-if="cart.carts && cart.carts.length > 0">
         <div class="text-end">
         <button class="btn btn-outline-danger" type="button" @click="delAllCarts">
           清空購物車
@@ -24,10 +24,10 @@
             <td>
               <button type="button" class="btn btn-outline-danger btn-sm"
                @click="delCartItem(item.id)"
-               :disabled="loadingStatus.loadingItem === item.id"
+               :disabled="status.loadingItem === item.id"
                >
                 <i class="fas fa-spinner fa-pulse"
-                v-if="loadingStatus.loadingItem === item.id"></i>
+                v-if="status.loadingItem === item.id"></i>
                 x
               </button>
             </td>
@@ -40,9 +40,9 @@
                     <!-- @blur="updateCart(item) 是用來觸發編輯購物車的事件，
                     使用 blur 事件監聽，當焦點離開該元素時才會觸發事件，
                     為的是避免使用者在短時間大量觸發事件，影響整體效能 -->
-                  <input type="number" class="form-control" min="1"
+                  <input type="number" class="form-control w-50" min="1"
                   v-model.number="item.qty" @blur="updateCart(item)"
-                  :disabled="loadingStatus.loadingItem === item.id" />
+                  :disabled="status.loadingItem === item.id" />
                   <span class="input-group-text" id="basic-addon2">
                    {{item.product.unit }}
                   </span>
@@ -76,11 +76,10 @@
           </button>
         </div>
       </div>
-
-      <!-- </div> -->
-      <!-- <div v-else class="text-center text-danger">
+      </div>
+      <div v-else class="text-center text-danger">
             <p>購物車目前無商品</p>
-      </div> -->
+      </div>
       <!-- 表單填寫 -->
     <div class="my-5 row justify-content-center">
       <VeeForm ref="form" class="col-md-6" v-slot="{ errors }" @submit="createOrder">
@@ -129,8 +128,8 @@
 </template>
 
 <script>
-import { mapActions } from 'pinia';
-
+import { mapActions, mapState } from 'pinia';
+import Swal from 'sweetalert2';
 import cartStore from '../../stores/cartStore';
 import toastMessage from '../../stores/toastMessage';
 
@@ -152,10 +151,12 @@ export default {
         },
         message: '',
       },
-      cart: {},
       isLoading: false,
       coupon_code: '',
     };
+  },
+  computed: {
+    ...mapState(cartStore, ['cart']),
   },
   methods: {
     ...mapActions(toastMessage, ['pushMessage']),
@@ -212,24 +213,36 @@ export default {
     },
     delAllCarts() {
       this.isLoading = true;
-      const url = `${VITE_URL}/api/${VITE_PATH}/carts`;
-      this.axios.delete(url)
-        .then((res) => {
-          this.pushMessage({
-            style: 'success',
-            title: '清除購物車',
-            content: res.data.message,
-          });
-          this.getCart();
-          this.isLoading = false;
-        }).catch((err) => {
-          this.isLoading = false;
-          this.pushMessage({
-            style: 'danger',
-            title: '清除購物車',
-            content: err.response.data.message,
-          });
-        });
+      Swal.fire({
+        title: '確定清空購物車?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const url = `${VITE_URL}/api/${VITE_PATH}/carts`;
+          this.axios.delete(url)
+            .then((res) => {
+              this.getCart();
+              this.isLoading = false;
+              Swal.fire({
+                title: '清除購物車',
+                content: res.data.message,
+                icon: 'success',
+              });
+            })
+            .catch((err) => {
+              this.isLoading = false;
+              Swal.fire({
+                icon: 'error',
+                title: err.response.data.message,
+              });
+            });
+        } else (this.isLoading = false);
+      });
     },
     addCouponCode() {
       const url = `${VITE_URL}/api/${VITE_PATH}/coupon`;
@@ -259,9 +272,12 @@ export default {
     createOrder() {
       // 檢查購物車是否為空
       if (this.cart.carts && this.cart.carts.length === 0) {
-        // 如果購物車為空，顯示通知訊息
-        // alert('購物車為空');
-        // 不執行後續的 API 請求
+        // 如果購物車為空，不執行後續的 API 請求
+        Swal.fire({
+          icon: 'error',
+          title: '購物車為空',
+          footer: '<a href="#">Why do I have this issue?</a>',
+        });
         return;
       }
       this.isLoading = true;

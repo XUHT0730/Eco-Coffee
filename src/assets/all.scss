@@ -3,3 +3,13 @@
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
 @import 'bootstrap/scss/bootstrap.scss';
+
+body {
+    font-family: Slate, sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    line-height: 1.4;
+    color: #131416;
+    text-align: center;
+    background-color: #fff;
+}

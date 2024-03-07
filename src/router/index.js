@@ -63,6 +63,11 @@ const routes = [
         path: 'products',
         component: () => import('../views/user/UserProducts.vue'),
       },
+      {
+        path: 'track',
+        name: '追蹤商品',
+        component: () => import('../views/user/UserTrack.vue'),
+      },
     ],
   },
   {
