@@ -60,13 +60,7 @@
                         <RouterLink :to="`/product/${item.id}`" type="button"
                           class="btn btn-primary pe-4 py-2 w-100">
                           商品介紹
-                          <!-- <i class="bi bi-heart-fill ps-3 pb-1"></i> -->
                           <i class="bi bi-arrow-right"></i>
-                          <!-- <img
-                            src="/img/arrow-right-long.svg"
-                            class="ps-3 pb-1"
-                            alt="arrow-right"
-                          /> -->
                         </RouterLink>
                       </div>
                     </div>
@@ -83,8 +77,7 @@
       <p class="display-3 text-info my-4 mb-md-6">前往商品列表</p>
       <RouterLink
         to="/products"
-        class="fs-5 btn btn-primary py-3 px-5"
-      >
+        class="fs-5 btn btn-primary py-3 px-5">
         查看商品
       </RouterLink>
     </div>

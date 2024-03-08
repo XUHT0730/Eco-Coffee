@@ -29,6 +29,15 @@ export default defineStore('cartStore', {
         product_id: id,
         qty: 1,
       };
+      // 檢查購物車是否已經存在相同商品
+      if (this.carts.some((item) => item.product_id === id)) {
+      // 商品已存在於購物車中，顯示 SweetAlert 提示訊息
+        Swal.fire({
+          title: '商品已存在於購物車中',
+          icon: 'warning',
+        });
+        return;
+      }
       const url = `${VITE_URL}/api/${VITE_PATH}/cart`;
       axios.post(url, { data: order })
         .then((res) => {

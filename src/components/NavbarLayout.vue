@@ -3,8 +3,9 @@
       <nav class="navbar container navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container-fluid">
           <!--LOGO-->
-          <RouterLink to="/" class="navbar-brand">
-              <i class="bi bi-cup-hot">Eco-Coffee</i>
+          <RouterLink to="/" class="navbar-brand align-items-center">
+              <i class="bi bi-cup-hot"></i>
+              <span class="ms-2">Eco-Coffee</span>
           </RouterLink>
           <!-- BUTTON -->
           <button class="navbar-toggler"  data-bs-toggle="collapse"
@@ -16,10 +17,8 @@
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
                 <RouterLink to="/products"
                 class="nav-item nav-link">產品列表</RouterLink>
-                <RouterLink to="/article"
+                <RouterLink to="/articles"
                 class="nav-item nav-link">Blog</RouterLink>
-                <router-link to="/articles"
-                class="nav-item nav-link">所有推文頁面</router-link>
             </div>
             <div class="nav navbar-nav d-flex me-2">
               <RouterLink to="/track" class="nav-link nav-item
@@ -39,21 +38,6 @@
                  <i class="bi bi-person-circle"></i>
               </router-link>
             </div>
-            <!-- 因為在 navbar-collapse 內，所以一同響應隱藏 -->
-            <!-- <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form> -->
-            <!-- <form class="py-2 d-flex justify-content-end">
-              <input type="text" v-model.trim="search"
-               class="form-control rounded-0 me-2 border-primary"
-               placeholder="快速搜尋商品呢" />
-                <div class="input-group-append">
-                    <button class="btn btn-primary rounded-0" type="button" id="search">
-                    <i class="bi bi-search"></i>
-                    </button>
-                </div>
-            </form> -->
           </div>
         </div>
      </nav>

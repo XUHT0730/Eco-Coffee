@@ -102,6 +102,8 @@ export default {
   props: {
     article: Object,
     isNew: Boolean,
+    // 將 tag 作為 props 傳遞出去給 UsrArticles.vue
+    tag: [],
   },
   data() {
     return {

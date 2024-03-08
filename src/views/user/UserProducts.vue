@@ -8,7 +8,7 @@
               <div class="col-md-3">
                 <div class="input-group w-md-50 mt-md-0 mt-3">
                   <input type="text" v-model.trim="search"
-                  class="form-control rounded-0 border-primary" placeholder="要找什麼商品呢?" />
+                  class="form-control rounded-0 border-primary" placeholder="快速搜尋 ex : 低咖啡因、濾掛" />
                   <div class="input-group-append">
                     <button class="btn btn-primary rounded-0" type="button" id="search">
                       <i class="bi bi-search"></i>
@@ -68,8 +68,10 @@
                         現在只要 {{ product.price }} 元
                       </div>
                   </td>
-                  <button class="btn btn-outline-primary w-100" type="button"
-                  @click.prevent="addToCart(product.id)">加入購物車</button>
+                  <button class="btn btn-primary w-100" type="button"
+                  @click.prevent="addToCart(product.id)">
+                  <i class="bi bi-cart-check"></i>
+                  加入購物車</button>
                 </div>
               </div>
             </div>

@@ -7,7 +7,7 @@ import VueAxios from 'vue-axios';
 // 引入 Ckeditor5-vue 用於製作貼文頁面
 // 需先在終端機中輸入 npm i --save @ckeditor/ckeditor5-vue @ckeditor/ckeditor5-build-classic
 import CKEditor from '@ckeditor/ckeditor5-vue';
-import './assets/all.scss';
+import './assets/scss/all.scss';
 // 引入 vee-validate
 // 需先在終端機執行 1. npm install vee-validate
 // 2. npm install @vee-validate/rules  3. npm install @vee-validate/i18n

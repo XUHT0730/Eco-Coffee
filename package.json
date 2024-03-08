@@ -24,6 +24,7 @@
     "import": "^0.0.6",
     "pinia": "^2.1.7",
     "sweetalert2": "^11.10.6",
+    "swiper": "^11.0.7",
     "vee-validate": "^4.12.5",
     "vite-plugin-eslint": "^1.8.1",
     "vue": "^3.4.15",

@@ -5,7 +5,10 @@
    <div class="d-flex align-items-center h-100 position-relative" style="z-index: 1;">
     <div class="header-text">
       <h1>愛咖啡更支持咖啡</h1>
-      <button class="btn btn-primary btn-lg" type="button">了解公平貿易</button>
+        <RouterLink :to="`/article/`" type="button"
+           class="btn btn-primary btn-lg">
+           了解公平貿易
+          </RouterLink>
     </div>
   </div>
   </header>
@@ -13,7 +16,9 @@
     <h2 class="text-center my-6">選購公平貿易咖啡商品</h2>
     <div class="d-flex justify-content-center align-items-center">
       <div class="row row-cols-3 mb-4 g-4 col-lg-10 col-md-9">
-          <div class="col" v-for="product in products" :key="product.id">
+          <div class="col" v-for="(product,index) in products" :key="product.id">
+            <!-- 只顯示每個 category 的前三個產品 -->
+            <template v-if="index < 3 ||products[index - 1].category !== product.category">
               <div class="card position-relative" >
                 <img class="card-img-top object-fit-cover w-70"
                 :src="product.imageUrl" alt="" height="325">
@@ -50,8 +55,9 @@
                   加入購物車</button>
                 </div>
               </div>
+            </template>
             </div>
-            </div>
+      </div>
        </div>
        <div class="row justify-content-center">
           <RouterLink :to="`/products`" type="button"
@@ -73,6 +79,54 @@
       </div>
      </div>
   </section>
+
+  <section class="container mt-6">
+      <div class="d-flex justify-content-center">
+        <swiper
+        :slidesPerView="1"
+        :spaceBetween="10"
+        :pagination="{
+          clickable: true,
+        }"
+        :breakpoints="{
+          '640': {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          '768': {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+          '1024': {
+            slidesPerView: 5,
+            spaceBetween: 50,
+          },
+        }"
+        :modules="modules"
+        class="mySwiper">
+        <swiper-slide v-for="product in products" :key="product.id">
+          <div class="row row-cols-md-4 row-cols-sm-2 g-3">
+            <div class="col-xs-2 col-sm col-md-4 col-lg">
+                <div class="card" style="width: 14rem">
+                  <div
+                  style="height: 200px; background-size: cover; background-position: center;"
+                  :style="{backgroundImage:`url(${product.imageUrl})`}"
+                  class="card-img-top"
+                  alt=""></div>
+                  <div class="card-body">
+                    <h5 class="card-title fs-6 fw-bold">{{ product.title }}</h5>
+                    <p class="card-text">NT$ {{ product.price }}</p>
+                    <a type="button" class="btn btn-primary d-flex justify-content-center"
+                      @click.prevent="addToCart(product.id)">立即購買</a>
+                  </div>
+                </div>
+              </div>
+          </div>
+          </swiper-slide>
+      </swiper>
+    </div>
+  </section>
+
   <section class="container mt-6">
     <h2 class="me-2">什麼是公平貿易咖啡豆 ?
 
@@ -122,8 +176,17 @@
 <script>
 import { mapActions } from 'pinia';
 import Swal from 'sweetalert2';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+// import required modules
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import FooterLayout from '../../components/FooterLayout.vue';
 import cartStore from '../../stores/cartStore';
+// Import Swiper Vue.js components
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -144,8 +207,8 @@ export default {
   methods: {
     ...mapActions(cartStore, ['addToCart']),
     getProducts() {
-      const { category = '' } = this.$route.query;
-      const getProductsUrl = `${VITE_URL}/api/${VITE_PATH}/products?category=${category}`;
+      // const { category = '' } = this.$route.query;
+      const getProductsUrl = `${VITE_URL}/api/${VITE_PATH}/products/all`;
       this.isLoading = true;
       this.axios.get(getProductsUrl)
         .then((res) => {
@@ -193,6 +256,13 @@ export default {
   },
   components: {
     FooterLayout,
+    Swiper,
+    SwiperSlide,
+  },
+  setup() {
+    return {
+      modules: [Autoplay, Pagination, Navigation],
+    };
   },
   created() {
     this.getProducts();
