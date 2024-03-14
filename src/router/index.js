@@ -68,6 +68,10 @@ const routes = [
         name: '追蹤商品',
         component: () => import('../views/user/UserTrack.vue'),
       },
+      {
+        path: 'about',
+        component: () => import('../views/user/UserAbout.vue'),
+      },
     ],
   },
   {
@@ -83,16 +87,15 @@ const router = createRouter({
   // 可以使滑鼠移動到連結上，就會呈現 active 效果
   linkActiveClass: 'active',
   // 當使用者一進入 newpage 頁面，畫面就會滾動到最上方
-  // scrollBehavior(to, from, savedPosition) {
-  //   console.log(to, from, savedPosition);
-  //   if (to.fullPath.match('newpage')) {
-  //     return {
-  //       top: 0,
-  //     };
-  //   }
-  //   // 預設情況下就不做滾動
-  //   return {};
-  // },
+  scrollBehavior(to) {
+    if (to.fullPath.match('/')) {
+      return {
+        top: 0,
+      };
+    }
+    // 預設情況下就不做滾動
+    return {};
+  },
 });
 
 export default router;

@@ -1,27 +1,29 @@
 <template>
   <LoadingOverLay :active="isLoading" :z-index="1060"></LoadingOverLay>
-  <div class="container">
-       <!-- 搜尋欄位 -->
-       <div class="bg-light py-4">
-          <div class="container">
-          <div class="row d-flex justify-content-end ">
+  <!-- 搜尋欄位 -->
+      <section class="bg-light py-4">
+        <div class="container">
+            <div class="row d-flex justify-content-end">
               <div class="col-md-3">
                 <div class="input-group w-md-50 mt-md-0 mt-3">
-                  <input type="text" v-model.trim="search"
-                  class="form-control rounded-0 border-primary" placeholder="快速搜尋 ex : 低咖啡因、濾掛" />
-                  <div class="input-group-append">
-                    <button class="btn btn-primary rounded-0" type="button" id="search">
-                      <i class="bi bi-search"></i>
-                    </button>
-                  </div>
+                    <input type="text" v-model.trim="search"
+                    class="form-control border-primary py-2"
+                    placeholder="快速搜尋 ex : 低咖啡因、濾掛" />
+                      <div class="input-group-append">
+                        <button class="btn btn-primary py-2" type="button" id="search">
+                          <i class="bi bi-search"></i>
+                        </button>
+                      </div>
+                    </div>
                 </div>
               </div>
-          </div>
-          </div>
         </div>
-        <div class="row mt-5  mt-md-5 mt-3 mb-7">
+      </section>
+
+      <section class="container min-container">
+        <div class="row mt-5 mt-md-5 mt-3">
           <!-- 左側分類 list group -->
-          <div class="col-lg-2 col-md-3 mb-2">
+          <div class="col-lg-2 col-md-3 mb-5">
             <ul class="list-group">
               <li :class="{ 'active': !$route.query.category }" class="list-group-item">
                 <router-link class="py-2 d-block text-muted" to="/products">全部商品</router-link>
@@ -34,37 +36,52 @@
             </ul>
           </div>
           <!-- 右側所有產品列表 -->
-          <div class="row row-cols-3 my-4 g-4 col-lg-10 col-md-9">
-             <!-- 如果搜索結果為空，顯示查無此商品的消息 -->
+          <div class="col-lg-10 col-lg-10 col-md-9 mb-5">
+            <div class="row row-cols-3 g-4">
+             <!-- 如果搜索結果為空，顯示查無此商品的消息-->
             <div v-if="products.length === 0" class="col">
               <p>查無此商品</p>
             </div>
              <!-- 如果搜索結果不為空，則顯示搜索結果 -->
-            <div v-else class="col" v-for="product in products" :key="product.id">
-              <div class="card shadow bg-white" >
-                <img class="card-img-top object-fit-cover w-70"
-                :src="product.imageUrl" height="325">
+            <div v-else class="col-12 col-xl-4 col-lg-5 d-flex justify-content-center"
+             v-for="product in products" :key="product.id">
+              <div class="card product-card shadow bg-white mb-sm-4 ms-md-4 m-sm-auto" >
+                <router-link :to="`/product/${product.id}`" class="product-card-link">
+                <img :src="product.imageUrl" class="product-card-img" />
+                </router-link>
                 <div class="card-body position-relative">
-                    <div class="bg-secondary fs-6 px-3 py-1 text-white position-absolute category">
-                        {{ product.category }}
+                    <div class="row d-flex">
+                        <div class="col">
+                          <div class="left w-100">
+                            <div class="bg-secondary
+                             position-absolute fs-6 px-2 py-1 text-white category">
+                              {{ product.category }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="right w-100 text-end">
+                            <div @click="setTrack(product.id)">
+                              <span v-if="trackList.includes(product.id)">
+                                <i class="bi bi-heart-fill fs-4 text-danger"></i>
+                              </span>
+                              <span v-else><i class="bi bi-heart fs-4 text-danger"></i></span>
+                            </div>
+                          </div>
+                        </div>
                     </div>
-                    <h5 class="card-title pt-5 px-1">
+                    <h5 class="card-title pt-2 fw-bold">
                       <router-link :to="`/product/${product.id}`">
                         {{ product.title }}
                       </router-link>
                     </h5>
-                      <div class="position-absolute" @click="setTrack(product.id)">
-                        <span v-if="trackList.includes(product.id)">
-                          <i class="bi bi-heart-fill fs-4 text-danger"></i>
-                        </span>
-                        <span v-else><i class="bi bi-heart fs-4 text-danger"></i></span>
-                      </div>
                     <td>
                       <div class="h5" v-if="!product.price">
                         {{ item.origin_price }} 元
                       </div>
-                      <del class="h6" v-if="product.price">原價 {{ product.origin_price }} 元</del>
-                      <div class="h5" v-if="product.price">
+                      <del class="h6 text-dark" v-if="product.price">
+                        原價 {{ product.origin_price }} 元</del>
+                      <div class="h5 fw-bold" v-if="product.price">
                         現在只要 {{ product.price }} 元
                       </div>
                   </td>
@@ -75,18 +92,28 @@
                 </div>
               </div>
             </div>
+          </div>
 
           </div>
           <PaginationComponent class="d-flex justify-content-center"
            :pagination="pagination" @emitPages="getProducts">
           </PaginationComponent>
         </div>
-      </div>
+      </section>
+      <FooterLayout></FooterLayout>
 </template>
+
+<style>
+  .min-container {
+    min-height: calc(100vh - 56px - 76px);
+  }
+
+</style>
 <script>
 import { mapActions } from 'pinia';
 import Swal from 'sweetalert2';
 import cartStore from '../../stores/cartStore';
+import FooterLayout from '../../components/FooterLayout.vue';
 import toastMessage from '../../stores/toastMessage';
 import PaginationComponent from '../../components/PaginationComponent.vue';
 
@@ -128,9 +155,9 @@ export default {
             (item) => item.title.trim().toLowerCase().includes(this.search.toLowerCase()),
           );
         })
-        .catch((err) => {
+        .catch(() => {
           this.isLoading = false;
-          console.log(err);
+          // console.log(err);
         });
     },
     getProduct(id) {
@@ -167,6 +194,7 @@ export default {
   },
   components: {
     PaginationComponent,
+    FooterLayout,
   },
   watch: {
     search(newVal) {

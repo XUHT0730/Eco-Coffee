@@ -1,71 +1,65 @@
 <template>
-    <section class="position-relative box-bg05 mb-7">
-    <LoadingOverLay :active="isLoading" :z-index="1060" class="text-center" />
-    <div class="OBJECTS05" v-if="filterProducts.length > 0">
+  <LoadingOverLay :active="isLoading" :z-index="1060" class="text-center" />
+    <section class="position-relative mb-6">
+    <div v-if="filterProducts.length > 0">
       <div class="container">
-        <div class="row">
-          <div class="col-12 text-dark mt-xl-7 mt-lg-7 mt-md-7" data-aos="fade-down">
-            <div class="fw-bold title mt-5 mb-2 d-none d-md-block d-lg-block d-xl-block">
+        <div class="row d-flex justify-content-center">
+          <div class="col-12 text-center text-dark mt-xl-7 mt-lg-7 mt-md-7" data-aos="fade-down">
+            <div class="h3 fw-bold mt-5 mb-2">
               追蹤商品
             </div>
-            <div class="fw-bold title mt-7 mb-2 d-block d-md-none d-xl-none d-lg-none">
-              商品收藏
-              <div class="text-info fw-normal fs-5 d-md-none">
-                保存自己感興趣商品
-              </div>
-            </div>
-            <span class="text-info fs-4">Course Collection</span>
           </div>
-          <LoadingOverLay :active="isLoading" :z-index="1060" class="text-center" />
-          <div
-            class="row g-5 pb-5 pb-md-4 pb-lg-4 pb-xl-7 mx-auto justify-content-center"
-            data-aos="fade-up"
-          >
+          <div class="row row-cols-3 g-4 col-lg-12 col-md-10 mb-5 d-flex justify-content-center">
             <template v-for="item in filterProducts" :key="item.id">
               <div
-                class="col-12 col-xl-4 col-lg-5 mx-2 mx-xl-0 mx-lg-0 mx-md-0"
+                class="col-12 col-xl-4 col-lg-5 d-flex justify-content-center"
               >
-                <div class="card02 shadow bg-white">
-                  <img :src="item.imageUrl" class="w-70 object-fit-cover" height="325"/>
-                  <div class="card-body position-relative">
-                    <div class="bg-secondary fs-6 px-4 py-1 text-white position-absolute category">
-                      {{ item.category }}
+              <div class="card product-card shadow bg-white mb-sm-4 ms-md-4 m-sm-auto" >
+                <router-link :to="`/product/${item.id}`" class="product-card-link">
+                <img :src="item.imageUrl" class="product-card-img" />
+                </router-link>
+                <div class="card-body position-relative">
+                    <div class="row d-flex">
+                        <div class="col">
+                          <div class="left w-100">
+                            <div class="bg-secondary
+                             position-absolute fs-6 px-2 py-1 text-white category">
+                              {{ item.category }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="right w-100 text-end">
+                            <div @click="setTrack(item.id)">
+                              <span v-if="trackList.includes(item.id)">
+                                <i class="bi bi-heart-fill fs-4 text-danger"></i>
+                              </span>
+                              <span v-else><i class="bi bi-heart fs-4 text-danger"></i></span>
+                            </div>
+                          </div>
+                        </div>
                     </div>
-                    <h5 class="card-title pt-5 px-5">{{ item.title }}</h5>
-                    <!-- Track icon -->
-                    <div class="card_Favorite position-absolute" @click="setTrack(item.id)">
-                      <span v-if="trackList.includes(item.id)">
-                        <i class="bi bi-heart-fill fs-4 text-danger"></i>
-                      </span>
-                      <span v-else>
-                        <i class="bi bi-heart fs-4 text-danger"></i>
-                      </span>
-                    </div>
-                    <div class="fs-5 card-text text-info px-5 pt-2"
-                     v-if="item.price === item.origin_price">
-                      {{ $filters.currency(item.price) }} 元
-                    </div>
-                    <div v-else class="mt-3 d-flex c_font">
-                      <del class="ms-5 card-text text-info pt-2">
-                        原價 ${{ $filters.currency(item.origin_price) }} 元</del
-                      >
-                      <p
-                        class="card-text text-dark ms-3 ms-xl-5 ms-lg-5 ms-md-9 pt-2"
-                      >
-                        特價 ${{ $filters.currency(item.price) }} 元
-                      </p>
-                    </div>
-                    <div class="pb-7 pb-md-5 pb-lg-5 pb-xl-5 pt-2 pt-md-6 d-flex">
-                      <div class="classBtn04 position-absolute">
-                        <RouterLink :to="`/product/${item.id}`" type="button"
-                          class="btn btn-primary pe-4 py-2 w-100">
-                          商品介紹
-                          <i class="bi bi-arrow-right"></i>
-                        </RouterLink>
+                    <h5 class="card-title pt-2 fw-bold">
+                      <router-link :to="`/product/${item.id}`">
+                        {{ item.title }}
+                      </router-link>
+                    </h5>
+                    <td>
+                      <div class="h5" v-if="!item.price">
+                        {{ item.origin_price }} 元
                       </div>
-                    </div>
-                  </div>
+                      <del class="h6 text-dark" v-if="item.price">
+                        原價 {{ item.origin_price }} 元</del>
+                      <div class="h5 fw-bold" v-if="item.price">
+                        現在只要 {{ item.price }} 元
+                      </div>
+                  </td>
+                  <button class="btn btn-primary w-100" type="button"
+                  @click.prevent="addToCart(item.id)">
+                  <i class="bi bi-cart-check"></i>
+                  加入購物車</button>
                 </div>
+              </div>
               </div>
             </template>
           </div>
@@ -73,19 +67,20 @@
       </div>
     </div>
     <div v-else class="text-center mb-7 mb-md-9 pt-7 pt-md-9">
-      <h2 class="text-info">沒有追蹤商品，快去逛逛</h2>
-      <p class="display-3 text-info my-4 mb-md-6">前往商品列表</p>
-      <RouterLink
-        to="/products"
-        class="fs-5 btn btn-primary py-3 px-5">
+      <h2 class="text-dark mt-6">沒有追蹤商品，快去逛逛</h2>
+      <p class="text-primary my-4 mb-md-5">前往商品列表</p>
+      <RouterLink to="/products" class="fs-5 btn btn-primary py-3 px-5">
         查看商品
       </RouterLink>
     </div>
   </section>
+  <FooterLayout></FooterLayout>
 </template>
 <script>
-// import { ref, computed, onMounted } from 'vue';
+import { mapActions } from 'pinia';
 import Swal from 'sweetalert2';
+import FooterLayout from '../../components/FooterLayout.vue';
+import cartStore from '../../stores/cartStore';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -94,6 +89,7 @@ export default {
       isLoading: false,
       products: [],
       trackList: [],
+      cart: {},
     };
   },
   computed: {
@@ -102,7 +98,11 @@ export default {
       return this.products.filter((item) => this.trackList.includes(item.id));
     },
   },
+  components: {
+    FooterLayout,
+  },
   methods: {
+    ...mapActions(cartStore, ['addToCart']),
     getProducts() {
       this.isLoading = true;
       const url = `${VITE_URL}/api/${VITE_PATH}/products/all`;

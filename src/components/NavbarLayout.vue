@@ -1,11 +1,11 @@
 <template>
   <ToastMessages />
-      <nav class="navbar container navbar-expand-lg navbar-dark bg-primary sticky-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-2">
         <div class="container-fluid">
           <!--LOGO-->
           <RouterLink to="/" class="navbar-brand align-items-center">
               <i class="bi bi-cup-hot"></i>
-              <span class="ms-2">Eco-Coffee</span>
+              <span class="ms-2 fw-bold">Eco-Coffee</span>
           </RouterLink>
           <!-- BUTTON -->
           <button class="navbar-toggler"  data-bs-toggle="collapse"
@@ -15,27 +15,27 @@
           <!--主角 MENU-->
           <div id="lokiNavbar" ref="collapse" class="collapse navbar-collapse">
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
+              <RouterLink to="/about"
+                class="nav-item nav-link">了解公平貿易</RouterLink>
                 <RouterLink to="/products"
                 class="nav-item nav-link">產品列表</RouterLink>
                 <RouterLink to="/articles"
-                class="nav-item nav-link">Blog</RouterLink>
+                class="nav-item nav-link">部落格</RouterLink>
             </div>
             <div class="nav navbar-nav d-flex me-2">
-              <RouterLink to="/track" class="nav-link nav-item
-                me-2 position-relative">
-                <i class="bi bi-heart-fill"></i>
+              <RouterLink to="/track" class="nav-link nav-item me-2 position-relative">
+                <i class="bi bi-heart-fill icon"></i>
               </RouterLink>
-              <RouterLink to="/cart" class="btn btn-outline-primary
-              nav-item nav-link position-relative">
-                  <i class="bi bi-cart"></i>
-                  <span class="position-absolute top-0 start-100
-                  translate-middle badge rounded-pill bg-danger">
+              <RouterLink to="/cart" class="btn btn-outline-primary nav-item
+               nav-link position-relative d-flex align-items-center me-2">
+                <i class="bi bi-cart icon"></i>
+                <span class="badge rounded-pill bg-danger">
                   {{ this.carts?.length }}
                   <span class="visually-hidden">unread messages</span>
-                  </span>
+                </span>
               </RouterLink>
-              <router-link to="/login" class="nav-item nav-link">
-                 <i class="bi bi-person-circle"></i>
+              <router-link to="/login" class="nav-item nav-link me-2">
+                <i class="bi bi-person-circle icon"></i>
               </router-link>
             </div>
           </div>
@@ -44,6 +44,17 @@
 </template>
 
 <style lang="scss">
+ @media (max-width: 768px) {
+    .nav-link.active {
+      background-color: rgb(114, 189, 133);
+    }
+  }
+
+  @media screen and (min-width: 769px) {
+    .nav-link.active {
+      border-bottom: solid#FFFFFF 3px;
+    }
+  }
   .navbar-nav .nav-item {
     position: relative;
   }
@@ -54,11 +65,14 @@
     left: 0;
     width: 0;
     height: 2px; /* 底線高度 */
-    background-color: rgb(0, 0, 0); /* 底線顏色 */
+    background-color: rgb(255, 255, 255); /* 底線顏色 */
     transition: width 0.3s; /* 添加過渡效果 */
   }
   .navbar-nav .nav-item:hover::after {
     width: 100%; /* 滑鼠接觸時，底線寬度為項目寬度 */
+  }
+  .icon {
+    font-size: 21px;
   }
 </style>
 <script>

@@ -2,23 +2,23 @@
   <VueLoading :active="isLoading" :z-index="1060" />
   <div class="container">
     <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
+      <ol class="breadcrumb mt-3">
         <li class="breadcrumb-item">
           <RouterLink to="/articles">部落格列表</RouterLink>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">
+        <li class="breadcrumb-item active fw-bold" aria-current="page">
           {{ article.title }}
         </li>
       </ol>
     </nav>
     <div class="row justify-content-center">
       <article class="col-8">
-        <h2>{{ article.title }}</h2>
+        <h2 class="fw-bold">{{ article.title }}</h2>
         <p>
           <small class="text-muted">{{ $filters.date(article.create_at) }}</small> -
           <small class="text-muted">作者：{{ article.author }}</small>
         </p>
-        <img :src="article.imageUrl" :alt="article.title" class="img-fluid mb-3">
+        <img :src="article.imageUrl" :alt="article.title" class="img-fluid my-3">
         <div v-html="article.content"></div>
       </article>
     </div>
@@ -43,7 +43,7 @@ export default {
     getArticle() {
       const api = `${VITE_URL}/api/${VITE_PATH}/article/${this.id}`;
       this.isLoading = true;
-      this.$http.get(api).then((response) => {
+      this.axios.get(api).then((response) => {
         this.article = response.data.article;
         this.isLoading = false;
       }).catch((error) => {

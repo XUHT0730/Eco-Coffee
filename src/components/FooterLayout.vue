@@ -1,68 +1,86 @@
 <template>
-    <footer class="container border-2 border-top">
-        <div class="footer__wrapper bg-white text-dark">
-            <div class="footer-blocks">
-                <div class="footer-block">
-                <!-- <img src="images/undraw_chef_cu-0-r.svg"
-                style="height: 109px; width: 139px; margin-bottom: 10px;" alt=""> -->
-                <p>15% off your first order</p>
-                <p>Subscribe today and save</p>
-                <VeeForm ref="form" class="col-md-6"
-                v-slot="{ errors }" @submit="createOrder">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <VeeField id="email" name="email" type="email"
-                        class="form-control" :class="{ 'is-invalid': errors['email'] }"
-                            placeholder="請輸入 Email"
-                            rules="email|required" v-model="form.user.email" />
-                        <ErrorMessage name="email" class="invalid-feedback" />
-                    </div>
-                </VeeForm>
-                </div>
-                <div class="footer-block">
-                    <h4 style="margin-bottom: 25px;">相關連結</h4>
-                    <ul class="footerul" style="padding-left: 50px;">
-                        <li style="margin-bottom: 10px;"><a href="#">主頁</a></li>
-                        <li style="margin-bottom: 10px;"><a href="#">常見問題</a></li>
-                    </ul>
-                    <ul class="footerul">
-                        <li style="margin-bottom: 10px;"><a href="#">最新消息</a></li>
-                        <li style="margin-bottom: 10px;"><a href="#">聯絡我們</a></li>
-                    </ul>
-                </div>
-                <div class="footer-block">
-                    <h4 class="mb-2">聯絡我們</h4>
-                    <div class="row">
-                        <i class="bi bi-instagram"></i>
-                        <i class="bi bi-facebook"></i>
-                        <i class="bi bi-envelope-heart"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+  <footer class="border-2 bg-primary border-top mt-6">
+    <div class="container text-white text-center">
+      <!-- 在 sm 尺寸下僅顯示 RouterLink 元素 -->
+      <div class="row d-lg-none d-md-none">
+        <RouterLink to="/" class="navbar-brand py-3">
+          <i class="bi bi-cup-hot"></i>
+          <span class="ms-2 fw-bold text-white">Eco-Coffee</span>
+        </RouterLink>
+      </div>
+      <div class="footer__wrapper d-none d-sm-block">
+          <div class="row">
+              <div class="col-md-4 mb-4">
+                  <div class="footer-block">
+                      <p class="h4 fw-bold mb-3">首次下單可享 15% 優惠</p>
+                      <p>訂閱獲取優惠卷 & 最新商品</p>
+                      <VeeForm ref="form" v-slot="{ errors }" @submit="createOrder">
+                          <div class="mb-3">
+                              <label for="email" class="form-label">Email</label>
+                              <VeeField id="email" name="email" type="email"
+                               class="form-control w-70" :class="{ 'is-invalid': errors['email'] }"
+                                  placeholder="請輸入 Email" rules="email|required"
+                                   v-model="form.user.email" />
+                              <ErrorMessage name="email" class="invalid-feedback" />
+                          </div>
+                      </VeeForm>
+                  </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                  <div class="footer-block-center">
+                      <p class="h4 fw-bold mb-4">相關連結</p>
+                      <ul class="footerul ps-6">
+                        <li class="mb-3"><a class="text-white" href="#">主頁</a></li>
+                        <li class="mb-3"><a class="text-white" href="#">常見問題</a></li>
+                      </ul>
+                      <ul class="footerul">
+                          <li class="mb-3"><a class="text-white" href="#">最新消息</a></li>
+                          <li class="mb-3"><a class="text-white" href="#">聯絡我們</a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                  <div class="footer-block-center">
+                    <p class="h4 fw-bold mb-4">聯絡我們</p>
+                      <div class="row">
+                          <div class="col-4">
+                              <i class="bi bi-instagram icon"></i>
+                          </div>
+                          <div class="col-4">
+                              <i class="bi bi-facebook icon"></i>
+                          </div>
+                          <div class="col-4">
+                              <i class="bi bi-envelope-heart icon"></i>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <style lang="scss">
-    .footer__wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        max-width: 1080px;
-        margin: 0 auto;
-    }
-    .footer-blocks {
-        display: grid;
-        align-items: flex-start;
-        flex-basis: 100%;
-        padding-top: 3rem;
-        margin-bottom: 4rem;
-        border-top: 1px solid #dfe3ea;
-        grid-auto-columns: 1fr;
-        grid-gap: 56px;
-    }
-    .footer-block {
-        text-align: left;
-    }
+  .footer__wrapper {
+      padding-top: 3rem;
+      padding-bottom: 1rem;
+  }
+  .footer-block {
+      text-align: left;
+  }
+  .footer-block-center{
+    text-align: center;
+  }
+  .icon {
+      font-size: 30px;
+  }
+  .footerul {
+    list-style: none;
+    padding: 0;
+    float: left;
+    margin-left: 50px;
+ }
 </style>
 
 <script>

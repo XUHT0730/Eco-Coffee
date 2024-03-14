@@ -1,143 +1,158 @@
 <template>
-  <header class="container header"
+  <LoadingOverLay :active="isLoading" :z-index="1060"></LoadingOverLay>
+  <header class="header"
    style="background-image:
     url(https://storage.googleapis.com/vue-course-api.appspot.com/hedy-api-path/1709543433230.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=RKdXij%2BJKl7scyyCrzbEoL7DKU%2BhtTvd%2B19Qhee9AUDq%2FoXrgyD8lS%2BZCheCWRKgOfScfomYaSL3rgCwbQeThOe2rtiKYmypjiZnqy1hZF0ldnixATNZZaCldVhwKytNUTZHjWoP58IeUI9FLiRG6PMhzknkCEzSP4OdmF54GOEvdYBkQp3D1QhPENbhBB4bjd9WbxuGjJHRuDY5B4pItsX4ZbMPpLQQeOpGiO%2F2AjrnOIW2giK%2BDc4eD4SAZowcPBNK8YJCo79Z9KqZQ6lRS%2FInyi%2BNkpH3UnYfYzqFTN6PEHNva892jSwMMYMtKCu5cC7ReW%2FfkBTEY%2B9GR2KF7g%3D%3D);">
-   <div class="d-flex align-items-center h-100 position-relative" style="z-index: 1;">
+   <div class="container d-flex align-items-center h-100 position-relative" style="z-index: 1;">
     <div class="header-text">
-      <h1>愛咖啡更支持咖啡</h1>
-        <RouterLink :to="`/article/`" type="button"
-           class="btn btn-primary btn-lg">
+      <h1 class="fw-bold mb-3">發現公平貿易咖啡的美味世界</h1>
+        <RouterLink :to="`/about`" type="button"
+           class="btn btn-primary btn-lg" style="border-radius: 0;">
            了解公平貿易
           </RouterLink>
     </div>
   </div>
   </header>
-  <section class="container mt-6">
-    <h2 class="text-center my-6">選購公平貿易咖啡商品</h2>
-    <div class="d-flex justify-content-center align-items-center">
-      <div class="row row-cols-3 mb-4 g-4 col-lg-10 col-md-9">
-          <div class="col" v-for="(product,index) in products" :key="product.id">
-            <!-- 只顯示每個 category 的前三個產品 -->
-            <template v-if="index < 3 ||products[index - 1].category !== product.category">
-              <div class="card position-relative" >
-                <img class="card-img-top object-fit-cover w-70"
-                :src="product.imageUrl" alt="" height="325">
-                <div class="card-body position-relative">
-                  <div class="bg-secondary fs-6 px-3 py-1 text-white position-absolute category">
-                      {{ product.category }}
-                  </div>
-                  <h5 class="card-title pt-5 px-1">
-                    <router-link :to="`/product/${product.id}`">
-                      {{ product.title }}
-                    </router-link>
-                  </h5>
-                    <!-- Track icon -->
-                    <div class="card_Favorite position-absolute" @click="setTrack(product.id)">
-                      <span v-if="trackList.includes(product.id)">
-                        <i class="bi bi-heart-fill fs-4 text-danger"></i>
-                      </span>
-                      <span v-else>
-                        <i class="bi bi-heart fs-4 text-danger"></i>
-                      </span>
-                    </div>
-                    <td>
-                      <div class="h5" v-if="!product.price">
-                        {{ item.origin_price }} 元
-                      </div>
-                      <del class="h6" v-if="product.price">原價 {{ product.origin_price }} 元</del>
-                      <div class="h5" v-if="product.price">
-                        現在只要 {{ product.price }} 元
-                      </div>
-                  </td>
-                  <button class="btn btn-primary w-100" type="button"
-                  @click.prevent="addToCart(product.id)">
-                  <i class="bi bi-cart-check"></i>
-                  加入購物車</button>
-                </div>
-              </div>
-            </template>
+<section class="container mt-6">
+  <h2 class="text-center mb-5 fw-bold">支持公平貿易的店家</h2>
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-9 col-sm-12">
+      <div class="row row-cols-lg-2 row-cols-md-2 g-4">
+        <div class="col-sm-1 mb-4" v-for="item in categories" :key="item">
+            <router-link :to="`/products?category=${item}`" class="d-block text-muted">
+            <div class="image-container">
+              <img :src="categoryImages[item]" class="card-img-top object-fit-cover title-image"/>
+              <div class="overlay">{{item}}</div>
             </div>
-      </div>
-       </div>
-       <div class="row justify-content-center">
-          <RouterLink :to="`/products`" type="button"
-           class="btn btn-outline-primary fs-5 py-3 w-25">
-                查看更多商品
-          </RouterLink>
-        </div>
-  </section>
-  <section class="container mt-6">
-    <h2 class="me-2">用分類搜尋</h2>
-    <div class="container">
-      <div class="row row-cols-2 card-img my-4 g-4 col-lg-10 col-md-9">
-        <div class="col" v-for="item in categories" :key="item">
-          <img class="card-img-top object-fit-cover"
-           :src="categoryImages[item]" height="500" width="250">
-          <router-link class="py-2 d-block text-muted"
-          :to="`/products?category=${item}`">{{ item }}</router-link>
+            <h3 class="my-3 text-center d-md-none d-lg-none">{{item}}</h3>
+          </router-link>
         </div>
       </div>
-     </div>
-  </section>
+    </div>
+  </div>
+</section>
 
-  <section class="container mt-6">
-      <div class="d-flex justify-content-center">
-        <swiper
-        :slidesPerView="1"
-        :spaceBetween="10"
-        :pagination="{
-          clickable: true,
-        }"
-        :breakpoints="{
-          '640': {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          '768': {
-            slidesPerView: 4,
-            spaceBetween: 40,
-          },
-          '1024': {
-            slidesPerView: 5,
-            spaceBetween: 50,
-          },
-        }"
-        :modules="modules"
-        class="mySwiper">
-        <swiper-slide v-for="product in products" :key="product.id">
-          <div class="row row-cols-md-4 row-cols-sm-2 g-3">
-            <div class="col-xs-2 col-sm col-md-4 col-lg">
-                <div class="card" style="width: 14rem">
-                  <div
-                  style="height: 200px; background-size: cover; background-position: center;"
-                  :style="{backgroundImage:`url(${product.imageUrl})`}"
-                  class="card-img-top"
-                  alt=""></div>
-                  <div class="card-body">
-                    <h5 class="card-title fs-6 fw-bold">{{ product.title }}</h5>
-                    <p class="card-text">NT$ {{ product.price }}</p>
-                    <a type="button" class="btn btn-primary d-flex justify-content-center"
-                      @click.prevent="addToCart(product.id)">立即購買</a>
-                  </div>
+  <section class="bg-light py-6 mt-6">
+    <div class="container">
+      <div class="row justify-content-center mb-3">
+            <div class="col-md-12 text-center">
+                <h1 class="fw-bold">以永續經營的精神 發展咖啡文化</h1>
+                <h2>打破咖啡產業中的不公平和不平等</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-6">
+            <div class="col-md-5">
+                <img src="@/assets/images/fair-trand.png"
+                class="w-100 h-70 object-fit-cover" alt="fair-trand">
+            </div>
+            <div class="col-md-5 d-flex align-items-center">
+                <div class="text-center">
+                    <h2 class="fw-bold">以永續經營的精神 發展咖啡文化</h2>
+                    <p class="text-primary me-3">我們相信，每一杯咖啡都能成為改變世界的力量。</p>
+                    <p>我們的使命是通過推動公平貿易和提供最優質的咖啡，促進社會正義和環境保護。我們相信，每一杯咖啡都能成為改變世界的力量。</p>
+                </div>
+            </div>
+        </div>
+      <div class="row justify-content-center mt-6 flex-row-reverse">
+        <div class="col-md-5">
+          <img class="w-100 object-fit-cover"
+           src="@/assets/images/whatisfairtrand.png" alt="">
+        </div>
+        <div class="col-md-5 d-flex align-items-center">
+          <div class="text-center">
+            <h2 class="fw-bold">合作咖啡豆品牌</h2>
+            <p class="text-primary me-3">以公平貿易的角度，並創造利潤共享的平台</p>
+            <p>
+            我們與四家頂級咖啡豆品牌合作，包括 Mount Hagen、OKOGREEN、
+            畢嘉士和微笑人咖啡。我們選擇這些品牌是因為它們與我們的價值觀和使命相契合，
+            並致力於推動公平貿易的發展。
+           </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <section class="container mt-6">
+      <h2 class="text-center fw-bold">熱銷商品</h2>
+        <div class="d-flex justify-content-center my-4">
+          <swiper
+          :autoplay = true
+          :slidesPerView="1"
+          :spaceBetween="10"
+          :breakpoints="{
+            '375': {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            '768': {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            '1024': {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+          }"
+          :modules="modules"
+          class="mySwiper">
+          <swiper-slide v-for="product in products" :key="product.id">
+            <div class="row">
+            <div class="col-md-4 col-sm">
+              <div class="card swiper-card mb-sm-4 ms-md-4 m-sm-auto">
+                <router-link :to="`/product/${product.id}`" class="swiper-card-link">
+                <img :src="product.imageUrl" class="swiper-card-img" />
+                </router-link>
+                <div class="card-body">
+                  <span class="badge rounded-pill bg-primary mb-2">{{product.category}}</span>
+                  <h5 class="card-title fs-6 fw-bold">{{ product.title }}</h5>
+                  <p class="card-text">NT$ {{ product.price }}</p>
+                  <a class="btn btn-primary d-flex justify-content-center text-white"
+                    @click.prevent="addToCart(product.id)">
+                    <i class="bi bi-cart-check me-2">
+                    </i>加入購物車</a>
                 </div>
               </div>
-          </div>
-          </swiper-slide>
-      </swiper>
-    </div>
-  </section>
-
-  <section class="container mt-6">
-    <h2 class="me-2">什麼是公平貿易咖啡豆 ?
-
-    </h2>
-  </section>
-
+              </div>
+            </div>
+            </swiper-slide>
+        </swiper>
+      </div>
+    </section>
   <FooterLayout></FooterLayout>
 </template>
 
 <style lang="scss" scoped>
-.card-img {
+* {box-sizing: border-box;}
+.image-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+.title-image {
+  display: block;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+.image-container:hover .overlay {
+  opacity: 1;
+}
+.header-img {
     overflow: hidden;
     border-radius: 10px;
     img {
@@ -152,17 +167,28 @@
     background-position: center center;
     background-size: cover;
     position: relative;
+    overflow: hidden;
+    transition: transform 0.6s ease;
   }
-  .header::after {
-  position: absolute;
-  content: "";
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: black;
-  opacity: 0.3;
+  .header:hover {
+  transform: scale(1.03);
 }
+  .header::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/hedy-api-path/1709543433230.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=RKdXij%2BJKl7scyyCrzbEoL7DKU%2BhtTvd%2B19Qhee9AUDq%2FoXrgyD8lS%2BZCheCWRKgOfScfomYaSL3rgCwbQeThOe2rtiKYmypjiZnqy1hZF0ldnixATNZZaCldVhwKytNUTZHjWoP58IeUI9FLiRG6PMhzknkCEzSP4OdmF54GOEvdYBkQp3D1QhPENbhBB4bjd9WbxuGjJHRuDY5B4pItsX4ZbMPpLQQeOpGiO%2F2AjrnOIW2giK%2BDc4eD4SAZowcPBNK8YJCo79Z9KqZQ6lRS%2FInyi%2BNkpH3UnYfYzqFTN6PEHNva892jSwMMYMtKCu5cC7ReW%2FfkBTEY%2B9GR2KF7g%3D%3D);
+    background-color: black;
+    opacity: 0.3;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
 .header-text {
   text-align: center;
   position: absolute;
@@ -170,21 +196,45 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
+  z-index: 1;
+}
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
 
 <script>
 import { mapActions } from 'pinia';
 import Swal from 'sweetalert2';
-import { Swiper, SwiperSlide } from 'swiper/vue';
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 import FooterLayout from '../../components/FooterLayout.vue';
 import cartStore from '../../stores/cartStore';
 // Import Swiper Vue.js components
 
 // Import Swiper styles
 import 'swiper/css';
+
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
@@ -192,6 +242,7 @@ const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   data() {
     return {
+      isLoading: false,
       products: [],
       product: {},
       categories: ['赫根山 Mount Hagen', '生態綠 OKOGREEN', '畢嘉士', '微笑人咖啡 Laughing Man Coffee'],
