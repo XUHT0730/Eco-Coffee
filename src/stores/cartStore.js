@@ -20,8 +20,8 @@ export default defineStore('cartStore', {
           this.final_total = res.data.data.final_total;
           this.total = res.data.data.total;
         })
-        .catch((err) => {
-          console.log(err.response.data.message);
+        .catch(() => {
+          // console.log(err.response.data.message);
         });
     },
     addToCart(id) {
