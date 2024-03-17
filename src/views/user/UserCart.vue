@@ -38,21 +38,23 @@
                    </th>
                   <td class="border-0 align-middle" style="max-width: 170px;">
                     <div class="row g-0">
-                      <div class="col">
-                        <div class="input-group">
-                          <!-- @blur="updateCart(item) 是用來觸發編輯購物車的事件，
-                          使用 blur 事件監聽，當焦點離開該元素時才會觸發事件，
-                          為的是避免使用者在短時間大量觸發事件，影響整體效能 -->
-                          <input type="number" class="form-control border-dark" min="1"
-                          v-model.number="item.qty" @blur="updateCart(item)"
-                          :disabled="status.loadingItem === item.id" />
+                      <div class="d-flex flex-wrap">
+                        <div class="col-7">
+                          <div class="input-group">
+                            <!-- @blur="updateCart(item) 是用來觸發編輯購物車的事件，
+                            使用 blur 事件監聽，當焦點離開該元素時才會觸發事件，
+                            為的是避免使用者在短時間大量觸發事件，影響整體效能 -->
+                            <input type="number" class="form-control border-dark" min="1"
+                            v-model.number="item.qty" @blur="updateCart(item)"
+                            :disabled="status.loadingItem === item.id"/>
+                          </div>
                         </div>
-                      </div>
-                      <div class="col">
-                        <div class="input-group">
-                          <span class="input-group-text border-dark" id="basic-addon2">
-                          {{item.product.unit }}
-                          </span>
+                        <div class="col-3">
+                          <div class="input-group">
+                            <span class="input-group-text border-dark" id="basic-addon2">
+                            {{item.product.unit }}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
