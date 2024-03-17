@@ -1,6 +1,6 @@
 <template>
     <nav aria-label="Page navigation example">
-            <ul class="pagination">
+            <ul class="pagination ff-minor">
               <li class="page-item" :class="{'disabled' : pagination.current_page === 1}">
                 <a href="#" class="page-link"
                   @click.prevent="updatePage(pagination.current_page - 1)"

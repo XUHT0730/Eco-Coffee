@@ -13,30 +13,30 @@
     </div>
   </div>
   </header>
-<section class="container mt-6">
-  <h2 class="text-center mb-5 fw-bold">支持公平貿易的店家</h2>
-  <div class="row justify-content-center">
-    <div class="col-lg-10 col-md-9 col-sm-12">
-      <div class="row row-cols-lg-2 row-cols-md-2 g-4">
-        <div class="col-sm-1 mb-4" v-for="item in categories" :key="item">
-            <router-link :to="`/products?category=${item}`" class="d-block text-muted">
-            <div class="image-container">
-              <img :src="categoryImages[item]" class="card-img-top object-fit-cover title-image"/>
-              <div class="overlay">{{item}}</div>
-            </div>
-            <h3 class="my-3 text-center d-md-none d-lg-none">{{item}}</h3>
-          </router-link>
+  <section class="container mt-6">
+    <h2 class="text-center mb-5 fw-bold">支持公平貿易的店家</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-9 col-sm-12">
+        <div class="row row-cols-lg-2 row-cols-md-2 g-4">
+          <div class="col-sm-1 mb-4" v-for="item in categories" :key="item">
+              <router-link :to="`/products?category=${item}`" class="d-block text-muted">
+              <div class="image-container">
+                <img :src="categoryImages[item]" class="card-img-top object-fit-cover title-image"/>
+                <div class="overlay">{{item}}</div>
+              </div>
+              <h3 class="my-3 text-center d-md-none d-lg-none">{{item}}</h3>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <section class="bg-light py-6 mt-6">
     <div class="container">
       <div class="row justify-content-center mb-3">
             <div class="col-md-12 text-center">
-                <h1 class="fw-bold">以永續經營的精神 發展咖啡文化</h1>
+                <h1 class="fw-bold mt-3">以永續經營的精神 發展咖啡文化</h1>
                 <h2>打破咖啡產業中的不公平和不平等</h2>
             </div>
         </div>
@@ -47,8 +47,8 @@
             </div>
             <div class="col-md-5 d-flex align-items-center">
                 <div class="text-center">
-                    <h2 class="fw-bold">以永續經營的精神 發展咖啡文化</h2>
-                    <p class="text-primary me-3">我們相信，每一杯咖啡都能成為改變世界的力量。</p>
+                    <h2 class="fw-bold mt-3">以永續經營的精神 發展咖啡文化</h2>
+                    <p class="text-primary me-3 fw-bold">我們相信，每一杯咖啡都能成為改變世界的力量。</p>
                     <p>我們的使命是通過推動公平貿易和提供最優質的咖啡，促進社會正義和環境保護。我們相信，每一杯咖啡都能成為改變世界的力量。</p>
                 </div>
             </div>
@@ -60,8 +60,8 @@
         </div>
         <div class="col-md-5 d-flex align-items-center">
           <div class="text-center">
-            <h2 class="fw-bold">合作咖啡豆品牌</h2>
-            <p class="text-primary me-3">以公平貿易的角度，並創造利潤共享的平台</p>
+            <h2 class="fw-bold mt-3">合作咖啡豆品牌</h2>
+            <p class="text-primary fw-bold me-3">以公平貿易的角度，並創造利潤共享的平台</p>
             <p>
             我們與四家頂級咖啡豆品牌合作，包括 Mount Hagen、OKOGREEN、
             畢嘉士和微笑人咖啡。我們選擇這些品牌是因為它們與我們的價值觀和使命相契合，
@@ -119,7 +119,6 @@
         </swiper>
       </div>
     </section>
-  <FooterLayout></FooterLayout>
 </template>
 
 <style lang="scss" scoped>
@@ -228,7 +227,6 @@ import Swal from 'sweetalert2';
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import FooterLayout from '../../components/FooterLayout.vue';
 import cartStore from '../../stores/cartStore';
 // Import Swiper Vue.js components
 
@@ -306,7 +304,6 @@ export default {
     },
   },
   components: {
-    FooterLayout,
     Swiper,
     SwiperSlide,
   },

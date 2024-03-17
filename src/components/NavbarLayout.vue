@@ -3,33 +3,30 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-2">
         <div class="container-fluid">
           <!--LOGO-->
-          <RouterLink to="/" class="navbar-brand align-items-center">
-              <i class="bi bi-cup-hot"></i>
-              <span class="ms-2 fw-bold">Eco-Coffee</span>
+          <RouterLink to="/" class="fs-4 navbar-brand align-items-center me-2">
+              <i class="bi bi-cup-hot ff-minor"></i>
+              <span class="ms-2 fw-bold ff-minor">Eco-Coffee</span>
           </RouterLink>
           <!-- BUTTON -->
           <button class="navbar-toggler"  data-bs-toggle="collapse"
             @click="openCollapse" data-bs-target="#lokiNavbar">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon ff-minor"></span>
           </button>
           <!--主角 MENU-->
           <div id="lokiNavbar" ref="collapse" class="collapse navbar-collapse">
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
-              <RouterLink to="/about"
-                class="nav-item nav-link">了解公平貿易</RouterLink>
-                <RouterLink to="/products"
-                class="nav-item nav-link">產品列表</RouterLink>
-                <RouterLink to="/articles"
-                class="nav-item nav-link">部落格</RouterLink>
+              <RouterLink to="/about" class="nav-item nav-link">了解公平貿易</RouterLink>
+              <RouterLink to="/products" class="nav-item nav-link">產品列表</RouterLink>
+              <RouterLink to="/articles" class="nav-item nav-link">部落格</RouterLink>
             </div>
             <div class="nav navbar-nav d-flex me-2">
-              <RouterLink to="/track" class="nav-link nav-item me-2 position-relative">
+              <RouterLink to="/track" class="nav-link nav-item me-2">
                 <i class="bi bi-heart-fill icon"></i>
               </RouterLink>
               <RouterLink to="/cart" class="btn btn-outline-primary nav-item
                nav-link position-relative d-flex align-items-center me-2">
-                <i class="bi bi-cart icon"></i>
-                <span class="badge rounded-pill bg-danger">
+                <i class="bi bi-cart icon ff-minor"></i>
+                <span class="badge rounded-pill bg-danger ff-minor">
                   {{ this.carts?.length }}
                   <span class="visually-hidden">unread messages</span>
                 </span>

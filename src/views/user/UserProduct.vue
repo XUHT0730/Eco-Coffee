@@ -1,6 +1,6 @@
 <template>
   <LoadingOverLay :active="isLoading" :z-index="1060"/>
-    <div class="container">
+    <section class="container">
         <nav aria-label="breadcrumb">
         <ol class="breadcrumb mt-3">
           <li class="breadcrumb-item">
@@ -63,8 +63,8 @@
             </div>
         </article>
     </div>
-  </div>
-  <section class="container mt-6">
+    </section>
+    <section class="container mt-6">
     <hr>
       <h2 class="text-center fw-bold my-5">熱銷商品</h2>
         <div class="d-flex justify-content-center my-4">
@@ -111,7 +111,6 @@
         </swiper>
       </div>
     </section>
-  <FooterLayout></FooterLayout>
 </template>
 
 <style>
@@ -145,7 +144,6 @@ import Swal from 'sweetalert2';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import cartStore from '../../stores/cartStore';
-import FooterLayout from '../../components/FooterLayout.vue';
 import 'swiper/css';
 
 import 'swiper/css/pagination';
@@ -196,8 +194,8 @@ export default {
           // };
           this.isLoading = false;
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          // console.log(err);
           this.isLoading = false;
         });
     },
@@ -231,7 +229,6 @@ export default {
     },
   },
   components: {
-    FooterLayout,
     Swiper,
     SwiperSlide,
   },

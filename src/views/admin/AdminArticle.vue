@@ -1,16 +1,17 @@
 <template>
-  <div>
+  <div class="container">
     <LoadingOverLay :active="isLoading" :z-index="1060" />
-    <div class="text-end mt-4">
+    <div class="text-end mt-3">
       <button class="btn btn-primary" type="button" @click="openModal(true)">
         建立新的頁面
       </button>
     </div>
-    <table class="table mt-4">
+    <div class="table-responsive">
+      <table class="table table-striped mt-4">
       <thead>
         <tr>
-          <th style="width: 200px">標題</th>
-          <th style="width: 200px">作者</th>
+          <th style="width: 300px">標題</th>
+          <th style="width: 50px">作者</th>
           <th>描述</th>
           <th style="width: 100px">建立時間</th>
           <th style="width: 100px">是否公開</th>
@@ -42,6 +43,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
     <ArticleModal ref="articleModal" :article="tempArticle"
      :is-new="isNew" @update-article="updateArticle" />
 

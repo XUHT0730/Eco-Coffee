@@ -1,6 +1,6 @@
 <template>
-  <LoadingOverLay :active="isLoading" :z-index="1060" />
-  <div class="container mt-6">
+  <div class="container ec-container mt-6">
+    <LoadingOverLay :active="isLoading" :z-index="1060" />
     <div class="row row-cols-1 row-cols-md-3 g-2 d-flex justify-content-center">
       <template v-for="article in articles" :key="article.id">
         <div class="col d-flex justify-content-center" v-if="article.isPublic">
@@ -31,13 +31,17 @@
       </template>
     </div>
   </div>
-  <FooterLayout></FooterLayout>
 </template>
+
+<style>
+  .ec-container {
+      min-height: calc(100vh - 56px - 76px);
+    }
+</style>
 
 <script>
 import { mapActions } from 'pinia';
 import ToastMessage from '../../stores/toastMessage';
-import FooterLayout from '../../components/FooterLayout.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -67,9 +71,6 @@ export default {
         });
       });
     },
-  },
-  components: {
-    FooterLayout,
   },
   created() {
     this.getArticles();

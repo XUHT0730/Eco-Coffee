@@ -1,48 +1,46 @@
 <template>
-  <div>
     <LoadingOverLay :active="isLoading" :z-index="1060"></LoadingOverLay>
-    <h2>後台產品列表</h2>
     <div class="container">
-            <div class="text-end mt-4">
-              <button type="button" class="btn btn-primary" @click="openModal('new')">
-                建立新的產品
-              </button>
-            </div>
-            <table class="table mt-4">
+        <div class="text-end mt-3">
+          <button type="button" class="btn btn-primary" @click="openModal('new')">
+            建立新的產品
+          </button>
+        </div>
+            <table class="table table-responsive table-striped mt-4">
               <thead>
                 <tr>
-                  <th width="120">
+                  <th width="120" class="d-none d-sm-table-cell">
                     分類
                   </th>
                   <th>產品名稱</th>
-                  <th width="120">
+                  <th width="100" class="d-none d-sm-table-cell">
                     原價
                   </th>
-                  <th width="120">
+                  <th width="100">
                     售價
                   </th>
-                  <th width="100">
+                  <th width="100" class="text-nowrap">
                     是否啟用
                   </th>
-                  <th width="120">
+                  <th width="120" class="text-nowrap">
                     編輯
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(item) in products" :key="item.id">
-                  <td width="150">{{ item.category }}</td>
+                  <td width="150" class="d-none d-sm-table-cell">{{ item.category }}</td>
                   <td width="120">{{ item.title }}</td>
-                  <td class="text-end">{{ item.origin_price }}</td>
-                  <td class="text-end">{{item.price}}</td>
-                  <td>
+                  <td class="text-end d-none d-sm-table-cell">{{ item.origin_price }}</td>
+                  <td class="text-end">{{ item.price }}</td>
+                  <td style="white-space: nowrap;">
                     <span v-if="item.is_enabled" class="text-success">啟用</span>
                     <span v-else>未啟用</span>
                   </td>
                   <td>
                     <div class="btn-group">
                       <button type="button" class="btn btn-outline-primary btn-sm"
-                       @click="openModal('edit', item)">
+                        @click="openModal('edit', item)">
                         編輯
                       </button>
                       <button type="button" class="btn btn-outline-danger btn-sm"
@@ -53,13 +51,12 @@
                   </td>
                 </tr>
               </tbody>
-            </table>
-          <!-- 分頁元件 ( Pagination ) -->
-          <!--  props => 使用 v-bind 動態綁定 pagination 變數
-                @emitPages="更新頁面事件"-->
-          <PaginationComponent :pagination="pagination" @emitPages="getProducts">
-          </PaginationComponent>
-          <!-- 分頁元件(Pagination) -->
+         </table>
+          <!--  props => 使用 v-bind 動態綁定 pagination 變數 @emitPages="更新頁面事件"-->
+          <div class="d-flex justify-content-center">
+            <PaginationComponent :pagination="pagination" @emitPages="getProducts">
+            </PaginationComponent>
+          </div>
         </div>
         <!-- Modal -->
         <MyModal :product="tempProduct"
@@ -71,7 +68,6 @@
         @del-item="delProduct" ref="deleteModal">
         </DeleteModal>
         <!-- 刪除 Modal -->
-  </div>
 </template>
 
 <script>

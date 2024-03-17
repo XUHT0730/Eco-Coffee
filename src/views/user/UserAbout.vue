@@ -5,8 +5,8 @@
        autoplay muted loop class="w-100">
       </video>
       <div class="layout-wrapper">
-          <i class="h2 bi bi-cup-hot me-2"></i>
-          <span class="h2">Eco-Coffee</span>
+          <i class="h2 bi bi-cup-hot me-2 ff-minor"></i>
+          <span class="h2 ff-minor">Eco-Coffee</span>
           <h3 class="mt-3">連結咖啡愛好者與咖啡農民</h3>
        </div>
   </section>
@@ -133,14 +133,13 @@
           </template>
       </div>
        </div>
-       <div class="row justify-content-center">
+       <div class="row d-flex justify-content-center">
           <RouterLink :to="`/products`" type="button"
            class="btn btn-outline-primary fs-5 py-3 w-25">
                 查看更多商品
           </RouterLink>
         </div>
   </section>
-  <FooterLayout></FooterLayout>
   </template>
 
   <style>
@@ -162,7 +161,6 @@
 <script>
 import { mapActions } from 'pinia';
 import Swal from 'sweetalert2';
-import FooterLayout from '../../components/FooterLayout.vue';
 import cartStore from '../../stores/cartStore';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
@@ -174,9 +172,6 @@ export default {
       isLoading: false,
       trackList: [],
     };
-  },
-  components: {
-    FooterLayout,
   },
   methods: {
     ...mapActions(cartStore, ['addToCart']),

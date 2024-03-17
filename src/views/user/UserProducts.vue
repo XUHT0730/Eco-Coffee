@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row d-flex justify-content-end">
               <div class="col-md-3">
-                <div class="input-group w-md-50 mt-md-0 mt-3">
+                <div class="input-group w-100 mt-md-0 mt-3">
                     <input type="text" v-model.trim="search"
                     class="form-control border-primary py-2"
                     placeholder="快速搜尋 ex : 低咖啡因、濾掛" />
@@ -14,13 +14,13 @@
                           <i class="bi bi-search"></i>
                         </button>
                       </div>
-                    </div>
                 </div>
               </div>
+            </div>
         </div>
       </section>
 
-      <section class="container min-container">
+      <section class="container ec-container">
         <div class="row mt-5 mt-md-5 mt-3">
           <!-- 左側分類 list group -->
           <div class="col-lg-2 col-md-3 mb-5">
@@ -93,27 +93,23 @@
               </div>
             </div>
           </div>
-
           </div>
           <PaginationComponent class="d-flex justify-content-center"
            :pagination="pagination" @emitPages="getProducts">
           </PaginationComponent>
         </div>
       </section>
-      <FooterLayout></FooterLayout>
 </template>
 
 <style>
-  .min-container {
-    min-height: calc(100vh - 56px - 76px);
-  }
-
+  .ec-container {
+      min-height: calc(100vh - 56px - 76px);
+    }
 </style>
 <script>
 import { mapActions } from 'pinia';
 import Swal from 'sweetalert2';
 import cartStore from '../../stores/cartStore';
-import FooterLayout from '../../components/FooterLayout.vue';
 import toastMessage from '../../stores/toastMessage';
 import PaginationComponent from '../../components/PaginationComponent.vue';
 
@@ -194,7 +190,6 @@ export default {
   },
   components: {
     PaginationComponent,
-    FooterLayout,
   },
   watch: {
     search(newVal) {

@@ -1,9 +1,7 @@
 <template>
-    <div>
-        <AdminNavbar></AdminNavbar>
-        <ToastModal></ToastModal>
-        <RouterView v-if="checkSuccess"></RouterView>
-    </div>
+    <AdminNavbar></AdminNavbar>
+    <ToastModal></ToastModal>
+    <RouterView v-if="checkSuccess"></RouterView>
 </template>
 
 <script>

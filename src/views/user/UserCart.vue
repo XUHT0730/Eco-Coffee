@@ -1,6 +1,6 @@
 <template>
   <LoadingOverLay :active="isLoading" :z-index="1060"></LoadingOverLay>
-  <div class="container">
+  <section class="container">
     <div class="mt-4">
         <!-- 如購物車內有產品則顯示，沒有的話則顯示購物車目前無商品-->
       <div v-if="cart.carts && cart.carts.length > 0">
@@ -9,129 +9,229 @@
           清空購物車
         </button>
       </div>
-    <table class="table align-middle">
-      <thead>
-        <tr>
-          <th></th>
-          <th>品名</th>
-          <th style="width: 110px">數量</th>
-          <th>單價</th>
-        </tr>
-      </thead>
-      <tbody>
-        <template v-if="cart.carts">
-          <tr v-for="item in cart.carts" :key="item.id">
-            <td>
-              <button type="button" class="btn btn-outline-danger btn-sm"
-               @click="delCartItem(item.id)"
-               :disabled="status.loadingItem === item.id"
-               >
-                <i class="fas fa-spinner fa-pulse"
-                v-if="status.loadingItem === item.id"></i>
-                x
-              </button>
-            </td>
-            <td>
-                {{ item.product.title }}
-                <div class="text-success" v-if="item.coupon">已套用優惠券</div>
-              </td>
-              <td>
-                  <div class="input-group input-group-sm">
-                    <!-- @blur="updateCart(item) 是用來觸發編輯購物車的事件，
-                    使用 blur 事件監聽，當焦點離開該元素時才會觸發事件，
-                    為的是避免使用者在短時間大量觸發事件，影響整體效能 -->
-                  <input type="number" class="form-control w-50" min="1"
-                  v-model.number="item.qty" @blur="updateCart(item)"
-                  :disabled="status.loadingItem === item.id" />
-                  <span class="input-group-text" id="basic-addon2">
-                   {{item.product.unit }}
-                  </span>
-                </div>
-              </td>
-              <td class="text-end">
-                <small v-if="cart.final_total !== cart.total" class="text-success">折扣價：</small>
-                {{ $filters.currency(item.final_total) }}
-              </td>
-          </tr>
-        </template>
-      </tbody>
-      <tfoot>
-        <tr>
-            <td colspan="3" class="text-end">總計</td>
-            <td class="text-end">{{ $filters.currency(cart.total) }}</td>
-          </tr>
-          <tr v-if="cart.final_total !== cart.total">
-            <td colspan="3" class="text-end text-success">折扣價</td>
-            <td class="text-end text-success">
-              {{ $filters.currency(cart.final_total) }}
-            </td>
-          </tr>
-      </tfoot>
-    </table>
-    <div class="input-group mb-3 input-group-sm">
-        <input type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼" />
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" @click="addCouponCode">
-            套用優惠碼
-          </button>
+      <div class="mt-3">
+        <h3 class="mt-3 mb-4 text-primary fw-bold">購物車</h3>
+        <div class="row">
+          <div class="col-md-8">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0 ps-0">品名</th>
+                  <th scope="col" class="border-0">數量</th>
+                  <th scope="col" class="border-0" style="white-space: nowrap;">價格</th>
+                  <th scope="col" class="border-0"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <template v-if="cart.carts">
+                  <tr v-for="item in cart.carts" :key="item.id"
+                   class="border-bottom border-top border-dark">
+                   <th scope="row" class="border-0 px-0 font-weight-normal py-4">
+                      <router-link :to="`/product/${item.id}`">
+                        <img :src="item.product.imageUrl"
+                        style="width: 80px; height: 80px; object-fit: cover;" />
+                      </router-link>
+                      <div class="d-inline-block ms-md-3 align-middle">
+                        <p class="mb-0 fw-bold d-inline-block">{{item.product.title}}</p>
+                        <div class="text-primary" v-if="item.coupon">已套用優惠券</div>
+                      </div>
+                   </th>
+                  <td class="border-0 align-middle" style="max-width: 170px;">
+                    <div class="row g-0">
+                      <div class="col">
+                        <div class="input-group">
+                          <!-- @blur="updateCart(item) 是用來觸發編輯購物車的事件，
+                          使用 blur 事件監聽，當焦點離開該元素時才會觸發事件，
+                          為的是避免使用者在短時間大量觸發事件，影響整體效能 -->
+                          <input type="number" class="form-control border-dark" min="1"
+                          v-model.number="item.qty" @blur="updateCart(item)"
+                          :disabled="status.loadingItem === item.id" />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="input-group">
+                          <span class="input-group-text border-dark" id="basic-addon2">
+                          {{item.product.unit }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="border-0 align-middle" style="max-width: 160px;">
+                    <p class="mb-0 ms-auto">
+                      <small v-if="cart.final_total !== cart.total"
+                       class="text-primary text-center">優惠<br></small>
+                      {{ $filters.currency(item.final_total) }}
+                    </p>
+                  </td>
+                  <td class="border-0 align-middle">
+                    <button type="button" class="btn btn-outline-dark "
+                      @click="delCartItem(item.id)"
+                      :disabled="status.loadingItem === item.id"
+                      >
+                    <i class="fas fa-spinner fa-pulse"
+                     v-if="status.loadingItem === item.id"></i>
+                     X
+                    </button>
+                  </td>
+                </tr>
+                </template>
+              </tbody>
+            </table>
+            <div class="input-group w-50 mb-6 border-dark">
+              <input type="text" v-model="coupon_code" class="form-control
+                rounded-0 border-bottom border-dark
+                border-top-0 border-start-0 border-end-0 shadow-none"
+                placeholder="請輸入優惠碼" aria-label="Recipient's username"
+                 aria-describedby="button-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-dark border-bottom border-dark
+                 border-top-0 border-start-0 border-end-0 rounded-0"
+                  type="button" id="button-addon2"  @click="addCouponCode">
+                  <i class="bi bi-send-check-fill"></i>
+                </button>
+              </div>
+            </div>
+            <router-link to="/products" class="text-primary fw-bold mb-5 h5">
+                <i class="bi bi-chevron-double-left mr-1"></i>
+                繼續購物
+            </router-link>
+          </div>
+          <div class="col-md-4">
+            <div class="border p-4 mb-4 border-dark">
+              <p class="h4 mb-4 text-primary fw-bold">訂單明細</p>
+              <table class="table text-muted border-bottom border-dark">
+                <tbody>
+                  <tr>
+                    <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">小計</th>
+                    <td class="text-end border-0 px-0 pt-4">{{ $filters.currency(cart.total) }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal">支付方式</th>
+                    <td class="text-end border-0 px-0 pt-0 pb-4">ApplePay</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-between mt-4">
+                <p class="mb-0 h4 fw-bold">總計</p>
+                <p class="mb-0 h4 fw-bold">{{ $filters.currency(cart.total) }}</p>
+              </div>
+              <div v-if="cart.final_total !== cart.total"
+               class = "d-flex justify-content-between mt-4">
+                <p class="mb-0 h4 fw-bold text-primary">折扣價</p>
+                <p class="mb-0 h4 fw-bold text-primary">
+                  {{ $filters.currency(cart.final_total) }}
+                </p>
+              </div>
+              <router-link to="/checkoutfirst" class="btn btn-dark w-100 mt-4">
+                確認訂單
+              </router-link>
+            </div>
+          </div>
         </div>
       </div>
       </div>
       <div v-else class="text-center text-danger">
-            <p>購物車目前無商品</p>
+        <p>購物車無商品，快去逛逛</p>
+        <router-link to="/products" class="text-dark mt-6 h5">
+          <i class="bi bi-chevron-double-left mr-1"></i>
+            前往購物
+          </router-link>
       </div>
-      <!-- 表單填寫 -->
-    <div class="my-5 row justify-content-center">
-      <VeeForm ref="form" class="col-md-6" v-slot="{ errors }" @submit="createOrder">
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <VeeField id="email" name="email" type="email"
-          class="form-control" :class="{ 'is-invalid': errors['email'] }"
-            placeholder="請輸入 Email" rules="email|required" v-model="form.user.email" />
-          <ErrorMessage name="email" class="invalid-feedback" />
-        </div>
-        <div class="mb-3">
-          <label for="name" class="form-label">收件人姓名</label>
-          <VeeField id="name" name="姓名" type="text"
-           class="form-control" :class="{ 'is-invalid': errors['姓名'] }"
-            placeholder="請輸入姓名" rules="required" v-model="form.user.name" />
-          <ErrorMessage name="姓名" class="invalid-feedback" />
-        </div>
-        <div class="mb-3">
-          <label for="tel" class="form-label">收件人電話</label>
-          <VeeField id="tel" name="電話" type="tel"
-           class="form-control" :class="{ 'is-invalid': errors['電話'] }"
-            placeholder="請輸入電話" rules="required|min:8|max:10" v-model="form.user.tel" />
-          <ErrorMessage name="電話" class="invalid-feedback" />
-        </div>
-
-        <div class="mb-3">
-          <label for="address" class="form-label">收件人地址</label>
-          <VeeField id="address" name="地址" type="text"
-           class="form-control" :class="{ 'is-invalid': errors['地址'] }"
-            placeholder="請輸入地址" rules="required" v-model="form.user.address" />
-          <ErrorMessage name="地址" class="invalid-feedback" />
-        </div>
-
-        <div class="mb-3">
-          <label for="message" class="form-label">留言</label>
-          <textarea name="" id="message" class="form-control"
-           cols="30" rows="10" v-model="form.message"></textarea>
-        </div>
-        <div class="text-end">
-          <button type="submit" class="btn btn-danger">送出訂單</button>
-        </div>
-      </VeeForm>
     </div>
-    </div>
-  </div>
+  </section>
+  <section class="container mt-5 ec-container">
+      <h2 class="text-center fw-bold">熱銷商品</h2>
+        <div class="d-flex justify-content-center my-4">
+          <swiper
+          :autoplay = true
+          :slidesPerView="1"
+          :spaceBetween="10"
+          :breakpoints="{
+            '375': {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            '768': {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            '1024': {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+          }"
+          :modules="modules"
+          class="mySwiper">
+          <swiper-slide v-for="product in products" :key="product.id">
+            <div class="row">
+            <div class="col-md-4 col-sm">
+              <div class="card swiper-card mb-sm-4 ms-md-4 m-sm-auto">
+                <router-link :to="`/product/${product.id}`" class="swiper-card-link">
+                <img :src="product.imageUrl" class="swiper-card-img" />
+                </router-link>
+                <div class="card-body">
+                  <span class="badge rounded-pill bg-primary mb-2">{{product.category}}</span>
+                  <h5 class="card-title fs-6 fw-bold">{{ product.title }}</h5>
+                  <p class="card-text">NT$ {{ product.price }}</p>
+                  <a class="btn btn-primary d-flex justify-content-center text-white"
+                    @click.prevent="addToCart(product.id)">
+                    <i class="bi bi-cart-check me-2">
+                    </i>加入購物車</a>
+                </div>
+              </div>
+              </div>
+            </div>
+            </swiper-slide>
+        </swiper>
+      </div>
+  </section>
 </template>
+
+<style>
+@media (max-width: 576px) {
+  .no-wrap {
+    white-space: nowrap;
+  }
+}
+   .swiper {
+    width: 100%;
+    height: 100%;
+  }
+  .ec-container {
+    min-height: calc(100vh - 56px - 76px);
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
 
 <script>
 import { mapActions, mapState } from 'pinia';
 import Swal from 'sweetalert2';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 import cartStore from '../../stores/cartStore';
 import toastMessage from '../../stores/toastMessage';
+
+// Import Swiper styles
+import 'swiper/css';
+
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -141,15 +241,6 @@ export default {
       product: {},
       status: {
         loadingItem: '',
-      },
-      form: {
-        user: {
-          name: '',
-          email: '',
-          tel: '',
-          address: '',
-        },
-        message: '',
       },
       isLoading: false,
       coupon_code: '',
@@ -161,6 +252,19 @@ export default {
   methods: {
     ...mapActions(toastMessage, ['pushMessage']),
     ...mapActions(cartStore, ['getCart', 'addToCart']),
+    getProducts() {
+      this.isLoading = true;
+      const url = `${VITE_URL}/api/${VITE_PATH}/products/all`;
+      this.axios.get(url)
+        .then((res) => {
+          this.products = res.data.products;
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.isLoading = false;
+          alert(err.response.data.message);
+        });
+    },
     updateCart(data) {
       this.isLoading = true;
       const url = `${VITE_URL}/api/${VITE_PATH}/cart/${data.id}`;
@@ -186,6 +290,9 @@ export default {
             content: err.response.data.message,
           });
         });
+    },
+    getProduct(id) {
+      this.$router.push(`product/${id}`);
     },
     delCartItem(id) {
       this.status.loadingItem = id;
@@ -269,40 +376,19 @@ export default {
           });
         });
     },
-    createOrder() {
-      // 檢查購物車是否為空
-      if (this.cart.carts && this.cart.carts.length === 0) {
-        // 如果購物車為空，不執行後續的 API 請求
-        Swal.fire({
-          icon: 'error',
-          title: '購物車為空',
-          footer: '<a href="#">Why do I have this issue?</a>',
-        });
-        return;
-      }
-      this.isLoading = true;
-      // 先將表單資料儲存到 order 變數再代入 API 串接
-      const url = `${VITE_URL}/api/${VITE_PATH}/order`;
-      const order = this.form;
-      this.axios.post(url, { data: order })
-        .then((res) => {
-          // 建立訂單成功後，再把頁面導向到結帳頁
-          this.$router.push(`/checkout/${res.data.orderId}`);
-          this.$refs.form.resetForm();
-          this.isLoading = false;
-        })
-        .catch((err) => {
-          this.isLoading = false;
-          this.pushMessage({
-            style: 'danger',
-            title: '建立訂單',
-            content: err.response.data.message,
-          });
-        });
-    },
   },
   mounted() {
     this.getCart();
+    this.getProducts();
+  },
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  setup() {
+    return {
+      modules: [Autoplay, Pagination, Navigation],
+    };
   },
 };
 </script>

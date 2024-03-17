@@ -1,14 +1,14 @@
 <template>
-  <VueLoading :active="isLoading" :z-index="1060" />
-  <div class="container">
+  <div class="container ec-container">
+    <LoadingOverLay :active="isLoading" :z-index="1060" />
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb mt-3">
         <li class="breadcrumb-item">
           <RouterLink to="/articles">部落格列表</RouterLink>
         </li>
-        <li class="breadcrumb-item active fw-bold" aria-current="page">
+        <!-- <li class="breadcrumb-item active fw-bold" aria-current="page">
           {{ article.title }}
-        </li>
+        </li> -->
       </ol>
     </nav>
     <div class="row justify-content-center">
@@ -24,6 +24,12 @@
     </div>
   </div>
 </template>
+
+<style>
+  .ec-container {
+      min-height: calc(100vh - 56px - 76px);
+    }
+</style>
 
 <script>
 import { mapActions } from 'pinia';

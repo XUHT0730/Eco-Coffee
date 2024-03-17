@@ -1,16 +1,19 @@
 <template>
-  <footer class="border-2 bg-primary border-top mt-6">
+  <footer class="border-2 bg-primary border-top mt-5 footer">
     <div class="container text-white text-center">
       <!-- 在 sm 尺寸下僅顯示 RouterLink 元素 -->
       <div class="row d-lg-none d-md-none">
-        <RouterLink to="/" class="navbar-brand py-3">
+        <RouterLink to="/" class="fs-2 navbar-brand py-4">
           <i class="bi bi-cup-hot"></i>
-          <span class="ms-2 fw-bold text-white">Eco-Coffee</span>
+          <span class="ms-2 fw-bold text-white ff-minor">Eco-Coffee</span>
         </RouterLink>
+        <p class="mb-0 text-center">
+          <small>無商業用途，僅供學習使用</small>
+        </p>
       </div>
       <div class="footer__wrapper d-none d-sm-block">
           <div class="row">
-              <div class="col-md-4 mb-4">
+              <div class="col-md-4 mb-3">
                   <div class="footer-block">
                       <p class="h4 fw-bold mb-3">首次下單可享 15% 優惠</p>
                       <p>訂閱獲取優惠卷 & 最新商品</p>
@@ -26,7 +29,7 @@
                       </VeeForm>
                   </div>
               </div>
-              <div class="col-md-4 mb-4">
+              <div class="col-md-4 mb-3">
                   <div class="footer-block-center">
                       <p class="h4 fw-bold mb-4">相關連結</p>
                       <ul class="footerul ps-6">
@@ -39,23 +42,26 @@
                       </ul>
                   </div>
               </div>
-              <div class="col-md-4 mb-4">
+              <div class="col-md-4 mb-3">
                   <div class="footer-block-center">
                     <p class="h4 fw-bold mb-4">聯絡我們</p>
                       <div class="row">
-                          <div class="col-4">
-                              <i class="bi bi-instagram icon"></i>
+                          <div class="col-4 text-end">
+                              <i class="bi bi-instagram footer-icon"></i>
                           </div>
                           <div class="col-4">
-                              <i class="bi bi-facebook icon"></i>
+                              <i class="bi bi-facebook footer-icon"></i>
                           </div>
-                          <div class="col-4">
-                              <i class="bi bi-envelope-heart icon"></i>
+                          <div class="col-4 text-start">
+                              <i class="bi bi-envelope-heart footer-icon"></i>
                           </div>
                       </div>
                   </div>
               </div>
           </div>
+          <p class="mb-0 text-center">
+          <small>無商業用途，僅供學習使用</small>
+        </p>
       </div>
     </div>
   </footer>
@@ -72,7 +78,7 @@
   .footer-block-center{
     text-align: center;
   }
-  .icon {
+  .footer-icon {
       font-size: 30px;
   }
   .footerul {

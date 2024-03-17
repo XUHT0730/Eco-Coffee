@@ -1,6 +1,6 @@
 <template>
+    <LoadingOverLay :active="isLoading" :z-index="1060"></LoadingOverLay>
     <div class="container mt-5">
-      <LoadingOverLay :active="isLoading" :z-index="1060"></LoadingOverLay>
       <ToastModal />
             <div class="row justify-content-center">
               <h1 class="h3 mb-3 font-weight-normal">
@@ -18,9 +18,20 @@
                       placeholder="Password" v-model="user.password" required>
                     <label for="password">Password</label>
                   </div>
-                  <button class="btn btn-lg btn-primary w-100 mt-3" type="submit">
-                    登入
-                  </button>
+                  <div class="row">
+                    <div class="col">
+                      <RouterLink :to="`/`" type="button"
+                      class="btn btn-lg btn-dark w-100 mt-3">
+                       回到前台
+                      </RouterLink>
+                    </div>
+                    <div class="col">
+                      <button class="btn btn-lg btn-primary w-100 mt-3"
+                       type="submit">
+                        登入
+                      </button>
+                    </div>
+                  </div>
                 </form>
               </div>
             </div>
