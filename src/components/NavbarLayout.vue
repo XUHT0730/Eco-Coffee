@@ -1,5 +1,4 @@
 <template>
-  <ToastMessages />
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-2">
         <div class="container-fluid">
           <!--LOGO-->

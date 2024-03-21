@@ -53,7 +53,7 @@ app.use(createPinia());
 app.use(router);
 app.use(VueAxios, axios);
 app.use(CKEditor);
-
+// LoadingOverLay 為自定義名稱
 app.component('LoadingOverLay', Loading);
 // 掛載 Global 的 VeeValidate 元件
 app.component('VeeForm', Form);

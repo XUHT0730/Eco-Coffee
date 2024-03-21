@@ -1,5 +1,4 @@
 <template>
-  <LoadingOverLay :active="isLoading" :z-index="1060"></LoadingOverLay>
   <!-- 搜尋欄位 -->
       <section class="bg-light py-4">
         <div class="container">
@@ -37,62 +36,65 @@
           </div>
           <!-- 右側所有產品列表 -->
           <div class="col-lg-10 col-lg-10 col-md-9 mb-5">
-            <div class="row row-cols-3 g-4">
-             <!-- 如果搜索結果為空，顯示查無此商品的消息-->
-            <div v-if="products.length === 0" class="col">
-              <p>查無此商品</p>
-            </div>
-             <!-- 如果搜索結果不為空，則顯示搜索結果 -->
-            <div v-else class="col-12 col-xl-4 col-lg-5 d-flex justify-content-center"
-             v-for="product in products" :key="product.id">
-              <div class="card product-card shadow bg-white mb-sm-4 ms-md-4 m-sm-auto" >
-                <router-link :to="`/product/${product.id}`" class="product-card-link">
-                <img :src="product.imageUrl" class="product-card-img" />
-                </router-link>
-                <div class="card-body position-relative">
-                    <div class="row d-flex">
-                        <div class="col">
-                          <div class="left w-100">
-                            <div class="bg-secondary
-                             position-absolute fs-6 px-2 py-1 text-white category">
-                              {{ product.category }}
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-3">
-                          <div class="right w-100 text-end">
-                            <div @click="setTrack(product.id)">
-                              <span v-if="trackList.includes(product.id)">
-                                <i class="bi bi-heart-fill fs-4 text-danger"></i>
-                              </span>
-                              <span v-else><i class="bi bi-heart fs-4 text-danger"></i></span>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                    <h5 class="card-title pt-2 fw-bold">
-                      <router-link :to="`/product/${product.id}`">
-                        {{ product.title }}
+            <div class="vl-parent">
+              <LoadingOverLay :active="isLoading" :is-full-page="fullPage"/>
+                <div class="row row-cols-3 g-4">
+                  <!-- 如果搜索結果為空，顯示查無此商品的消息-->
+                  <div v-if="products.length === 0" class="col">
+                    <p>查無此商品</p>
+                  </div>
+                  <!-- 如果搜索結果不為空，則顯示搜索結果 -->
+                  <div v-else class="col-12 col-xl-4 col-lg-5 d-flex justify-content-center"
+                       v-for="product in products" :key="product.id">
+                    <div class="card product-card shadow bg-white mb-sm-4 ms-md-4 m-sm-auto" >
+                      <router-link :to="`/product/${product.id}`" class="product-card-link">
+                      <img :src="product.imageUrl" class="product-card-img" />
                       </router-link>
-                    </h5>
-                    <td>
-                      <div class="h5" v-if="!product.price">
-                        {{ item.origin_price }} 元
+                      <div class="card-body position-relative">
+                          <div class="row d-flex">
+                              <div class="col">
+                                <div class="left w-100">
+                                  <div class="bg-secondary
+                                  position-absolute fs-6 px-2 py-1 text-white category">
+                                    {{ product.category }}
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-3">
+                                <div class="right w-100 text-end">
+                                  <div @click="setTrack(product.id)">
+                                    <span v-if="trackList.includes(product.id)">
+                                      <i class="bi bi-heart-fill fs-4 text-danger"></i>
+                                    </span>
+                                    <span v-else><i class="bi bi-heart fs-4 text-danger"></i></span>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                          <h5 class="card-title pt-2 fw-bold">
+                            <router-link :to="`/product/${product.id}`">
+                              {{ product.title }}
+                            </router-link>
+                          </h5>
+                          <td>
+                            <div class="h5" v-if="!product.price">
+                              {{ item.origin_price }} 元
+                            </div>
+                            <del class="h6 text-dark" v-if="product.price">
+                              原價 {{ product.origin_price }} 元</del>
+                            <div class="h5 fw-bold" v-if="product.price">
+                              現在只要 {{ product.price }} 元
+                            </div>
+                          </td>
+                          <button class="btn btn-primary w-100" type="button"
+                            @click.prevent="addToCart(product.id)">
+                            <i class="bi bi-cart-check"></i>
+                            加入購物車</button>
                       </div>
-                      <del class="h6 text-dark" v-if="product.price">
-                        原價 {{ product.origin_price }} 元</del>
-                      <div class="h5 fw-bold" v-if="product.price">
-                        現在只要 {{ product.price }} 元
-                      </div>
-                  </td>
-                  <button class="btn btn-primary w-100" type="button"
-                  @click.prevent="addToCart(product.id)">
-                  <i class="bi bi-cart-check"></i>
-                  加入購物車</button>
+                    </div>
+                  </div>
                 </div>
-              </div>
             </div>
-          </div>
           </div>
           <PaginationComponent class="d-flex justify-content-center"
            :pagination="pagination" @emitPages="getProducts">
@@ -123,6 +125,7 @@ export default {
         loadingItem: '',
       },
       isLoading: false,
+      fullPage: false,
       products: [],
       categories: ['赫根山 Mount Hagen', '生態綠 OKOGREEN', '畢嘉士', '微笑人咖啡 Laughing Man Coffee'],
       product: {},
