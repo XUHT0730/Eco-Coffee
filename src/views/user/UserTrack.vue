@@ -113,9 +113,9 @@ export default {
           this.products = res.data.products;
           this.isLoading = false;
         })
-        .catch((err) => {
+        .catch(() => {
           this.isLoading = false;
-          alert(err.response.data.message);
+          // alert(err.response.data.message);
         });
     },
     getTrack() {
