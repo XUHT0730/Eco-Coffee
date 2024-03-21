@@ -50,8 +50,8 @@ export default defineStore('cartStore', {
           // this.$router.push('/cart');
           this.getCart();
         })
-        .catch((err) => {
-          alert(err);
+        .catch(() => {
+          // alert(err);
         });
     },
   },
