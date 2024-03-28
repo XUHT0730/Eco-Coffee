@@ -3,7 +3,7 @@
     <div class="container text-white text-center">
       <!-- 在 sm 尺寸下僅顯示 RouterLink 元素 -->
       <div class="row d-lg-none d-md-none">
-        <RouterLink to="/" class="fs-2 navbar-brand py-4">
+        <RouterLink to="/" class="fs-2 navbar-brand pt-4 pb-1">
           <i class="bi bi-cup-hot"></i>
           <span class="ms-2 fw-bold text-white ff-minor">Eco-Coffee</span>
         </RouterLink>
@@ -12,54 +12,93 @@
         </p>
       </div>
       <div class="footer__wrapper d-none d-sm-block">
-          <div class="row">
-              <div class="col-md-4 mb-3">
-                  <div class="footer-block">
-                      <p class="h4 fw-bold mb-3">首次下單可享 15% 優惠</p>
-                      <p>訂閱獲取優惠卷 & 最新商品</p>
-                      <VeeForm ref="form" v-slot="{ errors }" @submit="createOrder">
-                          <div class="mb-3">
-                              <label for="email" class="form-label">Email</label>
-                              <VeeField id="email" name="email" type="email"
-                               class="form-control w-70" :class="{ 'is-invalid': errors['email'] }"
-                                  placeholder="請輸入 Email" rules="email|required"
-                                   v-model="form.user.email" />
-                              <ErrorMessage name="email" class="invalid-feedback" />
-                          </div>
-                      </VeeForm>
-                  </div>
-              </div>
-              <div class="col-md-4 mb-3">
-                  <div class="footer-block-center">
-                      <p class="h4 fw-bold mb-4">相關連結</p>
-                      <ul class="footerul ps-6">
-                        <li class="mb-3"><a class="text-white" href="#">主頁</a></li>
-                        <li class="mb-3"><a class="text-white" href="#">常見問題</a></li>
-                      </ul>
-                      <ul class="footerul">
-                          <li class="mb-3"><a class="text-white" href="#">最新消息</a></li>
-                          <li class="mb-3"><a class="text-white" href="#">聯絡我們</a></li>
-                      </ul>
-                  </div>
-              </div>
-              <div class="col-md-4 mb-3">
-                  <div class="footer-block-center">
-                    <p class="h4 fw-bold mb-4">聯絡我們</p>
-                      <div class="row">
-                          <div class="col-4 text-end">
-                              <i class="bi bi-instagram footer-icon"></i>
-                          </div>
-                          <div class="col-4">
-                              <i class="bi bi-facebook footer-icon"></i>
-                          </div>
-                          <div class="col-4 text-start">
-                              <i class="bi bi-envelope-heart footer-icon"></i>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="footer-block">
+              <p class="h4 fw-bold mb-3">首次下單可享 15% 優惠</p>
+              <p>訂閱獲取優惠卷 & 最新商品</p>
+              <VeeForm ref="form" v-slot="{ errors }" @submit="subscribe">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <VeeField
+                    id="email"
+                    name="email"
+                    type="email"
+                    class="form-control"
+                    :class="{ 'is-invalid': errors['email'] }"
+                    placeholder="請輸入 Email"
+                    rules="email|required"
+                    v-model="email"
+                  />
+                  <ErrorMessage name="email" class="invalid-feedback" />
+                </div>
+                <div class="w-auto">
+                  <button
+                    type="submit"
+                    class="btn btn-secondary d-flex align-items-center
+                     py-2 px-6 px-sm-10 text-white fw-semibold"
+                    :disabled="isLoading"
+                  >
+                    <span
+                      v-show="isLoading"
+                      class="spinner-border spinner-border-sm me-2"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    訂閱
+                  </button>
+                </div>
+              </VeeForm>
+            </div>
           </div>
-          <p class="mb-0 text-center">
+          <div class="col-md-4 mb-3">
+            <div class="footer-block-center">
+              <p class="h4 fw-bold mb-4">相關連結</p>
+              <ul class="footerul ps-6">
+                <li class="mb-3">
+                  <router-link to="/products" class="text-white">商品一覽</router-link>
+                </li>
+                <li class="mb-3">
+                  <a class="text-white" href="#">常見問題</a>
+                </li>
+              </ul>
+              <ul class="footerul">
+                <li class="mb-3">
+                  <router-link to="/articles" class="text-white"
+                    >最新消息</router-link
+                  >
+                </li>
+                <li class="mb-3">
+                  <a class="text-white" href="#">聯絡我們</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="footer-block-center">
+              <p class="h4 fw-bold mb-4">聯絡我們</p>
+              <div class="row">
+                <div class="col-4 text-end">
+                    <a class="text-white" href="https://www.instagram.com/accounts/login/">
+                      <i class="bi bi-instagram footer-icon">
+                      </i>
+                    </a>
+                </div>
+                <div class="col-4">
+                  <a class="text-white" href="https://www.facebook.com/?locale=zh_TW">
+                    <i class="bi bi-facebook footer-icon"></i>
+                  </a>
+                </div>
+                <div class="col-4 text-start">
+                  <a class="text-white" href="https://mail.google.com/mail/">
+                    <i class="bi bi-envelope-heart footer-icon"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="mb-0 text-center">
           <small>無商業用途，僅供學習使用</small>
         </p>
       </div>
@@ -67,71 +106,55 @@
   </footer>
 </template>
 
-<style lang="scss">
-  .footer__wrapper {
-      padding-top: 3rem;
-      padding-bottom: 1rem;
-  }
-  .footer-block {
-      text-align: left;
-  }
-  .footer-block-center{
-    text-align: center;
-  }
-  .footer-icon {
-      font-size: 30px;
-  }
-  .footerul {
-    list-style: none;
-    padding: 0;
-    float: left;
-    margin-left: 50px;
- }
-</style>
-
 <script>
-const { VITE_URL, VITE_PATH } = import.meta.env;
+import Swal from 'sweetalert2';
+
 export default {
   data() {
     return {
-      form: {
-        user: {
-          address: '',
-        },
-        message: '',
-      },
+      email: '',
+      coupon: 'coupon2024',
+      isLoading: false,
     };
   },
   methods: {
-    createOrder() {
-      // 檢查購物車是否為空
-      if (this.cart.carts && this.cart.carts.length === 0) {
-        // 如果購物車為空，顯示通知訊息
-        // alert('購物車為空');
-        // 不執行後續的 API 請求
-        return;
-      }
+    subscribe() {
       this.isLoading = true;
-      // 先將表單資料儲存到 order 變數再代入 API 串接
-      const url = `${VITE_URL}/api/${VITE_PATH}/order`;
-      const order = this.form;
-      this.axios.post(url, { data: order })
-        .then((res) => {
-          // 建立訂單成功後，再把頁面導向到結帳頁
-          this.$router.push(`/checkout/${res.data.orderId}`);
-          this.$refs.form.resetForm();
-          this.isLoading = false;
-        })
-        .catch((err) => {
-          this.isLoading = false;
-          this.pushMessage({
-            style: 'danger',
-            title: '建立訂單',
-            content: err.response.data.message,
-          });
-        });
+      this.emil = '';
+      setTimeout(() => {
+        this.isLoading = false;
+        this.$refs.form.resetForm();
+      }, 1000);
+      Swal.fire({
+        icon: 'success',
+        title: '成功訂閱',
+        text: `恭喜獲得優惠碼: ${this.coupon}`,
+        showConfirmButton: true,
+        allowOutsideClick: true,
+      });
     },
   },
-
 };
 </script>
+
+<style lang="scss">
+.footer__wrapper {
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+}
+.footer-block {
+  text-align: left;
+}
+.footer-block-center {
+  text-align: center;
+}
+.footer-icon {
+  font-size: 30px;
+}
+.footerul {
+  list-style: none;
+  padding: 0;
+  float: left;
+  margin-left: 50px;
+}
+</style>

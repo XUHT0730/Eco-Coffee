@@ -19,13 +19,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item) in orders" :key="item.id" :class="{ 'text-secondary': !item.is_paid }">
+          <tr
+            v-for="item in orders"
+            :key="item.id"
+            :class="{ 'text-secondary': !item.is_paid }"
+          >
             <td>{{ $filters.date(item.create_at) }}</td>
             <td><span v-text="item.user.email" v-if="item.user"></span></td>
             <td>
               <ul class="list-unstyled">
                 <li v-for="product in item.products" :key="product.id">
-                  {{ product.product.title }} 數量：{{ product.qty }} {{ product.product.unit }}
+                  {{ product.product.title }} 數量：{{ product.qty }}
+                  {{ product.product.unit }}
                 </li>
               </ul>
             </td>
@@ -47,12 +52,18 @@
             </td>
             <td>
               <div class="btn-group">
-                <button class="btn btn-outline-primary btn-sm"
-                 type="button" @click="openModal(item)">
+                <button
+                  class="btn btn-outline-primary btn-sm"
+                  type="button"
+                  @click="openModal(item)"
+                >
                   檢視
                 </button>
-                <button class="btn btn-outline-danger btn-sm"
-                 type="button" @click="openDelOrderModal(item)">
+                <button
+                  class="btn btn-outline-danger btn-sm"
+                  type="button"
+                  @click="openDelOrderModal(item)"
+                >
                   刪除
                 </button>
               </div>
@@ -71,11 +82,11 @@
 
 <script>
 import { mapActions } from 'pinia';
-import toastMessage from '../../stores/toastMessage';
+import toastMessage from '@/stores/toastMessage';
 
-import OrderModal from '../../components/OrderModal.vue';
-import DeleteModal from '../../components/DeleteModal.vue';
-import PaginationComponent from '../../components/PaginationComponent.vue';
+import OrderModal from '@/components/OrderModal.vue';
+import DeleteModal from '@/components/DeleteModal.vue';
+import PaginationComponent from '@/components/PaginationComponent.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -100,7 +111,8 @@ export default {
       this.currentPage = currentPage;
       const url = `${VITE_URL}/api/${VITE_PATH}/admin/orders?page=${currentPage}`;
       this.isLoading = true;
-      this.axios.get(url, this.tempProduct)
+      this.axios
+        .get(url, this.tempProduct)
         .then((res) => {
           this.orders = res.data.orders;
           this.pagination = res.data.pagination;
@@ -133,7 +145,8 @@ export default {
       const paid = {
         is_paid: item.is_paid,
       };
-      this.axios.put(url, { data: paid })
+      this.axios
+        .put(url, { data: paid })
         .then((res) => {
           this.isLoading = false;
           const orderComponent = this.$refs.orderModal;
@@ -162,7 +175,8 @@ export default {
     delOrder() {
       const url = `${VITE_URL}/api/${VITE_PATH}/admin/order/${this.tempOrder.id}`;
       this.isLoading = true;
-      this.axios.delete(url)
+      this.axios
+        .delete(url)
         .then(() => {
           this.isLoading = false;
           const delComponent = this.$refs.deleteModal;

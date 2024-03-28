@@ -4,7 +4,11 @@
 // replace() 方法的目的是將每三位數的數字之間插入一個逗號
 export function currency(num) {
   const n = parseInt(num, 10);
-  return `${n.toFixed(0).replace(/./g, (c, i, a) => (i && c !== '.' && ((a.length - i) % 3 === 0) ? `, ${c}`.replace(/\s/g, '') : c))}`;
+  return `${n
+    .toFixed(0)
+    .replace(/./g, (c, i, a) => (i && c !== '.' && (a.length - i) % 3 === 0
+      ? `, ${c}`.replace(/\s/g, '')
+      : c))}`;
 }
 // date 函式：比較白話來說，是將一個時間戳記轉換成可讀的格式（ex：2024/2/28）
 export function date(time) {

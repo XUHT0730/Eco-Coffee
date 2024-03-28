@@ -13,7 +13,8 @@ export default defineStore('cartStore', {
   actions: {
     getCart() {
       const url = `${VITE_URL}/api/${VITE_PATH}/cart`;
-      axios.get(url)
+      axios
+        .get(url)
         .then((res) => {
           this.cart = res.data.data;
           this.carts = res.data.data.carts;
@@ -31,7 +32,7 @@ export default defineStore('cartStore', {
       };
       // 檢查購物車是否已經存在相同商品
       if (this.carts.some((item) => item.product_id === id)) {
-      // 商品已存在於購物車中，顯示 SweetAlert 提示訊息
+        // 商品已存在於購物車中，顯示 SweetAlert 提示訊息
         Swal.fire({
           title: '商品已存在於購物車中',
           icon: 'warning',
@@ -39,7 +40,8 @@ export default defineStore('cartStore', {
         return;
       }
       const url = `${VITE_URL}/api/${VITE_PATH}/cart`;
-      axios.post(url, { data: order })
+      axios
+        .post(url, { data: order })
         .then((res) => {
           Swal.fire({
             icon: 'success',
@@ -47,7 +49,6 @@ export default defineStore('cartStore', {
             showConfirmButton: false,
             timer: 1500,
           });
-          // this.$router.push('/cart');
           this.getCart();
         })
         .catch(() => {

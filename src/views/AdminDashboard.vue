@@ -1,14 +1,14 @@
 <template>
-    <AdminNavbar></AdminNavbar>
-    <ToastModal></ToastModal>
-    <RouterView v-if="checkSuccess"></RouterView>
+  <AdminNavbar></AdminNavbar>
+  <ToastModal></ToastModal>
+  <RouterView v-if="checkSuccess"></RouterView>
 </template>
 
 <script>
 import { mapActions } from 'pinia';
-import toastMessage from '../stores/toastMessage';
-import AdminNavbar from '../components/AdminNavbar.vue';
-import ToastModal from '../components/ToastModal.vue';
+import toastMessage from '@/stores/toastMessage';
+import AdminNavbar from '@/components/AdminNavbar.vue';
+import ToastModal from '@/components/ToastModal.vue';
 
 const { VITE_URL } = import.meta.env;
 export default {
@@ -25,7 +25,8 @@ export default {
     ...mapActions(toastMessage, ['pushMessage']),
     checkLogin() {
       const url = `${VITE_URL}/api/user/check`;
-      this.axios.post(url)
+      this.axios
+        .post(url)
         .then((res) => {
           this.pushMessage({
             style: 'success',

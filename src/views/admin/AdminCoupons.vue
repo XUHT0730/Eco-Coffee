@@ -2,7 +2,11 @@
   <div class="container">
     <LoadingOverLay :active="isLoading" :z-index="1060" />
     <div class="text-end mt-3">
-      <button class="btn btn-primary" type="button" @click="openCouponModal(true)">
+      <button
+        class="btn btn-primary"
+        type="button"
+        @click="openCouponModal(true)"
+      >
         建立新的優惠券
       </button>
     </div>
@@ -23,33 +27,49 @@
             <td>{{ item.percent }}%</td>
             <td>{{ $filters.date(item.due_date) }}</td>
             <td>
-              <span v-if="item.is_enabled === 1" class="text-success">啟用</span>
+              <span v-if="item.is_enabled === 1" class="text-success"
+                >啟用</span
+              >
               <span v-else class="text-muted">未啟用</span>
             </td>
             <td>
               <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary btn-sm"
-                  @click="openCouponModal(false, item)">編輯</button>
-                <button type="button" class="btn btn-outline-danger btn-sm"
-                @click="openDelCouponModal(item)">刪除</button>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary btn-sm"
+                  @click="openCouponModal(false, item)"
+                >
+                  編輯
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger btn-sm"
+                  @click="openDelCouponModal(item)"
+                >
+                  刪除
+                </button>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <CouponModal :coupon="tempCoupon"
-     :is-new="isNew" ref="couponModal" @update-coupon="updateCoupon" />
+    <CouponModal
+      :coupon="tempCoupon"
+      :is-new="isNew"
+      ref="couponModal"
+      @update-coupon="updateCoupon"
+    />
     <DeleteModal :item="tempCoupon" ref="deleteModal" @del-item="delCoupon" />
   </div>
 </template>
 
 <script>
 import { mapActions } from 'pinia';
-import toastMessage from '../../stores/toastMessage';
+import toastMessage from '@/stores/toastMessage';
 
-import CouponModal from '../../components/CouponModal.vue';
-import DeleteModal from '../../components/DeleteModal.vue';
+import CouponModal from '@/components/CouponModal.vue';
+import DeleteModal from '@/components/DeleteModal.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -91,7 +111,8 @@ export default {
     getCoupons() {
       this.isLoading = true;
       const url = `${VITE_URL}/api/${VITE_PATH}/admin/coupons`;
-      this.axios.get(url, this.tempProduct)
+      this.axios
+        .get(url, this.tempProduct)
         .then((res) => {
           this.coupons = res.data.coupons;
           this.isLoading = false;
@@ -138,7 +159,8 @@ export default {
     delCoupon() {
       const url = `${VITE_URL}/api/${VITE_PATH}/admin/coupon/${this.tempCoupon.id}`;
       this.isLoading = true;
-      this.axios.delete(url)
+      this.axios
+        .delete(url)
         .then((res) => {
           this.isLoading = false;
           this.pushMessage({

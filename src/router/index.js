@@ -91,7 +91,6 @@ const router = createRouter({
   routes,
   // 可以使滑鼠移動到連結上，就會呈現 active 效果
   linkActiveClass: 'active',
-  // 當使用者一進入 newpage 頁面，畫面就會滾動到最上方
   scrollBehavior(to) {
     if (to.fullPath.match('/')) {
       return {

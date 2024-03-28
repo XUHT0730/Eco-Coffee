@@ -15,25 +15,26 @@
       <article class="col-8">
         <h2 class="fw-bold">{{ article.title }}</h2>
         <p>
-          <small class="text-muted">{{ $filters.date(article.create_at) }}</small> -
+          <small class="text-muted">{{
+            $filters.date(article.create_at)
+          }}</small>
+          -
           <small class="text-muted">作者：{{ article.author }}</small>
         </p>
-        <img :src="article.imageUrl" :alt="article.title" class="img-fluid my-3">
+        <img
+          :src="article.imageUrl"
+          :alt="article.title"
+          class="img-fluid my-3"
+        />
         <div v-html="article.content"></div>
       </article>
     </div>
   </div>
 </template>
 
-<style>
-  .ec-container {
-      min-height: calc(100vh - 56px - 76px);
-    }
-</style>
-
 <script>
 import { mapActions } from 'pinia';
-import ToastMessage from '../../stores/toastMessage';
+import ToastMessage from '@/stores/toastMessage';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -49,17 +50,20 @@ export default {
     getArticle() {
       const api = `${VITE_URL}/api/${VITE_PATH}/article/${this.id}`;
       this.isLoading = true;
-      this.axios.get(api).then((response) => {
-        this.article = response.data.article;
-        this.isLoading = false;
-      }).catch((error) => {
-        this.isLoading = false;
-        this.pushMessage({
-          style: 'danger',
-          title: '取得文章資訊失敗',
-          content: error.response.data.message,
+      this.axios
+        .get(api)
+        .then((response) => {
+          this.article = response.data.article;
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          this.isLoading = false;
+          this.pushMessage({
+            style: 'danger',
+            title: '取得文章資訊失敗',
+            content: error.response.data.message,
+          });
         });
-      });
     },
   },
   created() {
@@ -68,3 +72,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.ec-container {
+  min-height: calc(100vh - 56px - 76px);
+}
+</style>

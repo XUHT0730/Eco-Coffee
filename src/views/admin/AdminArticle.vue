@@ -8,56 +8,64 @@
     </div>
     <div class="table-responsive">
       <table class="table table-striped mt-4">
-      <thead>
-        <tr>
-          <th style="width: 300px">標題</th>
-          <th style="width: 50px">作者</th>
-          <th>描述</th>
-          <th style="width: 100px">建立時間</th>
-          <th style="width: 100px">是否公開</th>
-          <th style="width: 120px">編輯</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="article in articles" :key="article.id">
-          <td>{{ article.title }}</td>
-          <td>{{ article.author }}</td>
-          <td>{{ article.description }}</td>
-          <td>{{ $filters.date(article.create_at) }}</td>
-          <td>
-            <span v-if="article.isPublic">已上架</span>
-            <span v-else>未上架</span>
-          </td>
-          <td>
-            <div class="btn-group">
-              <button class="btn btn-outline-primary btn-sm"
-               type="button" @click="getArticle(article.id)">
-                編輯
-              </button>
-              <button class="btn btn-outline-danger btn-sm"
-               type="button" @click="openDelArticleModal(article)">
-                刪除
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <thead>
+          <tr>
+            <th style="width: 300px">標題</th>
+            <th style="width: 50px">作者</th>
+            <th>描述</th>
+            <th style="width: 100px">建立時間</th>
+            <th style="width: 100px">是否公開</th>
+            <th style="width: 120px">編輯</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="article in articles" :key="article.id">
+            <td>{{ article.title }}</td>
+            <td>{{ article.author }}</td>
+            <td>{{ article.description }}</td>
+            <td>{{ $filters.date(article.create_at) }}</td>
+            <td>
+              <span v-if="article.isPublic">已上架</span>
+              <span v-else>未上架</span>
+            </td>
+            <td>
+              <div class="btn-group">
+                <button
+                  class="btn btn-outline-primary btn-sm"
+                  type="button"
+                  @click="getArticle(article.id)"
+                >
+                  編輯
+                </button>
+                <button
+                  class="btn btn-outline-danger btn-sm"
+                  type="button"
+                  @click="openDelArticleModal(article)"
+                >
+                  刪除
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <ArticleModal ref="articleModal" :article="tempArticle"
-     :is-new="isNew" @update-article="updateArticle" />
+    <ArticleModal
+      ref="articleModal"
+      :article="tempArticle"
+      :is-new="isNew"
+      @update-article="updateArticle"
+    />
 
-    <DeleteModal ref="deleteModal" :item="tempArticle"
-     @del-item="delArticle" />
+    <DeleteModal ref="deleteModal" :item="tempArticle" @del-item="delArticle" />
   </div>
 </template>
 
 <script>
 import { mapActions } from 'pinia';
-import toastMessage from '../../stores/toastMessage';
-
-import ArticleModal from '../../components/ArticleModal.vue';
-import DeleteModal from '../../components/DeleteModal.vue';
+import toastMessage from '@/stores/toastMessage';
+import ArticleModal from '@/components/ArticleModal.vue';
+import DeleteModal from '@/components/DeleteModal.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -80,7 +88,8 @@ export default {
       this.currentPage = page;
       const url = `${VITE_URL}/api/${VITE_PATH}/admin/articles?page=${page}`;
       this.isLoading = true;
-      this.axios.get(url)
+      this.axios
+        .get(url)
         .then((res) => {
           this.isLoading = false;
           if (res.data.success) {
@@ -89,7 +98,7 @@ export default {
           }
         })
         .catch((err) => {
-        // axios 的錯誤狀態，可參考：https://github.com/axios/axios#handling-errors
+          // axios 的錯誤狀態，可參考：https://github.com/axios/axios#handling-errors
           // console.log('err', err.response, err.request, err.message);
           this.isLoading = false;
           this.pushMessage({
@@ -102,14 +111,15 @@ export default {
     getArticle(id) {
       const url = `${VITE_URL}/api/${VITE_PATH}/admin/article/${id}`;
       this.isLoading = true;
-      this.axios.get(url)
+      this.axios
+        .get(url)
         .then((res) => {
           this.isLoading = false;
           this.openModal(false, res.data.article);
           this.isNew = false;
         })
         .catch((err) => {
-        // axios 的錯誤狀態，可參考：https://github.com/axios/axios#handling-errors
+          // axios 的錯誤狀態，可參考：https://github.com/axios/axios#handling-errors
           // console.log('err', err.response, err.request, err.message);
           this.isLoading = false;
           this.pushMessage({
@@ -173,7 +183,8 @@ export default {
     delArticle() {
       const url = `${VITE_URL}/api/${VITE_PATH}/admin/article/${this.tempArticle.id}`;
       this.isLoading = true;
-      this.axios.delete(url)
+      this.axios
+        .delete(url)
         .then((res) => {
           this.isLoading = false;
           this.pushMessage({
