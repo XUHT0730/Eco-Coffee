@@ -7,6 +7,7 @@
           <div class="card article-card">
             <img
               :src="article.imageUrl"
+              :alt="article.title"
               class="card-img-top article-card-img"
             />
             <div class="card-body">

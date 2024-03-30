@@ -31,7 +31,7 @@
                   :to="`/product/${product.id}`"
                   class="swiper-card-link"
                 >
-                  <img :src="product.imageUrl" class="swiper-card-img" />
+                  <img :src="product.imageUrl" class="swiper-card-img" :alt="product.title" />
                 </router-link>
                 <div class="card-body">
                   <span class="badge rounded-pill bg-primary mb-2">{{
@@ -108,12 +108,11 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .swiper {
   width: 100%;
   height: 100%;
 }
-
 .swiper-slide {
   text-align: center;
   font-size: 18px;

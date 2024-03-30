@@ -61,14 +61,13 @@
           <div class="row row-cols-3 g-4">
             <!-- 如果搜索結果為空，顯示查無此商品的消息-->
             <div v-if="products.length === 0" class="col">
-              <p>查無此商品</p>
+              <p class="h4 text-danger">Sorry ~ 查無此商品</p>
             </div>
             <!-- 如果搜索結果不為空，則顯示搜索結果 -->
             <div
               v-else
               class="col-12 col-xl-4 col-lg-5 d-flex justify-content-center"
-              v-for="product in products"
-              :key="product.id"
+              v-for="product in products" :key="product.id"
             >
               <div
                 class="card product-card shadow bg-white mb-sm-4 ms-md-4 m-sm-auto"
@@ -77,7 +76,7 @@
                   :to="`/product/${product.id}`"
                   class="product-card-link"
                 >
-                  <img :src="product.imageUrl" class="product-card-img" />
+                  <img :src="product.imageUrl" :alt="product.title" class="product-card-img" />
                 </router-link>
                 <div class="card-body position-relative">
                   <div class="row d-flex">
@@ -109,14 +108,15 @@
                     </router-link>
                   </h5>
                   <td>
-                    <div class="h5" v-if="!product.price">
-                      {{ item.origin_price }} 元
+                    <!-- 如果原價等於現價，就只顯示現價 -->
+                    <div class="h5 fw-bold" v-if="product.origin_price === product.price">
+                      NT$ {{ product.price }} 元
                     </div>
-                    <del class="h6 text-dark" v-if="product.price">
-                      原價 {{ product.origin_price }} 元</del
-                    >
-                    <div class="h5 fw-bold" v-if="product.price">
-                      現在只要 {{ product.price }} 元
+                    <div v-else>
+                      <del class="h6 text-dark">原價 {{ product.origin_price }} 元</del>
+                      <div class="h5 fw-bold" v-if="product.price">
+                      現在只要 NT$ {{ product.price }} 元
+                      </div>
                     </div>
                   </td>
                   <button
@@ -193,6 +193,23 @@ export default {
           // 將資料存起來
           this.products = res.data.products;
           this.isLoading = false;
+        })
+        .catch(() => {
+          this.isLoading = false;
+        });
+    },
+    getProduct(id) {
+      this.$router.push(`product/${id}`);
+    },
+    getSearch() {
+      const getSearchUrl = `${VITE_URL}/api/${VITE_PATH}/products/all`;
+      this.isLoading = true;
+      this.axios
+        .get(getSearchUrl)
+        .then((res) => {
+          // 將資料存起來
+          this.products = res.data.products;
+          this.isLoading = false;
           // 關鍵字搜尋
           this.products = this.products.filter(
             (item) => item.title.trim().toLowerCase().includes(this.search.toLowerCase()),
@@ -202,17 +219,14 @@ export default {
           this.isLoading = false;
         });
     },
-    getProduct(id) {
-      this.$router.push(`product/${id}`);
-    },
   },
   components: {
     PaginationComponent,
   },
   watch: {
     search(newVal) {
-      // 在這裡執行即時搜尋，例如 getProducts 方法
-      this.getProducts(1, newVal);
+      // 在這裡執行即時搜尋，例如 getSearch 方法
+      this.getSearch(1, newVal);
     },
     // 當路由發生變化，會重新取得一次值
     '$route.query': {
@@ -225,6 +239,7 @@ export default {
   created() {
     this.getProducts();
     this.getTrack();
+    this.getSearch();
   },
 };
 </script>

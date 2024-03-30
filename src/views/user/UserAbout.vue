@@ -43,7 +43,7 @@
         <img
           class="w-100 object-fit-cover"
           src="@/assets/images/aboutus01.png"
-          alt=""
+          alt="公平貿易的定義原則"
         />
       </div>
       <div class="col-md-5 d-flex align-items-center">
@@ -75,7 +75,6 @@
           <img
             style="height: 312px; width: 309px"
             src="@/assets/images/undraw_barista_qd50.svg"
-            alt=""
           />
         </div>
         <div class="col-md-4 d-flex align-items-center">
@@ -123,7 +122,7 @@
                   :to="`/product/${product.id}`"
                   class="product-card-link"
                 >
-                  <img :src="product.imageUrl" class="product-card-img" />
+                  <img :src="product.imageUrl" :alt="product.title" class="product-card-img" />
                 </router-link>
                 <div class="card-body position-relative">
                   <div class="row d-flex">

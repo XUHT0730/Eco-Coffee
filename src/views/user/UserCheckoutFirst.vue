@@ -51,28 +51,24 @@
           <p class="h4 text-primary fw-bold">訂單明細</p>
           <template v-if="cart.carts">
             <div v-for="item in cart.carts" :key="item.id">
-              <div class="d-flex py-3">
+              <div class="d-flex py-3 align-items-center">
                 <img
                   :src="item.product.imageUrl"
-                  alt=""
+                  :alt="item.product.title"
                   class="me-2"
                   style="width: 60px; height: 60px; object-fit: cover"
                 />
-                <div class="w-100">
-                  <div class="d-flex justify-content-between">
+                <div class="flex-grow-1">
+                  <div class="d-md-flex justify-content-md-between align-items-md-center">
                     <p class="mb-0 fw-bold">{{ item.product.title }}</p>
                     <p class="mb-0">
-                      <small
-                        v-if="cart.final_total !== cart.total"
-                        class="text-primary"
-                        >折扣價</small
-                      >
+                      x {{ item.qty }} {{ item.product.unit }}
+                    </p>
+                    <p class="mb-0">
+                      <small v-if="cart.final_total !== cart.total" class="text-primary">折扣價</small>
                       {{ $filters.currency(item.final_total) }}
                     </p>
                   </div>
-                  <p class="mb-0 text-secondary">
-                    x {{ item.qty }} {{ item.product.unit }}
-                  </p>
                 </div>
               </div>
             </div>

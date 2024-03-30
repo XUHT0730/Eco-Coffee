@@ -5,7 +5,7 @@
       <div class="col-md-6" v-if="order.is_paid === true">
         <h2 class="text-primary fw-bold">訂單完成</h2>
         <div class="mt-4">
-          <h5>感謝訂購</h5>
+          <p class="h5"><span class="h5 me-1 text-primary fw-bold">付款已完成</span>感謝訂購</p>
           <p class="ml-2">訂單完成預計 1 ~ 2 天出貨</p>
           <div
             style="
@@ -36,18 +36,19 @@
                 <tr v-for="item in order.products" :key="item.id">
                   <img
                     :src="item.product.imageUrl"
+                    :alt="item.product.title"
                     class="me-2"
                     style="width: 100px; height: 100px; object-fit: cover"
                   />
                   <td class="fw-bold">{{ item.product.title }}</td>
-                  <td class="text-end">
-                    NT${{ $filters.currency(item.final_total) }}
-                  </td>
                   <td
                     class="text-secondary text-end"
                     style="white-space: nowrap"
                   >
                     X{{ item.qty }}{{ item.product.unit }}
+                  </td>
+                  <td class="text-end">
+                    NT${{ $filters.currency(item.final_total) }}
                   </td>
                 </tr>
               </tbody>
@@ -61,34 +62,33 @@
               </tfoot>
             </table>
             <table class="table">
-              <p class="h4 text-primary fw-bold py-2">顧客資料</p>
               <tbody>
-                <tr>
-                  <th width="100">Email</th>
-                  <td class="text-end">{{ order.user.email }}</td>
+                <tr class="row">
+                  <th class="col-md-3">Email</th>
+                  <td class="col-md-9">{{ order.user.email }}</td>
                 </tr>
-                <tr>
-                  <th>姓名</th>
-                  <td class="text-end">{{ order.user.name }}</td>
+                <tr class="row">
+                  <th class="col-md-3">姓名</th>
+                  <td class="col-md-9">{{ order.user.name }}</td>
                 </tr>
-                <tr>
-                  <th>收件人電話</th>
-                  <td class="text-end">{{ order.user.tel }}</td>
+                <tr class="row">
+                  <th class="col-md-3 text-nowrap">收件人電話</th>
+                  <td class="col-md-9">{{ order.user.tel }}</td>
                 </tr>
-                <tr>
-                  <th>收件人地址</th>
-                  <td class="text-end">{{ order.user.address }}</td>
+                <tr class="row">
+                  <th class="col-md-3 text-nowrap">收件人地址</th>
+                  <td class="col-md-9">{{ order.user.address }}</td>
                 </tr>
-                <tr>
-                  <th>付款狀態</th>
-                  <td class="text-end">
+                <tr class="row">
+                  <th class="col-md-3 text-nowrap">付款狀態</th>
+                  <td class="col-md-9">
                     <span v-if="!order.is_paid">尚未付款</span>
                     <span v-else class="text-success fw-bold">付款完成</span>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <div class="text-end" v-if="order.is_paid === false">
+            <div class="text-center" v-if="order.is_paid === false">
               <button type="submit" class="btn btn-danger">確認付款去</button>
             </div>
           </form>

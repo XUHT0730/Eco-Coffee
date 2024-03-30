@@ -3,8 +3,7 @@
   <header
     class="header"
     style="
-      background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/hedy-api-path/1709543433230.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=RKdXij%2BJKl7scyyCrzbEoL7DKU%2BhtTvd%2B19Qhee9AUDq%2FoXrgyD8lS%2BZCheCWRKgOfScfomYaSL3rgCwbQeThOe2rtiKYmypjiZnqy1hZF0ldnixATNZZaCldVhwKytNUTZHjWoP58IeUI9FLiRG6PMhzknkCEzSP4OdmF54GOEvdYBkQp3D1QhPENbhBB4bjd9WbxuGjJHRuDY5B4pItsX4ZbMPpLQQeOpGiO%2F2AjrnOIW2giK%2BDc4eD4SAZowcPBNK8YJCo79Z9KqZQ6lRS%2FInyi%2BNkpH3UnYfYzqFTN6PEHNva892jSwMMYMtKCu5cC7ReW%2FfkBTEY%2B9GR2KF7g%3D%3D);
-    "
+      background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/hedy-api-path/1709543433230.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=RKdXij%2BJKl7scyyCrzbEoL7DKU%2BhtTvd%2B19Qhee9AUDq%2FoXrgyD8lS%2BZCheCWRKgOfScfomYaSL3rgCwbQeThOe2rtiKYmypjiZnqy1hZF0ldnixATNZZaCldVhwKytNUTZHjWoP58IeUI9FLiRG6PMhzknkCEzSP4OdmF54GOEvdYBkQp3D1QhPENbhBB4bjd9WbxuGjJHRuDY5B4pItsX4ZbMPpLQQeOpGiO%2F2AjrnOIW2giK%2BDc4eD4SAZowcPBNK8YJCo79Z9KqZQ6lRS%2FInyi%2BNkpH3UnYfYzqFTN6PEHNva892jSwMMYMtKCu5cC7ReW%2FfkBTEY%2B9GR2KF7g%3D%3D);"
   >
     <div
       class="container d-flex align-items-center h-100 position-relative"
@@ -23,30 +22,6 @@
       </div>
     </div>
   </header>
-  <!-- <section class="container mt-6">
-    <h2 class="text-center mb-5 fw-bold">支持公平貿易的店家</h2>
-    <div class="row justify-content-center">
-      <div class="col-lg-10 col-md-9 col-sm-12">
-        <div class="row row-cols-lg-2 row-cols-md-2 g-4">
-          <div class="col-sm-1 mb-4" v-for="item in categories" :key="item">
-            <router-link
-              :to="`/products?category=${item}`"
-              class="d-block text-muted"
-            >
-              <div class="image-container">
-                <img
-                  :src="categoryImages[item]"
-                  class="card-img-top object-fit-cover title-image"
-                />
-                <div class="overlay">{{ item }}</div>
-              </div>
-              <h3 class="my-3 text-center d-md-none d-lg-none">{{ item }}</h3>
-            </router-link>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
   <section class="container mt-6">
     <h2 class="text-center mb-5 fw-bold">支持公平貿易的店家</h2>
     <div class="row justify-content-center">
@@ -60,11 +35,13 @@
               <div class="image-container">
                 <img
                   :src="categoryImages[item]"
+                  :alt="item.categories"
                   class="card-img-top object-fit-cover title-image"
                 />
                 <div class="overlay">{{ item }}</div>
               </div>
-              <h3 class="my-3 text-center d-md-none d-lg-none">{{ item }}</h3>
+              <h3 class="my-3 text-center d-md-none d-lg-none">
+                <i class="bi bi-arrow-up fw-bold"></i>{{ item }}</h3>
             </router-link>
           </div>
         </div>
@@ -72,68 +49,11 @@
     </div>
   </section>
   <SwiperComponent2 />
-  <!-- <section class="container mt-6">
-      <h2 class="text-center fw-bold">熱銷商品</h2>
-        <div class="d-flex justify-content-center my-4">
-          <swiper
-          :autoplay = true
-          :slidesPerView="1"
-          :spaceBetween="10"
-          :breakpoints="{
-            '375': {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            '768': {
-              slidesPerView: 3,
-              spaceBetween: 30,
-            },
-            '1024': {
-              slidesPerView: 4,
-              spaceBetween: 30,
-            },
-          }"
-          :modules="modules"
-          class="mySwiper">
-          <swiper-slide v-for="product in products" :key="product.id">
-            <div class="row">
-            <div class="col-md-4 col-sm">
-              <div class="card swiper-card mb-sm-4 ms-md-4 m-sm-auto">
-                <router-link :to="`/product/${product.id}`" class="swiper-card-link">
-                <img :src="product.imageUrl" class="swiper-card-img" />
-                </router-link>
-                <div class="card-body">
-                  <span class="badge rounded-pill bg-primary mb-2">{{product.category}}</span>
-                  <h5 class="card-title fs-6 fw-bold">{{ product.title }}</h5>
-                  <p class="card-text">NT$ {{ product.price }}</p>
-                  <a class="btn btn-primary d-flex justify-content-center text-white"
-                    @click.prevent="addToCart(product.id)">
-                    <i class="bi bi-cart-check me-2">
-                    </i>加入購物車</a>
-                </div>
-              </div>
-              </div>
-            </div>
-            </swiper-slide>
-        </swiper>
-      </div>
-    </section> -->
 </template>
 
 <script>
 import { mapActions } from 'pinia';
-import Swal from 'sweetalert2';
-// import required modules
-// import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-// import { Swiper, SwiperSlide } from 'swiper/vue';
 import cartStore from '@/stores/cartStore';
-// Import Swiper Vue.js components
-
-// Import Swiper styles
-// import 'swiper/css';
-
-// import 'swiper/css/pagination';
-// import 'swiper/css/navigation';
 import SwiperComponent2 from '@/components/SwiperComponent2.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
@@ -159,7 +79,6 @@ export default {
         '微笑人咖啡 Laughing Man Coffee':
           'https://storage.googleapis.com/vue-course-api.appspot.com/hedy-api-path/1709716136349.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=Pu7xrGVSxcwMV5la8oQGW9F%2BDMRw7ZPbjWygBXtDl9I%2BXd4vORmgmvSFahlVoULqqHOsd%2FL6mPA5u%2B4ckyBPC3BfomiFLW8fECvfN26cnmCOtcED6ldIAUhAjp8rTfXoEZjZj02YT1nStQKHsWkuooFp6ZZ%2FaJsmqTRt4%2BgX%2F6gzB3DoAxXXSqHy5UjzbhLXK%2Fs2IXPbVq%2BwfzwR27W7tQ8SxvUMmdKWScYi5NxL%2BFJjZVS9LmiIAHY%2FagwtfOS%2B5ieXZ4ZMrpZ4m0bPSe2qbHjezy61RnddLf0FmIerEJa%2BmxLKK9dy3P1jYZOtsYi86awpKnxsjrw1qpOxrE27NA%3D%3D',
       },
-      trackList: [],
     };
   },
   methods: {
@@ -184,48 +103,12 @@ export default {
           });
         });
     },
-    getTrack() {
-      const trackListStr = localStorage.getItem('homeTrack');
-      if (trackListStr) {
-        this.trackList = JSON.parse(trackListStr);
-      }
-    },
-    setTrack(id) {
-      if (this.trackList.includes(id)) {
-        const index = this.trackList.findIndex((item) => item === id);
-        this.trackList.splice(index, 1);
-        Swal.fire({
-          icon: 'success',
-          title: '己移除收藏清單',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      } else {
-        Swal.fire({
-          icon: 'success',
-          title: '己加入收藏清單',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        this.trackList.push(id);
-      }
-      localStorage.setItem('homeTrack', JSON.stringify(this.trackList));
-      this.getTrack();
-    },
   },
   components: {
-    // Swiper,
-    // SwiperSlide,
     SwiperComponent2,
   },
-  // setup() {
-  //   return {
-  //     modules: [Autoplay, Pagination, Navigation],
-  //   };
-  // },
   created() {
     this.getProducts();
-    this.getTrack();
   },
 };
 </script>
@@ -236,7 +119,7 @@ export default {
 }
 /* 在手機裝置上為點擊時添加樣式 */
 .clickable-link:active {
-  opacity: 0.7; /* 可以根據需要調整透明度 */
+  opacity: 0.7; /* 整透明度 */
 }
 .image-container {
   position: relative;

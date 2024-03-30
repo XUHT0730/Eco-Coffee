@@ -10,9 +10,7 @@
           >
             <div class="h3 fw-bold mt-5 mb-2">追蹤商品</div>
           </div>
-          <div
-            class="row row-cols-3 g-4 col-lg-12 col-md-10 mb-5 d-flex"
-          >
+          <div class="row row-cols-3 g-4 col-lg-12 col-md-10 mb-5 d-flex">
             <template v-for="item in filterProducts" :key="item.id">
               <div
                 class="col-12 col-xl-4 col-lg-5 d-flex justify-content-center"
@@ -24,7 +22,11 @@
                     :to="`/product/${item.id}`"
                     class="product-card-link"
                   >
-                    <img :src="item.imageUrl" class="product-card-img" />
+                    <img
+                      :src="item.imageUrl"
+                      :alt="item.title"
+                      class="product-card-img"
+                    />
                   </router-link>
                   <div class="card-body position-relative">
                     <div class="row d-flex">

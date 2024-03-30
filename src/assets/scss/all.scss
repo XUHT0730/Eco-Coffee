@@ -1,6 +1,5 @@
-
 @import "bootstrap/scss/functions";
-// @import "./variables";
+
 @import"./utils/_variables";
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
@@ -8,5 +7,5 @@
 @import './components/card';
 @import './base/typography';
 @import './base/bass';
+@import './components/swiper';
 @import './components/custom';
-// @import './components/swiper';

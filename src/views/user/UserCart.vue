@@ -13,160 +13,139 @@
             清空購物車
           </button>
         </div>
-        <div class="mt-3">
-          <h3 class="mt-3 mb-4 text-primary fw-bold">購物車</h3>
-          <div class="row">
-            <div class="col-md-8">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col" class="border-0 ps-0">品名</th>
-                    <th scope="col" class="border-0">數量</th>
-                    <th
-                      scope="col"
-                      class="border-0"
-                      style="white-space: nowrap"
-                    >
-                      價格
-                    </th>
-                    <th scope="col" class="border-0"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <template v-if="cart.carts">
-                    <tr
-                      v-for="item in cart.carts"
-                      :key="item.id"
-                      class="border-bottom border-top border-dark"
-                    >
-                      <th
-                        scope="row"
-                        class="border-0 px-0 font-weight-normal py-4"
+          <div class="row justify-content-center mt-4">
+            <div
+              class="col-md-6 bg-white mb-4 overflow-hidden"
+              style="min-height: calc(100vh - 56px - 76px)"
+            >
+              <div class="d-flex justify-content-between">
+                <p class="h2 text-primary fw-bold">購物車內容</p>
+              </div>
+              <template v-if="cart.carts">
+                <div v-for="item in cart.carts" :key="item.id">
+                  <div class="d-flex mt-4 bg-light align-items-center">
+                      <img
+                        :src="item.product.imageUrl"
+                        :alt="item.product.title"
+                        class="object-fit-cover w-70"
+                        style="max-height: 150px"
+                      />
+                    <div class="w-100 p-3 position-relative">
+                      <button
+                        type="button"
+                        class="btn btn-outline-dark position-absolute fw-bold border-0"
+                        style="top: 16px; right: 15px"
+                        @click="delCartItem(item.id)"
+                        :disabled="status.loadingItem === item.id"
                       >
-                        <router-link :to="`/product/${item.id}`">
-                          <img
-                            :src="item.product.imageUrl"
-                            style="width: 80px; height: 80px; object-fit: cover"
+                        <i
+                          class="fas fa-spinner fa-pulse"
+                          v-if="status.loadingItem === item.id"
+                        ></i>
+                        X
+                      </button>
+                      <div>
+                        <p class="mb-2 fw-bold me-4">
+                          {{ item.product.title }}
+                        </p>
+                        <div
+                          class="fw-bold text-primary"
+                          style="font-size: 16px"
+                          v-if="item.coupon"
+                        >
+                          已套用優惠券
+                        </div>
+                      </div>
+                      <div
+                        class="d-flex justify-content-between align-items-center w-100 mt-4"
+                      >
+                        <div class="input-group w-50 align-items-center">
+                          <div class="input-group-prepend pe-1">
+                            <!-- 如果商品數量為 2 個以上顯示減號，如果數量為 1 個顯示垃圾桶 -->
+                            <button
+                              type="button"
+                              style="background-color: transparent; border: none;"
+                              @click="
+                                item.qty--;
+                                updateCart(item);"
+                              :disabled="item.qty === 1"
+                              v-if="item.qty > 1"
+                            >
+                             <i class="bi bi-dash-lg fs-4 text-primary fw-bold"></i>
+                            </button>
+                            <button
+                              type="button"
+                              style="background-color: transparent; border: none;"
+                              @click="delCartItem(item.id)"
+                              v-else
+                            >
+                              <i class="bi bi-trash3 fs-4 text-dark fw-bold"></i>
+                            </button>
+                          </div>
+                          <input
+                            type="number"
+                            class="form-control border-0 text-center my-auto
+                             shadow-none bg-light px-0"
+                            min="1"
+                            v-model.number="item.qty"
+                            :disabled="status.loadingItem === item.id"
+                            aria-label="Example text with button addon"
+                            aria-describedby="button-addon1"
+                            readonly
                           />
-                        </router-link>
-                        <div class="d-inline-block ms-md-3 align-middle">
-                          <p class="mb-0 fw-bold d-inline-block">
-                            {{ item.product.title }}
-                          </p>
-                          <div class="text-primary" v-if="item.coupon">
-                            已套用優惠券
+                          <div class="input-group-append ps-1">
+                            <button
+                              type="button"
+                              style="background-color: transparent; border: none;"
+                              @click="
+                                item.qty++;
+                                updateCart(item);"
+                            >
+                            <i class="bi bi-plus-lg fs-4 text-primary fw-bold"></i>
+                            </button>
                           </div>
                         </div>
-                      </th>
-                      <td
-                        class="border-0 align-middle"
-                        style="max-width: 170px"
-                      >
-                        <div class="row g-0">
-                          <div class="d-flex flex-wrap">
-                            <div class="col-10">
-                              <div class="input-group">
-                                <!-- 如果商品數量為 2 個以上，顯示減號
-                                     如果數量為 1 個，顯示垃圾桶 -->
-                                <button
-                                  type="button"
-                                  class="btn btn-primary text-white"
-                                  @click="
-                                    item.qty--;
-                                    updateCart(item);
-                                  "
-                                  :disabled="item.qty === 1"
-                                  v-if="item.qty > 1"
-                                >
-                                  -
-                                </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-dark text-white"
-                                  @click="delCartItem(item.id)"
-                                  v-else
-                                >
-                                  <i class="bi bi-trash3"></i>
-                                </button>
-                                <input
-                                  type="number"
-                                  class="form-control border-dark text-center"
-                                  min="1"
-                                  v-model.number="item.qty"
-                                  :disabled="status.loadingItem === item.id"
-                                  readonly
-                                />
-                                <button
-                                  type="button"
-                                  class="btn btn-primary text-white"
-                                  @click="item.qty++; updateCart(item);"
-                                >
-                                  +
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td
-                        class="border-0 align-middle"
-                        style="max-width: 160px"
-                      >
-                        <p class="mb-0 ms-auto">
+                        <p class="mb-0 ms-auto text-end">
                           <small
                             v-if="cart.final_total !== cart.total"
-                            class="text-primary text-center"
-                            >優惠<br
-                          /></small>
-                          {{ $filters.currency(item.final_total) }}
+                            class="text-primary"
+                            >優惠價<br/>
+                          </small>
+                          NT$ {{ $filters.currency(item.final_total) }}
                         </p>
-                      </td>
-                      <td class="border-0 align-middle">
-                        <button
-                          type="button"
-                          class="btn btn-outline-dark"
-                          @click="delCartItem(item.id)"
-                          :disabled="status.loadingItem === item.id"
-                        >
-                          <i
-                            class="fas fa-spinner fa-pulse"
-                            v-if="status.loadingItem === item.id"
-                          ></i>
-                          X
-                        </button>
-                      </td>
-                    </tr>
-                  </template>
-                </tbody>
-              </table>
-              <div class="input-group w-50 mb-6 border-dark">
-                <input
-                  type="text"
-                  v-model="coupon_code"
-                  class="form-control rounded-0 border-bottom border-dark
-                   border-top-0 border-start-0 border-end-0 shadow-none"
-                  placeholder="請輸入優惠碼"
-                  aria-label="Recipient's username"
-                  aria-describedby="button-addon2"
-                />
-                <div class="input-group-append">
-                  <button
-                    class="btn btn-outline-dark border-bottom border-dark
-                     border-top-0 border-start-0 border-end-0 rounded-0"
-                    type="button"
-                    id="button-addon2"
-                    @click="addCouponCode"
-                  >
-                    <i class="bi bi-send-check-fill"></i>
-                  </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <div class="input-group w-50 mb-5 mt-3 border-dark">
+                  <input
+                    type="text"
+                    v-model="coupon_code"
+                    class="form-control rounded-0 border-bottom border-dark
+                    border-top-0 border-start-0 border-end-0 shadow-none fs-5"
+                    placeholder="請輸入優惠碼"
+                    aria-label="Recipient's username"
+                    aria-describedby="button-addon2"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-outline-dark border-bottom border-dark
+                      border-top-0 border-start-0 border-end-0 rounded-0 fs-5"
+                      type="button"
+                      id="button-addon2"
+                      @click="addCouponCode"
+                    >
+                      <i class="bi bi-send-check-fill"></i>
+                    </button>
+                  </div>
               </div>
               <router-link to="/products" class="text-primary fw-bold mb-5 h5">
                 <i class="bi bi-chevron-double-left mr-1"></i>
                 繼續購物
               </router-link>
+              </template>
             </div>
-            <div class="col-md-4 mt-4">
+            <div class="col-md-4">
               <div class="border p-4 mb-4 border-dark">
                 <p class="h4 mb-4 text-primary fw-bold">訂單明細</p>
                 <table class="table text-muted border-bottom border-dark">
@@ -217,84 +196,25 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
       <div v-else class="text-center text-danger">
-        <p>購物車無商品，快去逛逛</p>
-        <router-link to="/products" class="text-dark mt-6 h5">
+        <p class="h3 fw-bold mb-3">購物車無商品，快去逛逛吧 ~ </p>
+        <router-link to="/products" class="text-dark h3">
           <i class="bi bi-chevron-double-left mr-1"></i>
           前往購物
         </router-link>
       </div>
     </div>
   </section>
-  <section class="container mt-5 ec-container">
-    <h2 class="text-center fw-bold">熱銷商品</h2>
-    <div class="d-flex justify-content-center my-4">
-      <swiper
-        :autoplay="true"
-        :slidesPerView="1"
-        :spaceBetween="10"
-        :breakpoints="{
-          '375': {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          '768': {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          '1024': {
-            slidesPerView: 4,
-            spaceBetween: 30,
-          },
-        }"
-        :modules="modules"
-        class="mySwiper"
-      >
-        <swiper-slide v-for="product in products" :key="product.id">
-          <div class="row">
-            <div class="col-md-4 col-sm">
-              <div class="card swiper-card mb-sm-4 ms-md-4 m-sm-auto">
-                <router-link
-                  :to="`/product/${product.id}`"
-                  class="swiper-card-link"
-                >
-                  <img :src="product.imageUrl" class="swiper-card-img" />
-                </router-link>
-                <div class="card-body">
-                  <span class="badge rounded-pill bg-primary mb-2">{{
-                    product.category
-                  }}</span>
-                  <h5 class="card-title fs-6 fw-bold">{{ product.title }}</h5>
-                  <p class="card-text">NT$ {{ product.price }}</p>
-                  <a
-                    class="btn btn-primary d-flex justify-content-center text-white"
-                    @click.prevent="addToCart(product.id)"
-                  >
-                    <i class="bi bi-cart-check me-2"> </i>加入購物車</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </swiper-slide>
-      </swiper>
-    </div>
-  </section>
+  <SwiperComponent2 />
 </template>
 
 <script>
 import { mapActions, mapState } from 'pinia';
 import Swal from 'sweetalert2';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/vue';
 import cartStore from '@/stores/cartStore';
 import toastMessage from '@/stores/toastMessage';
-
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import SwiperComponent2 from '@/components/SwiperComponent2.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -451,13 +371,7 @@ export default {
     this.getProducts();
   },
   components: {
-    Swiper,
-    SwiperSlide,
-  },
-  setup() {
-    return {
-      modules: [Autoplay, Pagination, Navigation],
-    };
+    SwiperComponent2,
   },
 };
 </script>
@@ -468,27 +382,7 @@ export default {
     white-space: nowrap;
   }
 }
-.swiper {
-  width: 100%;
-  height: 100%;
-}
 .ec-container {
   min-height: calc(100vh - 56px - 76px);
-}
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 </style>

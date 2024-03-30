@@ -6,9 +6,6 @@
         <li class="breadcrumb-item">
           <RouterLink to="/articles">部落格列表</RouterLink>
         </li>
-        <!-- <li class="breadcrumb-item active fw-bold" aria-current="page">
-          {{ article.title }}
-        </li> -->
       </ol>
     </nav>
     <div class="row justify-content-center">
