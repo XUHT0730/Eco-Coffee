@@ -8,95 +8,114 @@
     aria-hidden="true"
     ref="modal"
   >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            <span v-if="isNew">新增優惠卷</span>
-            <span v-else>編輯優惠卷</span>
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="title">標題</label>
-            <input
-              type="text"
-              class="form-control"
-              id="title"
-              v-model="tempCoupon.title"
-              placeholder="請輸入標題"
-            />
+    <VeeForm
+      ref="form"
+      v-slot="{ errors }"
+      @submit="$emit('update-coupon', tempCoupon)"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              <span v-if="isNew">新增優惠卷</span>
+              <span v-else>編輯優惠卷</span>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-          <div class="mb-3">
-            <label for="coupon_code">優惠碼</label>
-            <input
-              type="text"
-              class="form-control"
-              id="coupon_code"
-              v-model="tempCoupon.code"
-              placeholder="請輸入優惠碼"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="due_date">到期日</label>
-            <input
-              type="date"
-              class="form-control"
-              id="due_date"
-              v-model="due_date"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="price">折扣百分比</label>
-            <input
-              type="number"
-              class="form-control"
-              id="price"
-              min="0"
-              v-model.number="tempCoupon.percent"
-              placeholder="請輸入折扣百分比"
-            />
-          </div>
-          <div class="mb-3">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                :true-value="1"
-                :false-value="0"
-                v-model="tempCoupon.is_enabled"
-                id="is_enabled"
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="title">標題</label>
+              <VeeField
+                id="title"
+                name="title"
+                type="text"
+                class="form-control"
+                :class="{ 'is-invalid': errors['title'] }"
+                placeholder="請輸入標題"
+                rules="required"
+                v-model="tempCoupon.title"
               />
-              <label class="form-check-label" for="is_enabled">
-                是否啟用
-              </label>
+              <ErrorMessage name="title" class="invalid-feedback" />
+            </div>
+            <div class="mb-3">
+              <label for="coupon_code">優惠碼</label>
+              <VeeField
+                id="coupon_code"
+                name="coupon_code"
+                type="text"
+                class="form-control"
+                :class="{ 'is-invalid': errors['coupon_code'] }"
+                placeholder="請輸入優惠碼"
+                rules="required"
+                v-model="tempCoupon.code"
+              />
+              <ErrorMessage name="coupon_code" class="invalid-feedback" />
+            </div>
+            <div class="mb-3">
+              <label for="due_date">到期日</label>
+              <VeeField
+                id="due_date"
+                name="due_date"
+                type="date"
+                class="form-control"
+                :class="{ 'is-invalid': errors['due_date'] }"
+                placeholder="請輸入到期日"
+                rules="required"
+                v-model="due_date"
+              />
+              <ErrorMessage name="due_date" class="invalid-feedback" />
+            </div>
+            <div class="mb-3">
+              <label for="price">折扣百分比</label>
+              <VeeField
+                id="price"
+                name="price"
+                type="number"
+                class="form-control"
+                :class="{ 'is-invalid': errors['price'] }"
+                placeholder="請輸入折扣百分比"
+                rules="required"
+                min="0"
+                v-model.number="tempCoupon.percent"
+              />
+              <ErrorMessage name="price" class="invalid-feedback" />
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  :true-value="1"
+                  :false-value="0"
+                  v-model="tempCoupon.is_enabled"
+                  id="is_enabled"
+                />
+                <label class="form-check-label" for="is_enabled">
+                  是否啟用
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            關閉
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            @click="$emit('update-coupon', tempCoupon)"
-          >
-            {{ isNew ? "新增優惠卷" : "更新優惠券" }}
-          </button>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              關閉
+            </button>
+            <button type="submit" class="btn btn-primary">
+              {{ isNew ? "新增優惠卷" : "更新優惠券" }}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </VeeForm>
   </div>
 </template>
 
