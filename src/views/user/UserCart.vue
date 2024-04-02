@@ -83,11 +83,11 @@
                             </button>
                           </div>
                           <input
+                            id="qty"
                             type="number"
                             class="form-control border-0 text-center my-auto
                              shadow-none bg-light px-0"
-                            min="1"
-                            v-model.number="item.qty"
+                            :value="item.qty"
                             :disabled="status.loadingItem === item.id"
                             aria-label="Example text with button addon"
                             aria-describedby="button-addon1"

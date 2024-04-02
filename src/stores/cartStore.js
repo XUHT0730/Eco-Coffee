@@ -25,10 +25,10 @@ export default defineStore('cartStore', {
           // console.log(err.response.data.message);
         });
     },
-    addToCart(id) {
+    addToCart(id, qty = 1) {
       const order = {
         product_id: id,
-        qty: 1,
+        qty,
       };
       // 檢查購物車是否已經存在相同商品
       if (this.carts.some((item) => item.product_id === id)) {
