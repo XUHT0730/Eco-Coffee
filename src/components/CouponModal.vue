@@ -79,8 +79,7 @@
                 class="form-control"
                 :class="{ 'is-invalid': errors['price'] }"
                 placeholder="請輸入折扣百分比"
-                rules="required"
-                min="0"
+                rules="required|min_value:1"
                 v-model.number="tempCoupon.percent"
               />
               <ErrorMessage name="price" class="invalid-feedback" />

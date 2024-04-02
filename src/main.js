@@ -27,7 +27,6 @@ import { date, currency } from './methods/filters';
 
 import App from './App.vue';
 import router from './router';
-
 // 將所有 vee-validate 的規則載入
 Object.keys(AllRules).forEach((rule) => {
   defineRule(rule, AllRules[rule]);

@@ -171,7 +171,7 @@
                       class="form-control"
                       :class="{ 'is-invalid': errors['price'] }"
                       placeholder="請輸入售價"
-                      rules="required|min:0"
+                      rules="required|min_value:0"
                       v-model.number="tempProduct.price"
                     />
                     <ErrorMessage name="price" class="invalid-feedback" />
