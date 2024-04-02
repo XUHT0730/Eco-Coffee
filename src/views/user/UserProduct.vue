@@ -23,7 +23,7 @@
           width="525px"
           :alt="product.title"
         />
-        <SwiperComponent v-else :product="product" />
+        <SwiperComponent v-else :product="product"/>
       </div>
       <article class="col-12 col-md-5 col-lg-5">
         <h2 class="fw-bold mb-3">{{ product.title }}</h2>

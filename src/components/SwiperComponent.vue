@@ -8,8 +8,8 @@
     class="mySwiper2"
   >
     <SwiperSlide
-      ><img :src="product.imageUrl" :alt="product.title"
-    /></SwiperSlide>
+      ><img :src="product.imageUrl" :alt="product.title"/>
+    </SwiperSlide>
     <SwiperSlide v-for="(img, index) in product.imagesUrl" :key="index">
       <img :src="product.imagesUrl[index]" :alt="product.title" />
     </SwiperSlide>
@@ -23,7 +23,7 @@
     :watchSlidesVisibility="true"
     :watchSlidesProgress="true"
     :modules="modules"
-    class="mySwiper01"
+    class="mySwiper01 ms-6 mb-4"
   >
     <SwiperSlide
       ><img :src="product.imageUrl" :alt="product.title"
