@@ -117,7 +117,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="input-group w-50 mb-5 mt-3 border-dark">
+                <div class="input-group w-75 mb-5 mt-3 border-dark">
                   <input
                     type="text"
                     v-model="coupon_code"
