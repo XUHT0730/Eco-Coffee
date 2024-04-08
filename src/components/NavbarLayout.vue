@@ -2,8 +2,11 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-2">
     <div class="container-fluid">
       <!--LOGO-->
-      <RouterLink to="/" @click="closeCollapse"
-       class="fs-4 navbar-brand align-items-center me-2">
+      <RouterLink
+        to="/"
+        @click="closeCollapse"
+        class="fs-4 navbar-brand align-items-center me-2"
+      >
         <i class="bi bi-cup-hot ff-minor"></i>
         <span class="ms-2 fw-bold ff-minor">Eco-Coffee</span>
       </RouterLink>
@@ -17,23 +20,41 @@
         <span class="navbar-toggler-icon ff-minor"></span>
       </button>
       <!--主角 MENU-->
-      <div id="lokiNavbar" ref="collapse"
-        class="collapse navbar-collapse">
+      <div id="lokiNavbar" ref="collapse" class="collapse navbar-collapse">
         <div class="navbar-nav me-auto mb-2 mb-lg-0">
-          <RouterLink to="/about" @click="closeCollapse" class="nav-item nav-link"
+          <RouterLink
+            to="/about"
+            @click="closeCollapse"
+            class="nav-item nav-link"
             >了解公平貿易</RouterLink
           >
-          <RouterLink to="/products" @click="closeCollapse" class="nav-item nav-link"
+          <RouterLink
+            to="/products"
+            @click="closeCollapse"
+            class="nav-item nav-link"
             >產品列表</RouterLink
           >
-          <RouterLink to="/articles" @click="closeCollapse" class="nav-item nav-link"
+          <RouterLink
+            to="/articles"
+            @click="closeCollapse"
+            class="nav-item nav-link"
             >部落格</RouterLink
+          >
+          <router-link
+            to="/fqa"
+            @click="closeCollapse"
+            class="nav-item nav-link"
+          >
+            常見問題</router-link
           >
         </div>
         <div class="nav navbar-nav d-flex me-2">
-          <RouterLink to="/track" @click="closeCollapse"
-           class="btn btn-primary d-flex align-items-center
-            nav-item nav-link position-relative me-1">
+          <RouterLink
+            to="/track"
+            @click="closeCollapse"
+            class="btn btn-primary d-flex align-items-center
+             nav-item nav-link position-relative me-1"
+          >
             <i class="bi bi-heart-fill icon"></i>
             <span
               v-if="trackList.length > 0"
@@ -44,9 +65,11 @@
               <span class="visually-hidden">unread messages</span>
             </span>
           </RouterLink>
-          <RouterLink to="/cart" @click="closeCollapse"
-            class="btn btn-primary nav-item nav-link position-relative
-             d-flex align-items-center me-1"
+          <RouterLink
+            to="/cart"
+            @click="closeCollapse"
+            class="btn btn-primary nav-item nav-link
+             position-relative d-flex align-items-center me-1"
           >
             <i class="bi bi-cart icon"></i>
             <span

@@ -1,6 +1,6 @@
 <template>
   <section class="container mt-6">
-    <h2 class="text-center fw-bold">熱銷商品</h2>
+    <h2 class="text-center fw-bold mb-5">熱銷商品</h2>
     <div class="d-flex justify-content-center my-4">
       <swiper
         :autoplay="true"
@@ -34,9 +34,9 @@
                   <img :src="product.imageUrl" class="swiper-card-img" :alt="product.title" />
                 </router-link>
                 <div class="card-body">
-                  <span class="badge rounded-pill bg-primary mb-2">{{
-                    product.category
-                  }}</span>
+                  <span class="badge bg-secondary text-white mb-2 px-2 py-2">
+                    {{ product.category }}
+                  </span>
                   <h5 class="card-title fs-6 fw-bold">{{ product.title }}</h5>
                   <p class="card-text">NT$ {{ product.price }}</p>
                   <a
@@ -117,8 +117,6 @@ export default {
   text-align: center;
   font-size: 18px;
   background: #fff;
-
-  /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;

@@ -94,7 +94,7 @@
       </article>
     </div>
   </section>
-  <SwiperComponent2 />
+  <SwiperComponent2 @click="handleClick"/>
 </template>
 
 <script>
@@ -154,17 +154,14 @@ export default {
         .get(url)
         .then((res) => {
           this.product = res.data.product;
-          // 此段用於 form-select 但目前無法將選擇的數字帶入購物車中
-          // this.product = {
-          //   ...res.data.product,
-          //   num: 1,
-          // };
           this.isLoading = false;
         })
         .catch(() => {
-          // console.log(err);
           this.isLoading = false;
         });
+    },
+    handleClick() {
+      window.location.reload(); // 點擊時刷新網頁
     },
   },
   components: {

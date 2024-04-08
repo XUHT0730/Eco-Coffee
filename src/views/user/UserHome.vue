@@ -3,7 +3,8 @@
   <header
     class="header"
     style="
-      background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/hedy-api-path/1709543433230.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=RKdXij%2BJKl7scyyCrzbEoL7DKU%2BhtTvd%2B19Qhee9AUDq%2FoXrgyD8lS%2BZCheCWRKgOfScfomYaSL3rgCwbQeThOe2rtiKYmypjiZnqy1hZF0ldnixATNZZaCldVhwKytNUTZHjWoP58IeUI9FLiRG6PMhzknkCEzSP4OdmF54GOEvdYBkQp3D1QhPENbhBB4bjd9WbxuGjJHRuDY5B4pItsX4ZbMPpLQQeOpGiO%2F2AjrnOIW2giK%2BDc4eD4SAZowcPBNK8YJCo79Z9KqZQ6lRS%2FInyi%2BNkpH3UnYfYzqFTN6PEHNva892jSwMMYMtKCu5cC7ReW%2FfkBTEY%2B9GR2KF7g%3D%3D);"
+      background-image: url(https://images.unsplash.com/photo-1500353391678-d7b57979d6d2?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    "
   >
     <div
       class="container d-flex align-items-center h-100 position-relative"
@@ -41,12 +42,40 @@
                 <div class="overlay">{{ item }}</div>
               </div>
               <h3 class="my-3 text-center d-md-none d-lg-none">
-                <i class="bi bi-arrow-up fw-bold"></i>{{ item }}</h3>
+                <i class="bi bi-arrow-up fw-bold"></i>{{ item }}
+              </h3>
             </router-link>
           </div>
         </div>
       </div>
     </div>
+  </section>
+  <section class="container mt-6">
+    <hr />
+    <div class="row justify-content-center my-5">
+      <div class="col-md-8 offset-md-2 text-center">
+        <div class="row">
+          <div class="col-md-4">
+            <img
+              src="/src/assets/images/homeimg.jpg"
+              class="rounded-circle mr-5"
+              style="width: 180px; height: 190px; object-fit: cover"
+            />
+          </div>
+          <div class="col-md-6 text-start">
+            <h2 class="ff-minor fw-bold text-primary">Eco-Coffee</h2>
+            <p>
+              我們致力於提供來自世界各地最優質的公平貿易咖啡豆，支持農民和生產者，同時倡導對環境的尊重和保護。<br />
+              相信透過公平貿易，我們可以共同創造一個更美好的世界，並讓每一杯咖啡都充滿著正能量和美好的未來。
+            </p>
+            <router-link to="/products" class="btn btn-primary float-end">
+              查看商品
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
   </section>
   <SwiperComponent2 />
 </template>
@@ -119,7 +148,7 @@ export default {
 }
 /* 在手機裝置上為點擊時添加樣式 */
 .clickable-link:active {
-  opacity: 0.7; /* 整透明度 */
+  opacity: 0.7;
 }
 .image-container {
   position: relative;
@@ -136,7 +165,7 @@ export default {
   position: absolute;
   bottom: 0;
   background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  background: rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
   width: 100%;
   transition: 0.5s ease;
@@ -148,73 +177,5 @@ export default {
 }
 .image-container:hover .overlay {
   opacity: 1;
-}
-.header-img {
-  overflow: hidden;
-  border-radius: 10px;
-  img {
-    transition: all 0.6s ease;
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-}
-.header {
-  height: 504px;
-  background-position: center center;
-  background-size: cover;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.6s ease;
-}
-.header:hover {
-  transform: scale(1.03);
-}
-.header::after {
-  position: absolute;
-  content: "";
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/hedy-api-path/1709543433230.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=RKdXij%2BJKl7scyyCrzbEoL7DKU%2BhtTvd%2B19Qhee9AUDq%2FoXrgyD8lS%2BZCheCWRKgOfScfomYaSL3rgCwbQeThOe2rtiKYmypjiZnqy1hZF0ldnixATNZZaCldVhwKytNUTZHjWoP58IeUI9FLiRG6PMhzknkCEzSP4OdmF54GOEvdYBkQp3D1QhPENbhBB4bjd9WbxuGjJHRuDY5B4pItsX4ZbMPpLQQeOpGiO%2F2AjrnOIW2giK%2BDc4eD4SAZowcPBNK8YJCo79Z9KqZQ6lRS%2FInyi%2BNkpH3UnYfYzqFTN6PEHNva892jSwMMYMtKCu5cC7ReW%2FfkBTEY%2B9GR2KF7g%3D%3D);
-  background-color: black;
-  opacity: 0.3;
-  background-size: cover;
-  background-position: center;
-  z-index: 0;
-}
-.header-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  z-index: 1;
-}
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 </style>

@@ -77,6 +77,10 @@ const routes = [
         path: 'about',
         component: () => import('../views/user/UserAbout.vue'),
       },
+      {
+        path: 'fqa',
+        component: () => import('../views/user/UserFQA.vue'),
+      },
     ],
   },
   {

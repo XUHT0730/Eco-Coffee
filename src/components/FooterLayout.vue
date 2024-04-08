@@ -59,7 +59,7 @@
                   <router-link to="/products" class="text-white">商品一覽</router-link>
                 </li>
                 <li class="mb-3">
-                  <a class="text-white" href="#">常見問題</a>
+                  <router-link to="/fqa" class="text-white">常見問題</router-link>
                 </li>
               </ul>
               <ul class="footerul">
@@ -136,25 +136,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.footer__wrapper {
-  padding-top: 3rem;
-  padding-bottom: 1rem;
-}
-.footer-block {
-  text-align: left;
-}
-.footer-block-center {
-  text-align: center;
-}
-.footer-icon {
-  font-size: 30px;
-}
-.footerul {
-  list-style: none;
-  padding: 0;
-  float: left;
-  margin-left: 50px;
-}
-</style>

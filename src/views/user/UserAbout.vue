@@ -122,7 +122,11 @@
                   :to="`/product/${product.id}`"
                   class="product-card-link"
                 >
-                  <img :src="product.imageUrl" :alt="product.title" class="product-card-img" />
+                  <img
+                    :src="product.imageUrl"
+                    :alt="product.title"
+                    class="product-card-img"
+                  />
                 </router-link>
                 <div class="card-body position-relative">
                   <div class="row d-flex">
