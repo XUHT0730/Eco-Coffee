@@ -5,9 +5,9 @@
       <RouterLink
         to="/"
         @click="closeCollapse"
-        class="fs-4 navbar-brand align-items-center me-2"
+        class="fs-3 navbar-brand align-items-center me-2"
       >
-        <i class="bi bi-cup-hot ff-minor"></i>
+        <i class="bi bi-cup-hot ff-minor fs-3"></i>
         <span class="ms-2 fw-bold ff-minor">Eco-Coffee</span>
       </RouterLink>
       <!-- BUTTON -->
@@ -21,7 +21,7 @@
       </button>
       <!--主角 MENU-->
       <div id="lokiNavbar" ref="collapse" class="collapse navbar-collapse">
-        <div class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="navbar-nav me-auto mb-2 mb-lg-0 fs-6">
           <RouterLink
             to="/about"
             @click="closeCollapse"
@@ -51,11 +51,11 @@
         <div class="nav navbar-nav d-flex me-2">
           <RouterLink
             to="/track"
-            @click="closeCollapse"
+            @click="closeCollapse "
             class="btn btn-primary d-flex align-items-center
              nav-item nav-link position-relative me-1"
           >
-            <i class="bi bi-heart-fill icon"></i>
+            <i class="bi bi-heart-fill icon fs-4"></i>
             <span
               v-if="trackList.length > 0"
               class="badge rounded-pill bg-danger"
@@ -71,7 +71,7 @@
             class="btn btn-primary nav-item nav-link
              position-relative d-flex align-items-center me-1"
           >
-            <i class="bi bi-cart icon"></i>
+            <i class="bi bi-cart icon fs-4"></i>
             <span
               v-if="carts.length > 0"
               class="badge rounded-pill bg-danger"
@@ -82,7 +82,7 @@
             </span>
           </RouterLink>
           <router-link to="/login" class="nav-item nav-link me-1">
-            <i class="bi bi-person-circle icon"></i>
+            <i class="bi bi-person-circle icon fs-4"></i>
           </router-link>
         </div>
       </div>
@@ -125,7 +125,7 @@ export default {
 <style lang="scss">
 @media (max-width: 768px) {
   .nav-link.active {
-    background-color: rgb(114, 189, 133);
+    background-color: rgb(193, 234, 203);
   }
 }
 
@@ -151,7 +151,8 @@ export default {
 .navbar-nav .nav-item:hover::after {
   width: 90%; /* 滑鼠接觸時，底線寬度為項目寬度 */
 }
-.icon {
+.navbar-nav .icon {
   font-size: 21px;
+  color: #FFFFFF;
 }
 </style>
