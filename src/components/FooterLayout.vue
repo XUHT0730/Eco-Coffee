@@ -7,7 +7,7 @@
           <i class="bi bi-cup-hot"></i>
           <span class="ms-2 fw-bold text-white ff-minor">Eco-Coffee</span>
         </RouterLink>
-        <p class="mb-0 text-center">
+        <p class="pt-2 pb-1 text-center">
           <small>無商業用途，僅供學習使用</small>
         </p>
       </div>
@@ -35,8 +35,9 @@
                 <div class="w-auto">
                   <button
                     type="submit"
-                    class="btn btn-secondary d-flex align-items-center
-                     py-2 px-6 px-sm-10 text-white fw-semibold"
+                    class="btn d-flex align-items-center
+                     py-2 px-6 px-sm-10 text-black fw-semibold"
+                     style="background-color:#D7AD92"
                     :disabled="isLoading"
                   >
                     <span
@@ -56,20 +57,18 @@
               <p class="h4 fw-bold mb-4">相關連結</p>
               <ul class="footerul ps-6">
                 <li class="mb-3">
-                  <router-link to="/products" class="text-white">商品一覽</router-link>
+                  <router-link to="/products">商品一覽</router-link>
                 </li>
                 <li class="mb-3">
-                  <router-link to="/fqa" class="text-white">常見問題</router-link>
+                  <router-link to="/fqa">常見問題</router-link>
                 </li>
               </ul>
               <ul class="footerul">
                 <li class="mb-3">
-                  <router-link to="/articles" class="text-white"
-                    >最新消息</router-link
-                  >
+                  <router-link to="/articles">最新消息</router-link>
                 </li>
                 <li class="mb-3">
-                  <a class="text-white" href="#">聯絡我們</a>
+                  <a href="#">聯絡我們</a>
                 </li>
               </ul>
             </div>
@@ -79,13 +78,18 @@
               <p class="h4 fw-bold mb-4">聯絡我們</p>
               <div class="row">
                 <div class="col-4 text-end">
-                    <a class="text-white" href="https://www.instagram.com/accounts/login/">
-                      <i class="bi bi-instagram footer-icon">
-                      </i>
-                    </a>
+                  <a
+                    class="text-white"
+                    href="https://www.instagram.com/accounts/login/"
+                  >
+                    <i class="bi bi-instagram footer-icon"> </i>
+                  </a>
                 </div>
                 <div class="col-4">
-                  <a class="text-white" href="https://www.facebook.com/?locale=zh_TW">
+                  <a
+                    class="text-white"
+                    href="https://www.facebook.com/?locale=zh_TW"
+                  >
                     <i class="bi bi-facebook footer-icon"></i>
                   </a>
                 </div>
@@ -136,3 +140,34 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.footer__wrapper {
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+}
+.footer-block {
+  text-align: left;
+}
+.footer-block-center {
+  text-align: center;
+}
+.footer-icon {
+  font-size: 30px;
+}
+.footerul {
+  list-style: none;
+  padding: 0;
+  float: left;
+  margin-left: 50px;
+}
+.footer a {
+  color: rgb(255, 255, 255);
+}
+.footer a:hover {
+  color: #0f0301;
+}
+.footer a:hover .bi {
+  color: #0b0f03;
+}
+</style>

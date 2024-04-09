@@ -30,7 +30,7 @@
                   v-if="article.isPublic"
                   class="btn btn-outline-primary w-50"
                 >
-                  文章頁面
+                查看文章
                 </RouterLink>
               </div>
             </div>

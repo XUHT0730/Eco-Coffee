@@ -10,10 +10,10 @@
           >
             <div class="h3 fw-bold mt-5 mb-2">追蹤商品</div>
           </div>
-          <div class="row row-cols-3 g-4 col-lg-12 col-md-10 mb-5 d-flex">
+          <div class="row row-cols-4 g-4 col-lg-12 col-md-10 mb-5 d-flex">
             <template v-for="item in filterProducts" :key="item.id">
               <div
-                class="col-12 col-xl-4 col-lg-5 d-flex justify-content-center"
+                class="col-12 col-xl-3 col-lg-3 d-flex justify-content-center"
               >
                 <div
                   class="card product-card shadow bg-white mb-sm-4 ms-md-4 m-sm-auto"
@@ -31,17 +31,17 @@
                   <div class="card-body position-relative">
                     <div class="row d-flex">
                       <div class="col">
-                        <div class="left w-100">
+                        <div class="w-100">
                           <div
                             class="bg-secondary position-absolute
-                             fs-6 px-2 py-1 text-white category"
+                             fs-9 px-2 py-1 text-white category"
                           >
                             {{ item.category }}
                           </div>
                         </div>
                       </div>
                       <div class="col-3">
-                        <div class="right w-100 text-end">
+                        <div class="w-100 text-end">
                           <div @click="setTrack(item.id)">
                             <span v-if="trackList.includes(item.id)">
                               <i class="bi bi-heart-fill fs-4 text-danger"></i>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showTopIcon" @click="scrollToTop">
+  <div v-if="showTopIcon" class="top" @click="scrollToTop">
     <i
       class="bi bi-arrow-up text-light"
       style="font-size: 2rem"
@@ -37,5 +37,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.top:hover{
+  transform: scale(1.2);
+}
 </style>

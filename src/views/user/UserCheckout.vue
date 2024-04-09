@@ -5,16 +5,16 @@
       <div class="col-md-6" v-if="order.is_paid === true">
         <h2 class="text-primary fw-bold">訂單完成</h2>
         <div class="mt-4">
-          <p class="h5"><span class="h5 me-1 text-primary fw-bold">付款已完成</span>感謝訂購</p>
+          <p class="h5">
+            <span class="h5 me-1 text-primary fw-bold">付款已完成</span>感謝訂購
+          </p>
           <p class="ml-2">訂單完成預計 1 ~ 2 天出貨</p>
-          <div
-            style="
-              height: 300px;
-              background-size: cover;
-              background-position: center;
-              background-image: url('/src/assets/images/checkout.jpg');
-            "
-          ></div>
+          <img
+            src="/src/assets/images/checkout.jpg"
+            class="object-fit-cover"
+            style="height: 300px"
+            alt="付款成功"
+          />
         </div>
         <router-link to="/" class="btn btn-outline-dark mr-2 rounded-0 mt-4">
           回到首頁
@@ -29,39 +29,40 @@
         <div class="my-5 row d-flex justify-content-center">
           <form class="border p-4 mb-4 border-dark" @submit.prevent="payOrder">
             <p class="h4 text-primary fw-bold">訂單明細</p>
-            <table
-              class="table align-middle mt-4 border-bottom text-muted border-dark"
+            <div
+              v-for="item in order.products"
+              :key="item.id"
+              class="align-middle mt-4 border-bottom border-dark"
             >
-              <tbody>
-                <tr v-for="item in order.products" :key="item.id">
-                  <img
-                    :src="item.product.imageUrl"
-                    :alt="item.product.title"
-                    class="me-2"
-                    style="width: 100px; height: 100px; object-fit: cover"
-                  />
-                  <td class="fw-bold">{{ item.product.title }}</td>
-                  <td
-                    class="text-secondary text-end"
-                    style="white-space: nowrap"
+              <div class="d-flex py-3 align-items-center">
+                <img
+                  :src="item.product.imageUrl"
+                  :alt="item.product.title"
+                  class="me-3"
+                  style="width: 100px; height: 100px; object-fit: cover"
+                />
+                <div class="flex-grow-1">
+                  <div
+                    class="d-md-flex justify-content-md-between align-items-md-center"
                   >
-                    X{{ item.qty }}{{ item.product.unit }}
-                  </td>
-                  <td class="text-end">
-                    NT${{ $filters.currency(item.final_total) }}
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="2" class="text-end h4 fw-bold">總計</td>
-                  <td colspan="2" class="text-end h4 fw-bold">
-                    {{ $filters.currency(order.total) }}
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-            <table class="table">
+                    <p class="mb-0 fw-bold">{{ item.product.title }}</p>
+                    <p class="text-secondary mb-0" style="white-space: nowrap">
+                      x {{ item.qty }} {{ item.product.unit }}
+                    </p>
+                    <p class="mb-0">
+                      NT${{ $filters.currency(item.final_total) }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between mt-4">
+              <p class="text-end text-primary h4 fw-bold">總計</p>
+              <p class="text-end text-primary h4 fw-bold">
+                $NT {{ $filters.currency(order.total) }}
+              </p>
+            </div>
+            <table class="table mt-2">
               <tbody>
                 <tr class="row">
                   <th class="col-md-3">Email</th>

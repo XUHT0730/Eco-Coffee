@@ -32,10 +32,7 @@
             :class="{ active: !$route.query.category }"
             class="list-group-item"
           >
-            <router-link
-              class="py-2 d-block"
-              style="color: black"
-              to="/products"
+            <router-link class="py-2 d-block" to="/products"
               >全部商品</router-link
             >
           </li>
@@ -47,7 +44,6 @@
           >
             <router-link
               class="py-2 d-block"
-              style="color: black"
               :to="`/products?category=${item}`"
               >{{ item }}</router-link
             >
@@ -67,7 +63,8 @@
             <div
               v-else
               class="col-12 col-xl-4 col-lg-5 d-flex justify-content-center"
-              v-for="product in products" :key="product.id"
+              v-for="product in products"
+              :key="product.id"
             >
               <div
                 class="card product-card shadow bg-white mb-sm-4 ms-md-4 m-sm-auto"
@@ -76,46 +73,56 @@
                   :to="`/product/${product.id}`"
                   class="product-card-link"
                 >
-                  <img :src="product.imageUrl" :alt="product.title" class="product-card-img" />
+                  <img
+                    :src="product.imageUrl"
+                    :alt="product.title"
+                    class="product-card-img"
+                  />
                 </router-link>
                 <div class="card-body position-relative">
-                  <div class="row d-flex">
+                  <div class="row d-flex align-items-center">
                     <div class="col">
-                      <div class="left w-100">
+                      <div class="w-auto">
                         <div
-                          class="bg-secondary position-absolute fs-6 px-2 py-1 text-white category"
+                          class="bg-secondary fs-8 px-2 py-1 text-white category"
+                          style="width: fit-content"
                         >
                           {{ product.category }}
                         </div>
                       </div>
                     </div>
-                    <div class="col-3">
-                      <div class="right w-100 text-end">
+                    <div class="col-2 track">
+                      <div class="w-100 text-end">
                         <div @click="setTrack(product.id)">
                           <span v-if="trackList.includes(product.id)">
-                            <i class="bi bi-heart-fill fs-4 text-danger"></i>
+                            <i class="bi bi-heart-fill fs-3 text-danger"></i>
                           </span>
                           <span v-else
-                            ><i class="bi bi-heart fs-4 text-danger"></i
+                            ><i class="bi bi-heart fs-3 text-danger"></i
                           ></span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <h5 class="card-title pt-2 fw-bold">
-                    <router-link :to="`/product/${product.id}`">
+                  <router-link :to="`/product/${product.id}`">
+                    <h5 class="card-title pt-2 fw-bold">
                       {{ product.title }}
-                    </router-link>
-                  </h5>
+                    </h5>
+                  </router-link>
                   <td>
                     <!-- 如果原價等於現價，就只顯示現價 -->
-                    <div class="h5 fw-bold" v-if="product.origin_price === product.price">
+                    <div
+                      class="h5 fw-bold"
+                      v-if="product.origin_price === product.price"
+                    >
                       NT$ {{ product.price }} 元
                     </div>
                     <div v-else>
-                      <del class="h6 text-dark">原價 {{ product.origin_price }} 元</del>
+                      <del class="h6 text-dark"
+                        >原價 {{ product.origin_price }} 元</del
+                      >
                       <div class="h5 fw-bold" v-if="product.price">
-                      現在只要 NT$ {{ product.price }} 元
+                        現在只要 NT$ {{ product.price }} 元
                       </div>
                     </div>
                   </td>
@@ -134,7 +141,7 @@
         </div>
       </div>
       <PaginationComponent
-        v-if="products.length > 30"
+        v-if="products.length > 6"
         class="d-flex justify-content-center"
         :pagination="pagination"
         @emitPages="getProducts"
@@ -245,8 +252,17 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .ec-container {
   min-height: calc(100vh - 56px - 76px);
+}
+.list-group-item a {
+  color: black;
+}
+.list-group-item.active a {
+  color: white;
+}
+.track:hover {
+  transform: scale(1.2);
 }
 </style>

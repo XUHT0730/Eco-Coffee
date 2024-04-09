@@ -4,12 +4,18 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb mt-3">
         <li class="breadcrumb-item">
+          <RouterLink to="/home">首頁</RouterLink>
+        </li>
+        <li class="breadcrumb-item">
           <RouterLink to="/articles">部落格列表</RouterLink>
+        </li>
+        <li class="breadcrumb-item active fw-bold" aria-current="page">
+          {{ article.title }}
         </li>
       </ol>
     </nav>
     <div class="row justify-content-center">
-      <article class="col-8">
+      <article class="col-10">
         <h2 class="fw-bold">{{ article.title }}</h2>
         <p>
           <small class="text-muted">{{

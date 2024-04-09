@@ -13,28 +13,25 @@
             清空購物車
           </button>
         </div>
-          <div class="row justify-content-center mt-4">
-            <div
-              class="col-md-6 bg-white mb-4 overflow-hidden"
-              style="min-height: calc(100vh - 56px - 76px)"
-            >
-              <div class="d-flex justify-content-between">
-                <p class="h2 text-primary fw-bold">購物車內容</p>
-              </div>
-              <template v-if="cart.carts">
-                <div v-for="item in cart.carts" :key="item.id">
-                  <div class="d-flex mt-4 bg-light align-items-center">
-                      <img
-                        :src="item.product.imageUrl"
-                        :alt="item.product.title"
-                        class="object-fit-cover w-70"
-                        style="max-height: 150px"
-                      />
-                    <div class="w-100 p-3 position-relative">
-                      <button
+        <div class="row justify-content-center mt-4">
+          <div class="col-md-6 bg-white mb-4 overflow-hidden">
+            <div class="d-flex justify-content-between">
+              <p class="h2 text-primary fw-bold">購物車內容</p>
+            </div>
+            <template v-if="cart.carts">
+              <div v-for="item in cart.carts" :key="item.id">
+                <div class="d-flex mt-4 bg-light align-items-center">
+                  <img
+                    :src="item.product.imageUrl"
+                    :alt="item.product.title"
+                    class="object-fit-cover w-70"
+                    style="max-height: 150px"
+                  />
+                  <div class="w-100 p-3 position-relative">
+                    <button
                         type="button"
                         class="btn btn-outline-dark position-absolute fw-bold border-0"
-                        style="top: 16px; right: 15px"
+                        style="top: 10px; right: 9px"
                         @click="delCartItem(item.id)"
                         :disabled="status.loadingItem === item.id"
                       >
@@ -56,149 +53,152 @@
                           已套用優惠券
                         </div>
                       </div>
-                      <div
-                        class="d-flex justify-content-between align-items-center w-100 mt-4"
-                      >
-                        <div class="input-group w-50 align-items-center">
-                          <div class="input-group-prepend pe-1">
-                            <!-- 如果商品數量為 2 個以上顯示減號，如果數量為 1 個顯示垃圾桶 -->
-                            <button
-                              type="button"
-                              style="background-color: transparent; border: none;"
-                              @click="
-                                item.qty--;
-                                updateCart(item);"
-                              :disabled="item.qty === 1"
-                              v-if="item.qty > 1"
-                            >
-                             <i class="bi bi-dash-lg fs-4 text-primary fw-bold"></i>
-                            </button>
-                            <button
-                              type="button"
-                              style="background-color: transparent; border: none;"
-                              @click="delCartItem(item.id)"
-                              v-else
-                            >
-                              <i class="bi bi-trash3 fs-4 text-dark fw-bold"></i>
-                            </button>
-                          </div>
-                          <input
-                            id="qty"
-                            type="number"
-                            class="form-control border-0 text-center my-auto
-                             shadow-none bg-light px-0"
-                            :value="item.qty"
-                            :disabled="status.loadingItem === item.id"
-                            aria-label="Example text with button addon"
-                            aria-describedby="button-addon1"
-                            readonly
-                          />
-                          <div class="input-group-append ps-1">
-                            <button
-                              type="button"
-                              style="background-color: transparent; border: none;"
-                              @click="
-                                item.qty++;
-                                updateCart(item);"
-                            >
-                            <i class="bi bi-plus-lg fs-4 text-primary fw-bold"></i>
-                            </button>
-                          </div>
+                    <div
+                      class="d-flex justify-content-between align-items-center w-100 mt-4"
+                    >
+                      <div class="input-group w-50 align-items-center">
+                        <div class="input-group-prepend pe-1">
+                          <!-- 如果商品數量為 2 個以上顯示減號，如果數量為 1 個顯示垃圾桶 -->
+                          <button
+                            type="button"
+                            style="background-color: transparent; border: none"
+                            @click="
+                              item.qty--;
+                              updateCart(item);
+                            "
+                            :disabled="item.qty === 1"
+                            v-if="item.qty > 1"
+                          >
+                            <i
+                              class="bi bi-dash-lg fs-4 text-primary fw-bold"
+                            ></i>
+                          </button>
+                          <button
+                            type="button"
+                            style="background-color: transparent; border: none"
+                            @click="delCartItem(item.id)"
+                            v-else
+                          >
+                            <i class="bi bi-trash3 fs-4 text-dark fw-bold"></i>
+                          </button>
                         </div>
-                        <p class="mb-0 ms-auto text-end">
-                          <small
-                            v-if="cart.final_total !== cart.total"
-                            class="text-primary"
-                            >優惠價<br/>
-                          </small>
-                          NT$ {{ $filters.currency(item.final_total) }}
-                        </p>
+                        <input
+                          id="qty"
+                          type="number"
+                          class="form-control border-0 text-center
+                           my-auto shadow-none bg-light px-0"
+                          :value="item.qty"
+                          :disabled="status.loadingItem === item.id"
+                          aria-label="Example text with button addon"
+                          aria-describedby="button-addon1"
+                          readonly
+                        />
+                        <div class="input-group-append ps-1">
+                          <button
+                            type="button"
+                            style="background-color: transparent; border: none"
+                            @click="
+                              item.qty++;
+                              updateCart(item);
+                            "
+                          >
+                            <i
+                              class="bi bi-plus-lg fs-4 text-primary fw-bold"
+                            ></i>
+                          </button>
+                        </div>
                       </div>
+                      <p class="mb-0 ms-auto text-end">
+                        <small
+                          v-if="cart.final_total !== cart.total"
+                          class="text-primary"
+                          >優惠價<br />
+                        </small>
+                        NT$ {{ $filters.currency(item.final_total) }}
+                      </p>
                     </div>
                   </div>
                 </div>
-                <div class="input-group w-75 mb-5 mt-3 border-dark">
-                  <input
-                    type="text"
-                    v-model="coupon_code"
-                    class="form-control rounded-0 border-bottom border-dark
-                    border-top-0 border-start-0 border-end-0 shadow-none fs-5"
-                    placeholder="請輸入優惠碼"
-                    aria-label="Recipient's username"
-                    aria-describedby="button-addon2"
-                  />
-                  <div class="input-group-append">
-                    <button
-                      class="btn btn-outline-dark border-bottom border-dark
-                      border-top-0 border-start-0 border-end-0 rounded-0 fs-5"
-                      type="button"
-                      id="button-addon2"
-                      @click="addCouponCode"
-                    >
-                      <i class="bi bi-send-check-fill"></i>
-                    </button>
-                  </div>
+              </div>
+              <div class="input-group w-100 mb-4 mt-3 border-dark">
+                <input
+                  type="text"
+                  v-model="coupon_code"
+                  class="form-control rounded-0 border-bottom
+                   border-dark border-top-0 border-start-0 border-end-0 shadow-none fs-7"
+                  placeholder="請輸入優惠碼"
+                  aria-label="Recipient's username"
+                  aria-describedby="button-addon2"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-dark border-bottom
+                     border-dark border-top-0 border-start-0 border-end-0 rounded-0 fs-5"
+                    type="button"
+                    id="button-addon2"
+                    @click="addCouponCode"
+                  >
+                    <i class="bi bi-send-check-fill"></i>
+                  </button>
+                </div>
               </div>
               <router-link to="/products" class="text-primary fw-bold mb-5 h5">
                 <i class="bi bi-chevron-double-left mr-1"></i>
                 繼續購物
               </router-link>
-              </template>
-            </div>
-            <div class="col-md-4">
-              <div class="border p-4 mb-4 border-dark">
-                <p class="h4 mb-4 text-primary fw-bold">訂單明細</p>
-                <table class="table text-muted border-bottom border-dark">
-                  <tbody>
-                    <tr>
-                      <th
-                        scope="row"
-                        class="border-0 px-0 pt-4 font-weight-normal"
-                      >
-                        小計
-                      </th>
-                      <td class="text-end border-0 px-0 pt-4">
-                        {{ $filters.currency(cart.total) }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th
-                        scope="row"
-                        class="border-0 px-0 pt-0 pb-4 font-weight-normal"
-                      >
-                        支付方式
-                      </th>
-                      <td class="text-end border-0 px-0 pt-0 pb-4">ApplePay</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="d-flex justify-content-between mt-4">
-                  <p class="mb-0 h4 fw-bold">總計</p>
-                  <p class="mb-0 h4 fw-bold">
-                    {{ $filters.currency(cart.total) }}
-                  </p>
-                </div>
-                <div
-                  v-if="cart.final_total !== cart.total"
-                  class="d-flex justify-content-between mt-4"
-                >
-                  <p class="mb-0 h4 fw-bold text-primary">折扣價</p>
-                  <p class="mb-0 h4 fw-bold text-primary">
-                    {{ $filters.currency(cart.final_total) }}
-                  </p>
-                </div>
-                <router-link
-                  to="/checkoutfirst"
-                  class="btn btn-dark w-100 mt-4"
-                >
-                  確認訂單
-                </router-link>
+            </template>
+          </div>
+          <div class="col-md-4">
+            <div class="border p-4 mb-4 border-dark">
+              <p class="h4 mb-4 text-primary fw-bold">訂單明細</p>
+              <table class="table text-muted border-bottom border-dark">
+                <tbody>
+                  <tr>
+                    <th
+                      scope="row"
+                      class="border-0 px-0 pt-4 font-weight-normal"
+                    >
+                      小計
+                    </th>
+                    <td class="text-end border-0 px-0 pt-4">
+                      {{ $filters.currency(cart.total) }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      class="border-0 px-0 pt-0 pb-4 font-weight-normal"
+                    >
+                      支付方式
+                    </th>
+                    <td class="text-end border-0 px-0 pt-0 pb-4">ApplePay</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-between mt-4">
+                <p class="mb-0 h4 fw-bold">總計</p>
+                <p class="mb-0 h4 fw-bold">
+                  {{ $filters.currency(cart.total) }}
+                </p>
               </div>
+              <div
+                v-if="cart.final_total !== cart.total"
+                class="d-flex justify-content-between mt-4"
+              >
+                <p class="mb-0 h4 fw-bold text-primary">折扣價</p>
+                <p class="mb-0 h4 fw-bold text-primary">
+                  {{ $filters.currency(cart.final_total) }}
+                </p>
+              </div>
+              <router-link to="/checkoutfirst" class="btn btn-dark w-100 mt-4">
+                確認訂單
+              </router-link>
             </div>
           </div>
+        </div>
       </div>
       <div v-else class="text-center text-danger">
-        <p class="h3 fw-bold mb-3">購物車無商品，快去逛逛吧 ~ </p>
+        <p class="h3 fw-bold mb-3">購物車無商品，快去逛逛吧 ~</p>
         <router-link to="/products" class="text-dark h3">
           <i class="bi bi-chevron-double-left mr-1"></i>
           前往購物

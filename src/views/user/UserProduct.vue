@@ -23,7 +23,7 @@
           width="525px"
           :alt="product.title"
         />
-        <SwiperComponent v-else :product="product"/>
+        <SwiperComponent v-else :product="product" />
       </div>
       <article class="col-12 col-md-5 col-lg-5">
         <h2 class="fw-bold mb-3">{{ product.title }}</h2>
@@ -56,11 +56,13 @@
           </div>
         </div>
         <hr />
-        <div class="row my-4">
+        <div class="row mb-4 mt-2">
           <div class="col-12">
-            <select name="unit" class="form-select mr-3" v-model="product.qty">
-              <option selected disabled>選擇購買數量</option>
-              <option :value="qty" v-for="qty in 5" :key="qty">
+            <label for="productQty" class="fs-6 mb-2">請選擇購買數量 :</label>
+            <select name="productQty" id="productQty"
+              class="form-select mr-3" v-model="product.qty"
+            >
+              <option v-for="qty in 5" :key="qty" :value="qty">
                 {{ qty }} {{ product.unit }}
               </option>
             </select>
@@ -75,9 +77,12 @@
             >
               <span v-if="trackList.includes(product.id)">
                 <i class="bi bi-heart-fill text-danger"></i>
+                已加入收藏
               </span>
-              <span v-else><i class="bi bi-heart"></i></span>
-              加入收藏
+              <span v-else
+                ><i class="bi bi-heart"></i>
+                加入收藏
+              </span>
             </button>
           </div>
           <div class="col-6">
@@ -94,7 +99,7 @@
       </article>
     </div>
   </section>
-  <SwiperComponent2 @click="handleClick"/>
+  <SwiperComponent2 @click="handleClick" />
 </template>
 
 <script>
