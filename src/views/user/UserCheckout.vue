@@ -56,9 +56,9 @@
                 </div>
               </div>
             </div>
-            <div class="d-flex justify-content-between mt-4">
+            <div class="d-flex justify-content-between mt-4 border-bottom border-dark">
               <p class="text-end text-primary h4 fw-bold">總計</p>
-              <p class="text-end text-primary h4 fw-bold">
+              <p class="text-end text-primary h4 fw-bold mb-4">
                 $NT {{ $filters.currency(order.total) }}
               </p>
             </div>
