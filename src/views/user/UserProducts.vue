@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverLay :active="isLoading" :z-index="1060" />
+  <!-- <LoadingOverLay :active="isLoading" :z-index="1060" /> -->
   <!-- 搜尋欄位 -->
   <section class="bg-light py-4">
     <div class="container">
@@ -134,6 +134,7 @@
         </div>
       </div>
       <PaginationComponent
+        v-if="products.length > 30"
         class="d-flex justify-content-center"
         :pagination="pagination"
         @emitPages="getProducts"
