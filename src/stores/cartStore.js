@@ -30,29 +30,38 @@ export default defineStore('cartStore', {
         product_id: id,
         qty,
       };
-      // 檢查購物車是否已經存在相同商品
-      if (this.carts.some((item) => item.product_id === id)) {
-        // 商品已存在於購物車中，顯示 SweetAlert 提示訊息
+      // 檢查購物車中是否已存在相同的產品
+      const existProductIndex = this.carts.findIndex(
+        (item) => item.product_id === id,
+      );
+      if (existProductIndex !== -1) {
+        // 如果產品已存在於購物車中，就更新 qty
+        const existProduct = this.carts[existProductIndex];
+        const updatedQty = existProduct.qty + qty;
+        const updatedProduct = { ...existProduct, qty: updatedQty };
+        // 更新購物車中現有的產品
+        this.carts.splice(existProductIndex, 1, updatedProduct);
         Swal.fire({
-          title: '商品已存在於購物車中',
-          icon: 'warning',
+          icon: 'info',
+          title: '已更新購物車數量',
+          showConfirmButton: false,
+          timer: 1500,
         });
-        return;
+      } else {
+        // 如果產品不存在於購物車中，則添加新的產品項目
+        this.carts.push(order);
+        Swal.fire({
+          icon: 'success',
+          title: '成功加入購物車',
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
       const url = `${VITE_URL}/api/${VITE_PATH}/cart`;
       axios
         .post(url, { data: order })
-        .then((res) => {
-          Swal.fire({
-            icon: 'success',
-            title: res.data.message,
-            showConfirmButton: false,
-            timer: 1500,
-          });
+        .then(() => {
           this.getCart();
-        })
-        .catch(() => {
-          // alert(err);
         });
     },
   },

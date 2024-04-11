@@ -51,7 +51,7 @@
         <div class="nav navbar-nav d-flex me-2">
           <RouterLink
             to="/track"
-            @click="closeCollapse "
+            @click="closeCollapse"
             class="btn btn-primary d-flex align-items-center
              nav-item nav-link position-relative me-1"
           >
@@ -153,6 +153,6 @@ export default {
 }
 .navbar-nav .icon {
   font-size: 21px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 </style>
