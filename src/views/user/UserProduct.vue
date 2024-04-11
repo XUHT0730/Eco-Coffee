@@ -58,10 +58,10 @@
         <hr />
         <div class="row mb-4 mt-2">
           <div class="col-12">
-            <label for="productQty" class="fs-6 mb-2">請選擇購買數量 :</label>
             <select name="productQty" id="productQty"
               class="form-select mr-3" v-model="product.qty"
             >
+              <option value="" disabled>--請選擇數量--</option>
               <option v-for="qty in 5" :key="qty" :value="qty">
                 {{ qty }} {{ product.unit }}
               </option>
@@ -158,7 +158,12 @@ export default {
       this.axios
         .get(url)
         .then((res) => {
-          this.product = res.data.product;
+          // this.product = res.data.product;
+          this.product = {
+            ...res.data.product,
+            // 設定 product.qty 初始值為 1
+            qty: 1,
+          };
           this.isLoading = false;
         })
         .catch(() => {

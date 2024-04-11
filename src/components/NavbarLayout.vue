@@ -125,7 +125,7 @@ export default {
 <style lang="scss">
 @media (max-width: 768px) {
   .nav-link.active {
-    background-color: rgb(193, 234, 203);
+    background-color: rgb(114, 189, 133);
   }
 }
 
