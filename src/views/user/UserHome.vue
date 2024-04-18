@@ -12,10 +12,13 @@
     >
       <div class="header-text">
         <h1 class="fw-bold mb-3 text-nowrap">發現公平貿易咖啡的美味世界</h1>
+        <p class="h4 mb-3 no-wrap">
+          帶您品嘗最新鮮、友善的咖啡豆
+        </p>
         <RouterLink
           :to="`/about`"
           type="button"
-          class="btn btn-primary btn-lg"
+          class="btn btn-primary btn-lg mt-2"
           style="border-radius: 0"
         >
           了解公平貿易
@@ -38,6 +41,7 @@
                   :src="categoryImages[item]"
                   :alt="item.categories"
                   class="card-img-top object-fit-cover title-image"
+                  @load="loadDone"
                 />
                 <div class="overlay">{{ item }}</div>
               </div>
@@ -178,4 +182,7 @@ export default {
 .image-container:hover .overlay {
   opacity: 1;
 }
+.no-wrap {
+    white-space: nowrap;
+  }
 </style>

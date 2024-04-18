@@ -1,4 +1,5 @@
 <template>
+  <LoadingOverLay :active="isLoading" :z-index="1060" class="text-center" />
   <div class="container-fluid project py-10 mt-6">
     <div class="container">
       <h2 class="text-center mb-10 fw-bold">常見問題</h2>
@@ -135,13 +136,12 @@
                   aria-expanded="false"
                   aria-controls="flush-collapseFour"
                 >
-                  <p class="question rounded bg-primary
-                   mb-0 me-3 me-sm-4 p-2 h5 ff-minor text-white">
+                  <p
+                    class="question rounded bg-primary mb-0 me-3 me-sm-4 p-2 h5 ff-minor text-white"
+                  >
                     Q4
                   </p>
-                  <span class="question h5 fw-bold">
-                    咖啡豆保存方法</span
-                  >
+                  <span class="question h5 fw-bold"> 咖啡豆保存方法</span>
                 </button>
               </h2>
               <div
@@ -181,13 +181,12 @@
                   aria-expanded="false"
                   aria-controls="flush-collapseFive"
                 >
-                  <p class="question rounded bg-primary h5 ff-minor text-white
-                   mb-0 me-3 me-sm-4 p-2">
+                  <p
+                    class="question rounded bg-primary h5 ff-minor text-white mb-0 me-3 me-sm-4 p-2"
+                  >
                     Q5
                   </p>
-                  <span class="question h5 fw-bold">
-                    發票相關資訊</span
-                  >
+                  <span class="question h5 fw-bold"> 發票相關資訊</span>
                 </button>
               </h2>
               <div
@@ -200,18 +199,26 @@
                   <p>因應政府推動電子發票之落行，目前提供的發票開立類型：</p>
                   <ul>
                     <li>
-                      <p class="ms-0 ms-md-9">捐贈給慈善公益團體（財團法人中華民國兒童癌症基金會）。</p>
+                      <p class="ms-0 ms-md-9">
+                        捐贈給慈善公益團體（財團法人中華民國兒童癌症基金會）。
+                      </p>
                     </li>
                     <li>
-                      <p class="ms-0 ms-md-9">電子發票（可至訂單查詢中檢視，系統會為您自動對獎
-                        ，中獎將信件通知並開立紙本發票掛號寄出至原訂單地址給您）。</p>
+                      <p class="ms-0 ms-md-9">
+                        電子發票（可至訂單查詢中檢視，系統會為您自動對獎
+                        ，中獎將信件通知並開立紙本發票掛號寄出至原訂單地址給您）。
+                      </p>
                     </li>
                     <li>
-                      <p class="ms-0 ms-md-9">電子發票（使用手機條碼索取，須持有手機載具）。</p>
+                      <p class="ms-0 ms-md-9">
+                        電子發票（使用手機條碼索取，須持有手機載具）。
+                      </p>
                     </li>
                     <li>
-                      <p class="ms-0 ms-md-9">公司戶發票 ( 電子發票 ): 請您填寫統編
-                        ，我們會在您付款後 3 天內以 email 方式將發票 pdf 檔寄送給您，不會再另外寄送紙本發票！
+                      <p class="ms-0 ms-md-9">
+                        公司戶發票 ( 電子發票 ): 請您填寫統編 ，我們會在您付款後
+                        3 天內以 email 方式將發票 pdf
+                        檔寄送給您，不會再另外寄送紙本發票！
                       </p>
                     </li>
                   </ul>
@@ -224,3 +231,17 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 200);
+  },
+};
+</script>

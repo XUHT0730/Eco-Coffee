@@ -1,7 +1,7 @@
 <template>
   <div class="container ec-container mt-6">
     <LoadingOverLay :active="isLoading" :z-index="1060" />
-    <div class="row row-cols-1 row-cols-md-3 g-4 d-flex">
+    <div class="row row-cols-1 row-cols-md-3 gy-5 gx-0 d-flex">
       <template v-for="article in articles" :key="article.id">
         <div class="col d-flex justify-content-center" v-if="article.isPublic">
           <div class="card article-card">

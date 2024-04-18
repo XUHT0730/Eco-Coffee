@@ -8,7 +8,7 @@
             class="col-12 text-center text-dark mt-xl-7 mt-lg-7 mt-md-7"
             data-aos="fade-down"
           >
-            <div class="h3 fw-bold mt-5 mb-2">追蹤商品</div>
+            <div class="h2 fw-bold mt-5 mb-2">追蹤商品</div>
           </div>
           <div class="row row-cols-4 g-4 col-lg-12 col-md-10 mb-5 d-flex">
             <template v-for="item in filterProducts" :key="item.id">
@@ -42,7 +42,7 @@
                       </div>
                       <div class="col-3">
                         <div class="w-100 text-end">
-                          <div @click="setTrack(item.id)">
+                          <div @click="setTrack(item.id)" style="cursor: pointer;">
                             <span v-if="trackList.includes(item.id)">
                               <i class="bi bi-heart-fill fs-4 text-danger"></i>
                             </span>
@@ -87,7 +87,7 @@
     </div>
     <div v-else class="text-center mb-7 mb-md-9 pt-7 pt-md-9">
       <h2 class="text-dark mt-6">沒有追蹤商品，快去逛逛</h2>
-      <p class="text-primary my-4 mb-md-5">前往商品列表</p>
+      <p class="text-primary my-4 mb-md-5 h5">前往商品列表</p>
       <RouterLink to="/products" class="fs-5 btn btn-primary py-3 px-5">
         查看商品
       </RouterLink>

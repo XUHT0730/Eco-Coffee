@@ -133,7 +133,7 @@
                     <div class="col">
                       <div class="left w-100">
                         <div
-                          class="bg-secondary position-absolute fs-6 px-2 py-1 text-white category"
+                          class="bg-secondary position-absolute fs-7 px-2 py-1 text-white category"
                         >
                           {{ product.category }}
                         </div>
@@ -141,7 +141,7 @@
                     </div>
                     <div class="col-3">
                       <div class="right w-100 text-end">
-                        <div @click="setTrack(product.id)">
+                        <div @click="setTrack(product.id)" style="cursor: pointer;">
                           <span v-if="trackList.includes(product.id)">
                             <i class="bi bi-heart-fill fs-4 text-danger"></i>
                           </span>

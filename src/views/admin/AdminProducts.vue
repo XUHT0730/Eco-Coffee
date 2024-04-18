@@ -100,6 +100,7 @@ export default {
       state: {
         fileUploading: false,
       },
+      currentPage: 1,
     };
   },
   methods: {
@@ -109,6 +110,7 @@ export default {
     getProducts(page = 1) {
       // products?page=${page} 是用網址參數寫法，將 page 參數帶入，取得當前頁碼
       // https://support.google.com/google-ads/answer/6277564?hl=zh-Hant
+      this.currentPage = page;
       const getProductsUrl = `${VITE_URL}/api/${VITE_PATH}/admin/products?page=${page}`;
       this.isLoading = true;
       this.axios
@@ -186,7 +188,7 @@ export default {
             title: state,
             content: res.data.message,
           });
-          this.getProducts(); // 取得所有產品的函式，重新取得所有產品資料，完成產品更新
+          this.getProducts(this.currentPage); // 取得所有產品的函式，重新取得所有產品資料，完成產品更新，並維持在當前頁碼
           // this.myModal.hide(); // 套用 modal.hide() 方法關閉 model
           productComponent.hideModal();
           this.tempProduct = {};
@@ -227,7 +229,7 @@ export default {
     },
   },
   // 生命週期，在畫面完全生成之後，再來重新擷取動元素
-  mounted() {
+  created() {
     this.getProducts();
   },
   components: {

@@ -120,7 +120,7 @@
                   </div>
                 </div>
               </div>
-              <div class="input-group w-100 mb-4 mt-3 border-dark">
+              <div class="input-group w-100 mb-5 mt-3 border-dark">
                 <input
                   type="text"
                   v-model="coupon_code"
@@ -142,7 +142,7 @@
                   </button>
                 </div>
               </div>
-              <router-link to="/products" class="text-primary fw-bold mb-5 h5">
+              <router-link to="/products" class="text-primary fw-bold mb-5 h4">
                 <i class="bi bi-chevron-double-left mr-1"></i>
                 繼續購物
               </router-link>

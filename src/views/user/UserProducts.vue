@@ -56,7 +56,7 @@
           <LoadingOverLay :active="isLoading" :is-full-page="fullPage" />
           <div class="row row-cols-3 g-4">
             <!-- 如果搜索結果為空，顯示查無此商品的消息-->
-            <div v-if="products.length === 0" class="col">
+            <div v-if="!isLoading && products.length === 0" class="col">
               <p class="h4 text-danger">Sorry ~ 查無此商品</p>
             </div>
             <!-- 如果搜索結果不為空，則顯示搜索結果 -->
@@ -93,7 +93,10 @@
                     </div>
                     <div class="col-2 track">
                       <div class="w-100 text-end">
-                        <div @click="setTrack(product.id)">
+                        <div
+                          @click="setTrack(product.id)"
+                          style="cursor: pointer"
+                        >
                           <span v-if="trackList.includes(product.id)">
                             <i class="bi bi-heart-fill fs-3 text-danger"></i>
                           </span>
