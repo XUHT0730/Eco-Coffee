@@ -7,6 +7,7 @@
       muted
       loop
       class="w-100"
+      @load="loadDone"
     ></video>
     <div class="layout-wrapper">
       <i class="h2 bi bi-cup-hot me-2 ff-minor"></i>
@@ -206,7 +207,7 @@ export default {
     return {
       products: [],
       product: {},
-      isLoading: false,
+      isLoading: true,
     };
   },
   computed: {
@@ -233,6 +234,9 @@ export default {
             content: err.response.data.message,
           });
         });
+    },
+    loadDone() {
+      this.isLoading = false;
     },
   },
   created() {
