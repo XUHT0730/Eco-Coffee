@@ -1,93 +1,55 @@
 # Vue 店商網站 : Eco-Coffee
 
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
-<!-- 底下標籤來源參考寫法可至：https://github.com/Envoy-VC/awesome-badges#github-stats -->
-
-![](https://img.shields.io/github/stars/hsiangfeng/README-Example-Template.svg)｜![](https://img.shields.io/github/forks/hsiangfeng/README-Example-Template.svg)｜![](https://img.shields.io/github/issues-pr/hsiangfeng/README-Example-Template.svg)｜![](https://img.shields.io/github/issues/hsiangfeng/README-Example-Template.svg)
-
-> 由於許多人都不知道如何撰寫 README，所以我就提供一個 README 範本，讓大家可以參考，許多地方你都可以斟酌是否要加入，或是修改成你自己的風格。
-
-**ps. 底下範本不是絕對，你可以依照自己需求斟酌增加或刪除。**
-
-# Vue 店商網站 : Eco-Coffee
-
 ![專案封面圖](https://fakeimg.pl/500/)
 
 ## 專案說明
-> Demo Website :https://ginatung.github.io/2024-southerntravelwebsite-fin/#/
+> Demo Website :https://xuht0730.github.io/Eco-Coffee/#/
+
+Eco-Coffee 為虛構的咖啡豆電商網站，此網站具備前、後台功能。
 
 
-## 功能
+## 使用技術
 
-測試帳號密碼 **（請斟酌提供，建議只提供僅能觀看不能操作的帳號密碼）**
+- [x] Vue 及 Vue Vite 規劃 SPA 架構 
+- [x] Vue Router 架構路由
+- [x] 串接 RESTful API
+- [x] 使用 Pinia 統一狀態管理狀態
+- [x] Bootstrap5 + SCSS 規劃響應式版型
 
-```bash
-帳號： example@example.com
-密碼： example
-```
+### 前台功能
 
-- [x] 登入
-- [x] 登出
-- [x] 產品列表
-...
-
-## 畫面
-
-> 可提供 1~3 張圖片，讓觀看者透過 README 了解整體畫面
+- [x] 電商展示 : 產品分類、單一產品介紹  
+- [x] 商品收藏清單
+- [x] 購物車結帳
+- [x] 商品關鍵字搜尋
 
 ![範例圖片 1](https://fakeimg.pl/500/)
 ![範例圖片 2](https://fakeimg.pl/500/)
-![範例圖片 3](https://fakeimg.pl/500/)
+
+### 後台功能
+
+- [x] 訂單列表管理  
+- [x] 優惠券管理
+- [x] 發布文章管理
+
+![範例圖片 1](https://fakeimg.pl/500/)
+![範例圖片 2](https://fakeimg.pl/500/)
+
+## 建議的 IDE 設定
+
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
 ## 安裝
-
-> 請務必依據你的專案來調整內容。
 
 以下將會引導你如何安裝此專案到你的電腦上。
 
 Node.js 版本建議為：`16.15.0` 以上...
 
-### 取得專案
+### 環境變數
 
-```bash
-git clone git@github.com:hsiangfeng/README-Example-Template.git
-```
-
-### 移動到專案內
-
-```bash
-cd README-Example-Template
+請將 .env.example 複製一份並命名為 .env，並將裡面的環境變數設定為你的值。
+```sh
+cp .env.example .env
 ```
 
 ### 安裝套件
@@ -96,86 +58,53 @@ cd README-Example-Template
 npm install
 ```
 
-### 環境變數設定
-
-請在終端機輸入 `cp .env.example .env` 來複製 .env.example 檔案，並依據 `.env` 內容調整相關欄位。
-
-### 運行專案
+### 啟動開發環境
 
 ```bash
-npm run serve
+npm run dev
 ```
 
-### 開啟專案
-
-在瀏覽器網址列輸入以下即可看到畫面
+### 打包專案
 
 ```bash
-http://localhost:8080/
+npm run build
 ```
 
-## 環境變數說明
+### 部署專案
 
-```env
-APIPATH= # API 位置
-COUSTOMPATH= # 自訂變數
-...
+```bash
+npm run deploy
 ```
 
-## 資料夾說明
+## 使用套件
+- axios (^1.6.7)
+- bootstrap (^5.3.2)
+- bootstrap-icons (^1.11.3)
+- pinia (^2.1.7)
+- vue (^3.3.11)
+- vue-router (^4.2.5)
+- sweetalert2 (^11.10.5)
+- @popperjs/core (^2.11.8)
+- swiper@11
+- vee-validate/i18n (^4.12.5)
+- vee-validate/rules (^4.12.5)
+- eslint (^8.49.0)
+- eslint-config-airbnb-base (^15.0.0)
+- eslint-import-resolver-alias (^1.1.2)
+- eslint-plugin-import (^2.29.1)
+- eslint-plugin-n (^16.6.2)
+- eslint-plugin-promise (^6.1.1)
+- eslint-plugin-vue (^9.20.1)
+- gh-pages (^6.1.1)
 
-- views - 畫面放置處
-- controllers - 控制器放置處
-- modules - 模組放置處
-- assets - 靜態資源放置處
-  - scss - scss 檔案放置處
-  - images - 圖片放置處
-...
+## gh-pages 部署說明
 
-## 專案技術
-
-- Node.js v16.15.0
-- Vue v3.2.20
-- Vite v4.0.4
-- Vue Router v4.0.11
-- Axios v0.24.0
-- Bootstrap v5.1.3
-...
-
-## 第三方服務
-
-- Algolia
-- Google Analytics
-...
-
-## CI/CD 說明
-
-此專案有使用 Github Actions，所以發起 PR 時會自動執行以下動作：
-
-- 建立 Node.js 環境
-- 安裝相依套件
-- 編譯程式碼
-- 執行 ESLint 掃描
-- 執行測試
-...
-
-當專案 merge 到 main 時會自動執行以下動作：
-
-- 建立 Node.js 環境
-- 安裝相依套件
-- 編譯程式碼
-- 執行 ESLint 掃描
-- 執行測試
-- 部署到 Github Pages
-...
+內建預設是使用 gh-pages 進行部署，因此只需要在專案根目錄下執行以下指令即可。
+```bash
+npm run deploy
+```
 
 ## 聯絡作者
 
-> ps. 這邊絕對不是業配，而是要適當提供一些方式讓觀看者知道你的聯絡方式，讓他們可以更方便的找到你。
-
 你可以透過以下方式與我聯絡
-
-- [部落格](https://israynotarray.com/)
-- [Facebook](https://www.facebook.com/israynotarray)
-- [Instagram](https://www.instagram.com/isray_notarray/)
-...
+- [Mail](roy1108730@gmail.com) 
