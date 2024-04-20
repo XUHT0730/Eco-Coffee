@@ -23,8 +23,8 @@ Eco-Coffee 為虛構的咖啡豆電商網站，此網站具備前、後台功能
 - [x] 購物車結帳
 - [x] 商品關鍵字搜尋
 
-![範例圖片 1](https://fakeimg.pl/500/)
-![範例圖片 2](https://fakeimg.pl/500/)
+![範例圖片 1](https://github.com/XUHT0730/Eco-Coffee/blob/main/ReadMeImg/front1.png)
+![範例圖片 2](https://github.com/XUHT0730/Eco-Coffee/blob/main/ReadMeImg/front2.png)
 
 ### 後台功能
 
@@ -32,8 +32,8 @@ Eco-Coffee 為虛構的咖啡豆電商網站，此網站具備前、後台功能
 - [x] 優惠券管理
 - [x] 發布文章管理
 
-![範例圖片 1](https://fakeimg.pl/500/)
-![範例圖片 2](https://fakeimg.pl/500/)
+![範例圖片 1](https://github.com/XUHT0730/Eco-Coffee/blob/main/ReadMeImg/back1.png)
+![範例圖片 2](https://github.com/XUHT0730/Eco-Coffee/blob/main/ReadMeImg/back2.png)
 
 ## 建議的 IDE 設定
 
