@@ -1,6 +1,6 @@
 # Vue 店商網站 : Eco-Coffee
 
-![專案封面圖](https://fakeimg.pl/500/)
+![專案封面圖](https://github.com/XUHT0730/Eco-Coffee/blob/main/ReadMeImg/banner.png)
 
 ## 專案說明
 > Demo Website :https://xuht0730.github.io/Eco-Coffee/#/
