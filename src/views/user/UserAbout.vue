@@ -7,7 +7,7 @@
       muted
       loop
       class="w-100"
-      @load="loadDone"
+      @loadeddata="loadDone"
     ></video>
     <div class="layout-wrapper">
       <i class="h2 bi bi-cup-hot me-2 ff-minor"></i>

@@ -86,7 +86,7 @@
                           id="qty"
                           type="number"
                           class="form-control border-0 text-center
-                           my-auto shadow-none bg-light px-0"
+                          my-auto shadow-none bg-light px-0"
                           :value="item.qty"
                           :disabled="status.loadingItem === item.id"
                           aria-label="Example text with button addon"
@@ -125,7 +125,7 @@
                   type="text"
                   v-model="coupon_code"
                   class="form-control rounded-0 border-bottom
-                   border-dark border-top-0 border-start-0 border-end-0 shadow-none fs-7"
+                  border-dark border-top-0 border-start-0 border-end-0 shadow-none fs-7"
                   placeholder="請輸入優惠碼"
                   aria-label="Recipient's username"
                   aria-describedby="button-addon2"
@@ -133,7 +133,7 @@
                 <div class="input-group-append">
                   <button
                     class="btn btn-outline-dark border-bottom
-                     border-dark border-top-0 border-start-0 border-end-0 rounded-0 fs-5"
+                    border-dark border-top-0 border-start-0 border-end-0 rounded-0 fs-5"
                     type="button"
                     id="button-addon2"
                     @click="addCouponCode"
