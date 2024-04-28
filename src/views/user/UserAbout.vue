@@ -143,10 +143,10 @@
                     <div class="col-3">
                       <div class="right w-100 text-end">
                         <div @click="setTrack(product.id)" style="cursor: pointer;">
-                          <span v-if="trackList.includes(product.id)">
+                          <span v-if="trackList.includes(product.id)" title="移除收藏">
                             <i class="bi bi-heart-fill fs-4 text-danger"></i>
                           </span>
-                          <span v-else
+                          <span v-else title="加入收藏"
                             ><i class="bi bi-heart fs-4 text-danger"></i
                           ></span>
                         </div>
