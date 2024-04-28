@@ -28,6 +28,7 @@
           :src="article.imageUrl"
           :alt="article.title"
           class="img-fluid my-3"
+          @load="loadDone"
         />
         <div v-html="article.content"></div>
       </article>
@@ -43,7 +44,7 @@ const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   data() {
     return {
-      isLoading: false,
+      isLoading: true,
       article: {},
       id: '',
     };
@@ -67,6 +68,9 @@ export default {
             content: error.response.data.message,
           });
         });
+    },
+    loadDone() {
+      this.isLoading = false;
     },
   },
   created() {
