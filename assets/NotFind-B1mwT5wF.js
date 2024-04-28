@@ -1,0 +1,1 @@
+import{_ as n,r as a,o as s,c,b as t,f as e,a as r,e as _,F as l}from"./index-D73JBGpL.js";const d={},u=t("h1",null,"Not Found",-1);function f(i,m){const o=a("RouterLink");return s(),c(l,null,[u,t("p",null,[e("笑死，找不到頁面，回 "),r(o,{to:"/"},{default:_(()=>[e("首頁")]),_:1}),e(" 把")])],64)}const x=n(d,[["render",f]]);export{x as default};
